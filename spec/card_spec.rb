@@ -8,4 +8,8 @@ describe Card do
       expect(card).to be_a Card
     end
   end
+
+  it "can recognize equality to another card" do
+    expect(card).to eq Card.new(2, :hearts)
+  end
 end
