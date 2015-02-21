@@ -18,4 +18,16 @@ describe Card do
       expect(card).not_to eq Card.new(3, :spades)
     end
   end
+
+  it "knows when it is a face card" do
+    expect(Card.new(11, :hearts).face?).to eq true
+    expect(Card.new(12, :spades).face?).to eq true
+    expect(Card.new(13, :clubs).face?).to eq true
+  end
+
+  it "knows when it is not a face card" do
+    expect(Card.new(10, :spades).face?).to eq false
+    expect(Card.new(1, :spades).face?).to eq false
+    expect(Card.new(3, :diamonds).face?).to eq false
+  end
 end

@@ -29,5 +29,11 @@ describe Player do
       new_player = new_player.add_card(Card.new(8, :spades))
       expect(new_player.score).to eq 19
     end
+
+    it "is blackjack when the player has a face card and an ace" do
+      new_player = player.add_card(Card.new(1, :diamonds))
+      new_player = new_player.add_card(Card.new(13, :spades))
+      expect(new_player.score).to eq :blackjack
+    end
   end
 end
