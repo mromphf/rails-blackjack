@@ -14,4 +14,20 @@ describe Player do
       expect(Player.new([card_one, card_two])).to be_a Player
     end
   end
+
+  describe "being dealt cards" do
+    it "can add cards to its hand" do
+      new_player = player.add_card(Card.new(7, :diamonds))
+      expect(new_player).to be_a Player
+    end
+  end
+
+  describe "score " do
+    it "is computed by the total value of each card in the players hand" do
+      new_player = player.add_card(Card.new(7, :diamonds))
+      new_player = new_player.add_card(Card.new(4, :clubs))
+      new_player = new_player.add_card(Card.new(8, :spades))
+      expect(new_player.score).to eq 19
+    end
+  end
 end

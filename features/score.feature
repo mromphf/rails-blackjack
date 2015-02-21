@@ -5,6 +5,6 @@ Feature: Scores
 
     Scenario: Add three cards to form a score
         When the dealer deals me a 5 of hearts
-        And the dealer deals me a jack of clubs
+        And the dealer deals me a 11 of clubs
         And the dealer deals me a 2 of spades
-        Then I should have a total score of 17
+        Then I should have a total score of 18
