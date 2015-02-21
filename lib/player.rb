@@ -18,13 +18,15 @@ class Player
 
   private
     def blackjack?(cards)
-      return false if cards.size != 2
-      first_card = cards[0]
-      second_card = cards[1]
-      if (first_card.value == 1 || second_card.value == 1) &&
-          (second_card.face? || first_card.face?)
-        return true
+      result = false
+      if cards.size == 2
+        first_card = cards[0]
+        second_card = cards[1]
+        if (first_card.value == 1 || second_card.value == 1) &&
+            (second_card.face? || first_card.face?)
+          return true
+        end
       end
-      false
+      result 
     end
 end
