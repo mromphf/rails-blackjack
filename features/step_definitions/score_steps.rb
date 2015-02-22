@@ -17,6 +17,10 @@ When(/^the dealer deals me a (\d+) of spades$/) do |value|
   @player = @player.add_card(Card.new(value.to_i, :spades))
 end
 
+When(/^the dealer deals me a (\d+) of diamonds$/) do |value|
+  @player = @player.add_card(Card.new(value.to_i, :diamonds))
+end
+
 Then(/^I should have a total score of (\d+)$/) do |value|
   expect(@player.score).to eq value.to_i
 end

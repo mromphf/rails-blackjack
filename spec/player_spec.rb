@@ -35,5 +35,10 @@ describe Player do
       new_player = new_player.add_card(Card.new(13, :spades))
       expect(new_player.score).to eq :blackjack
     end
+
+    it "always evaluates face cards to a value of ten" do
+      card = Card.new(13, :diamonds)
+      expect(Player.new([card]).score).to eq 10
+    end
   end
 end

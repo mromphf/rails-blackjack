@@ -8,25 +8,35 @@ class Player
   end
 
   def score
-    score = 0
-    return :blackjack if blackjack?(@cards)
-    @cards.each do |card|
-      score += card.value
+    if blackjack?
+      return :blackjack
+    else
+      return calculate_score
     end
-    score
   end
 
   private
-    def blackjack?(cards)
-      result = false
-      if cards.size == 2
-        first_card = cards[0]
-        second_card = cards[1]
+    def blackjack?
+      if @cards.size == 2
+        first_card = @cards[0]
+        second_card = @cards[1]
         if (first_card.value == 1 || second_card.value == 1) &&
             (second_card.face? || first_card.face?)
           return true
         end
       end
-      result 
+      false
+    end
+
+    def calculate_score
+      score = 0
+      @cards.each do |card|
+        if card.face?
+          score += 10
+        else
+          score += card.value
+        end
+      end
+      score
     end
 end
