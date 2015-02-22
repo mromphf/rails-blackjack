@@ -35,11 +35,7 @@ class Player
     def calculate_score
       score = 0
       @cards.each do |card|
-        if card.face?
-          score += 10
-        else
-          score += card.value
-        end
+        score += card.value
       end
       score
     end

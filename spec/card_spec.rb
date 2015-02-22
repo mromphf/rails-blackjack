@@ -9,13 +9,11 @@ describe Card do
     end
   end
 
-  describe "equals method" do
-    it "can recognize two equals card" do
-      expect(card).to eq Card.new(2, :hearts)
-    end
-
-    it "can recognize two unequal cards" do
-      expect(card).not_to eq Card.new(3, :spades)
+  describe "value" do
+    it "will always be 10 for face cards" do
+      expect(Card.new(11, :clubs).value).to eq 10
+      expect(Card.new(12, :clubs).value).to eq 10
+      expect(Card.new(13, :diamonds).value).to eq 10
     end
   end
 
