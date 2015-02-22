@@ -41,4 +41,11 @@ describe Player do
       expect(Player.new([card]).score).to eq 10
     end
   end
+
+  it "will bust when score exceeds 21" do
+    new_player = player.add_card(Card.new(10, :hearts))
+    new_player = new_player.add_card(Card.new(10, :diamonds))
+    new_player = new_player.add_card(Card.new(3, :clubs))
+    expect(new_player.bust?).to eq true
+  end
 end

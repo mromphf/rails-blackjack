@@ -15,6 +15,10 @@ class Player
     end
   end
 
+  def bust?
+    score > 21
+  end
+
   private
     def blackjack?
       if @cards.size == 2

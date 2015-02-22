@@ -21,3 +21,10 @@ Feature: Scores
         When the dealer deals me a 13 of diamonds
         And the dealer deals me a 12 of clubs
         Then I should have a total score of 20
+
+    Scenario: Bust
+        Given I am a player
+        When the dealer deals me a 13 of hearts
+        And the dealer deals me a 10 of diamonds
+        And the dealer deals me a 5 of clubs
+        Then I should bust
