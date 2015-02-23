@@ -12,4 +12,8 @@ class Card
   def face?
     @value > 10
   end
+
+  def ace?
+    @value == 1
+  end
 end

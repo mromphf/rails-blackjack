@@ -24,7 +24,7 @@ class Player
       if @cards.size == 2
         first_card = @cards[0]
         second_card = @cards[1]
-        if (first_card.value == 1 || second_card.value == 1) &&
+        if (first_card.ace? || second_card.ace?) &&
             (second_card.face? || first_card.face?)
           return true
         end
