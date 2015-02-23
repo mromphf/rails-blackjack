@@ -26,7 +26,7 @@ Then(/^I should have a total score of (\d+)$/) do |value|
 end
 
 Then(/^I should have blackjack$/) do
-  expect(@player.score).to eq :blackjack
+  expect(@player.blackjack?).to eq true
 end
 
 Then(/^I should bust$/) do

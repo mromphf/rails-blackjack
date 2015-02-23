@@ -33,7 +33,7 @@ describe Player do
     it "is blackjack when the player has a face card and an ace" do
       new_player = player.add_card(Card.new(1, :diamonds))
       new_player = new_player.add_card(Card.new(13, :spades))
-      expect(new_player.score).to eq :blackjack
+      expect(new_player.blackjack?).to eq true
     end
 
     it "always evaluates face cards to a value of ten" do
