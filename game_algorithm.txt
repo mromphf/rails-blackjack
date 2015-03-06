@@ -1,0 +1,23 @@
+player = new player
+dealer = new player
+
+while game is in progress 
+    if player still has money to bet
+
+    deal card to player
+    deal card to dealer
+    deal card to player
+    deal card to dealer
+
+    while player's turn
+        wait for action
+        process action
+        decide if turn over
+
+    if not player bust
+        while dealer's turn
+            deal card for dealer
+            decide if dealer's score is higher than the players
+            go until dealer win or bust
+
+    deal chips to player with highest score
