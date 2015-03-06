@@ -17,23 +17,23 @@ describe Player do
 
   describe "being dealt cards" do
     it "can add cards to its hand" do
-      new_player = player.add_card(Card.new(7, :diamonds))
-      expect(new_player).to be_a Player
+      player = Player.new.add_card(Card.new(7, :diamonds))
+      expect(player).to be_a Player
     end
   end
 
   describe "score " do
     it "is computed by the total value of each card in the players hand" do
-      new_player = player.add_card(Card.new(7, :diamonds))
-      new_player = new_player.add_card(Card.new(4, :clubs))
-      new_player = new_player.add_card(Card.new(8, :spades))
-      expect(new_player.score).to eq 19
+      player = Player.new.add_card(Card.new(7, :diamonds))
+      player = player.add_card(Card.new(4, :clubs))
+      player = player.add_card(Card.new(8, :spades))
+      expect(player.score).to eq 19
     end
 
     it "is blackjack when the player has a face card and an ace" do
-      new_player = player.add_card(Card.new(1, :diamonds))
-      new_player = new_player.add_card(Card.new(13, :spades))
-      expect(new_player.blackjack?).to eq true
+      player = Player.new.add_card(Card.new(1, :diamonds))
+      player = player.add_card(Card.new(13, :spades))
+      expect(player.blackjack?).to eq true
     end
 
     it "always evaluates face cards to a value of ten" do
@@ -43,9 +43,9 @@ describe Player do
   end
 
   it "will bust when score exceeds 21" do
-    new_player = player.add_card(Card.new(10, :hearts))
-    new_player = new_player.add_card(Card.new(10, :diamonds))
-    new_player = new_player.add_card(Card.new(3, :clubs))
-    expect(new_player.bust?).to eq true
+    player = Player.new.add_card(Card.new(10, :hearts))
+    player = player.add_card(Card.new(10, :diamonds))
+    player = player.add_card(Card.new(3, :clubs))
+    expect(player.bust?).to eq true
   end
 end
