@@ -28,3 +28,16 @@ Feature: Scores
         And the dealer deals me a 10 of diamonds
         And the dealer deals me a 5 of clubs
         Then I should bust
+
+    Scenario: Aces low
+        Given I am a player
+        When the dealer deals me a 1 of hearts
+        And the dealer deals me a 5 of clubs
+        Then I should have a total score of 6
+
+    @wip
+    Scenario: Aces high
+        Given I am a player
+        When the dealer deals me a 1 of diamonds
+        And the dealer deals me a 11 of spades 
+        Then I should have a total score of 21
