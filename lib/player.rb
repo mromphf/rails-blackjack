@@ -1,15 +1,15 @@
 class Player
-  def initialize(cards=[])
-    @cards = cards
+  def initialize(hand=[])
+    @hand = hand
   end
 
   def add_card(card)
-    Player.new(@cards << card)
+    Player.new(@hand << card)
   end
 
   def score
     score = 0
-    @cards.each do |card|
+    @hand.each do |card|
       score += card.value
     end
     score
@@ -20,14 +20,15 @@ class Player
   end
 
   def blackjack?
-    if @cards.size == 2
-      first_card = @cards[0]
-      second_card = @cards[1]
-      if (first_card.ace? || second_card.ace?) &&
-          (second_card.face? || first_card.face?)
-        return true
-      end
+    if @hand.size == 2
+      return blackjack_logic(@hand[0], @hand[1])
     end
     false
   end
+
+  private
+    def blackjack_logic(first_card, second_card)
+      (first_card.ace? || second_card.ace?) && 
+        (second_card.face? || first_card.face?)
+    end
 end
