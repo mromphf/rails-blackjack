@@ -33,6 +33,14 @@ describe Card do
     end
   end
 
+  describe "comparability" do
+    it "is determined by the value of the card first" do
+      cards = [Card.new(3, :hearts), Card.new(11, :club), Card.new(7, :spades)]
+      cards.sort
+      expect(cards[2]).to eq Card.new(7, :spades)
+    end
+  end 
+
   it "knows when it is a face card" do
     expect(Card.new(11, :hearts).face?).to eq true
   end

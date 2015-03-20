@@ -1,4 +1,6 @@
 class Card
+  include Comparable
+
   attr_reader :value
 
   def initialize(value, suit)
@@ -8,6 +10,10 @@ class Card
 
   def ==(target)
     @value == target.value
+  end
+
+  def <=>(target)
+    @value <=> target.value
   end
 
   def value
