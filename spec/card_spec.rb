@@ -23,6 +23,16 @@ describe Card do
     end
   end
 
+  describe "equality" do
+    it "is true when the values of the card are the same" do
+      expect(Card.new(7, :hearts)).to eq Card.new(7, :clubs) 
+    end
+
+    it "is not true when the values of the card are NOT the same" do
+      expect(Card.new(8, :hearts)).not_to eq Card.new(7, :clubs) 
+    end
+  end
+
   it "knows when it is a face card" do
     expect(Card.new(11, :hearts).face?).to eq true
   end

@@ -1,7 +1,13 @@
 class Card
+  attr_reader :value
+
   def initialize(value, suit)
     @value = value
     @suit = suit
+  end
+
+  def ==(target)
+    @value == target.value
   end
 
   def value
