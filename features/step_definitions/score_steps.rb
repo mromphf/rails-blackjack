@@ -21,28 +21,32 @@ When(/^the dealer deals me a (\d+) of diamonds$/) do |value|
   @player = @player.add_card(Card.new(value.to_i, :diamonds))
 end
 
-When(/^the dealer deals me a Jack of clubs$/) do 
+When(/^the dealer deals me a jack of clubs$/) do 
   @player = @player.add_card(Card.new(11, :clubs))
 end
 
-When(/^the dealer deals me a Queen of clubs$/) do 
+When(/^the dealer deals me a queen of clubs$/) do 
   @player = @player.add_card(Card.new(12, :clubs))
 end
 
-When(/^the dealer deals me a King of clubs$/) do 
+When(/^the dealer deals me a king of clubs$/) do 
   @player = @player.add_card(Card.new(13, :clubs))
 end
 
-When(/^the dealer deals me a King of hearts$/) do 
+When(/^the dealer deals me a king of hearts$/) do 
   @player = @player.add_card(Card.new(13, :hearts))
 end
 
-When(/^the dealer deals me a Jack of hearts$/) do 
+When(/^the dealer deals me a jack of hearts$/) do 
   @player = @player.add_card(Card.new(11, :hearts))
 end
 
-When(/^the dealer deals me a King of diamonds$/) do 
+When(/^the dealer deals me a king of diamonds$/) do 
   @player = @player.add_card(Card.new(13, :diamonds))
+end
+
+When(/^the dealer deals me an ace of hearts$/) do 
+  pending
 end
 
 Then(/^I should have a total score of (\d+)$/) do |value|

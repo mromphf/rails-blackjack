@@ -1,4 +1,6 @@
 class Player
+  BLACKJACK = 21
+
   def initialize(hand=[])
     @hand = hand
   end
@@ -16,18 +18,18 @@ class Player
   end
 
   def bust?
-    score > 21
+    score > BLACKJACK
   end
 
   def blackjack?
     if @hand.size == 2
-      return blackjack_logic(@hand[0], @hand[1])
+      return has_blackjack?(@hand[0], @hand[1])
     end
     false
   end
 
   private
-    def blackjack_logic(first_card, second_card)
+    def has_blackjack?(first_card, second_card)
       (first_card.ace? || second_card.ace?) && 
         (second_card.face? || first_card.face?)
     end

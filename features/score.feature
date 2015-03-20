@@ -12,32 +12,34 @@ Feature: Scores
 
     Scenario: Add two cards to form blackjack
         Given I am a player
-        When the dealer deals me a Jack of clubs
+        When the dealer deals me a jack of clubs
         And the dealer deals me a 1 of spades
         Then I should have blackjack
 
     Scenario: Add two face cards for a score of twenty
         Given I am a player
-        When the dealer deals me a King of diamonds
-        And the dealer deals me a Queen of clubs
+        When the dealer deals me a king of diamonds
+        And the dealer deals me a queen of clubs
         Then I should have a total score of 20
 
     Scenario: Bust
         Given I am a player
-        When the dealer deals me a King of hearts
+        When the dealer deals me a king of hearts
         And the dealer deals me a 10 of diamonds
         And the dealer deals me a 5 of clubs
         Then I should bust
 
+    @wip
     Scenario: Aces low
         Given I am a player
-        When the dealer deals me a 1 of hearts
+        When the dealer deals me an ace of hearts
         And the dealer deals me a 5 of clubs
-        Then I should have a total score of 6
+        And the dealer deals me a jack of clubs
+        Then I should have a total score of 17
 
     @wip
     Scenario: Aces high
         Given I am a player
-        When the dealer deals me a 1 of diamonds
-        And the dealer deals me a Jack of clubs 
+        When the dealer deals me an ace of hearts
+        And the dealer deals me a jack of clubs 
         Then I should have a total score of 21
