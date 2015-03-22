@@ -23,13 +23,15 @@ class Player
 
   def blackjack?
     if @hand.size == 2
-      return has_blackjack?(@hand[0], @hand[1])
+      return has_blackjack?
     end
     false
   end
 
   private
-    def has_blackjack?(first_card, second_card)
+    def has_blackjack?
+      first_card = @hand[0]
+      second_card = @hand[1]
       (first_card.ace? || second_card.ace?) && 
         (second_card.face? || first_card.face?)
     end
