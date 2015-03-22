@@ -13,7 +13,7 @@ Feature: Scores
     Scenario: Add two cards to form blackjack
         Given I am a player
         When the dealer deals me a jack of clubs
-        And the dealer deals me a 1 of spades
+        And the dealer deals me an ace of hearts
         Then I should have blackjack
 
     Scenario: Add two face cards for a score of twenty
@@ -29,15 +29,13 @@ Feature: Scores
         And the dealer deals me a 5 of clubs
         Then I should bust
 
-    @wip
     Scenario: Aces low
         Given I am a player
         When the dealer deals me an ace of hearts
         And the dealer deals me a 5 of clubs
         And the dealer deals me a jack of clubs
-        Then I should have a total score of 17
+        Then I should have a total score of 16
 
-    @wip
     Scenario: Aces high
         Given I am a player
         When the dealer deals me an ace of hearts

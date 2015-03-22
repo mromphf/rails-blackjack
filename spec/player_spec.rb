@@ -30,8 +30,14 @@ describe Player do
       expect(player.score).to eq 19
     end
 
+    it "is computed correctly with aces" do
+      player = Player.new.add_card(Card.new(11, :spades))
+      player = player.add_card(Ace.new(:hearts))
+      expect(player.score).to eq 21
+    end
+
     it "is blackjack when the player has a face card and an ace" do
-      player = Player.new.add_card(Card.new(1, :diamonds))
+      player = Player.new.add_card(Ace.new(:diamonds))
       player = player.add_card(Card.new(13, :spades))
       expect(player.blackjack?).to eq true
     end

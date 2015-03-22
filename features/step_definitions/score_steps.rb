@@ -1,5 +1,6 @@
 require_relative "../../lib/player.rb"
 require_relative "../../lib/card.rb"
+require_relative "../../lib/ace.rb"
 
 Given(/^I am a player$/) do
   @player = Player.new
@@ -46,7 +47,7 @@ When(/^the dealer deals me a king of diamonds$/) do
 end
 
 When(/^the dealer deals me an ace of hearts$/) do 
-  pending
+  @player = @player.add_card(Ace.new(:hearts))
 end
 
 Then(/^I should have a total score of (\d+)$/) do |value|

@@ -1,11 +1,10 @@
 class Card
   include Comparable
 
-  attr_reader :value
-
   def initialize(value, suit)
     @value = value
     @suit = suit
+    validate_params
   end
 
   def ==(target)
@@ -16,7 +15,7 @@ class Card
     @value <=> target.value
   end
 
-  def value
+  def value(cards=[])
     return @value if @value <= 10
     10
   end
@@ -26,6 +25,13 @@ class Card
   end
 
   def ace?
-    @value == 1
+    false
   end
+
+  private
+    def validate_params
+      if @value == 1
+        raise "ERROR: A card cannot be assigned a value of one."
+      end
+    end
 end

@@ -7,6 +7,10 @@ describe Card do
     it "takes in a suit and a value" do
       expect(card).to be_a Card
     end
+
+    it "will throw an exception if given a value of one" do
+      expect { Card.new(1, :diamonds) }.to raise_error
+    end
   end
 
   describe "value" do
@@ -49,11 +53,7 @@ describe Card do
     expect(Card.new(10, :spades).face?).to eq false
   end
 
-  it "knows when it is an ace card" do
-    expect(Card.new(1, :spades).ace?).to eq true
-  end
-
-  it "knows when it is NOT an ace card" do
+  it "is not an ace" do
     expect(Card.new(2, :diamonds).ace?).to eq false
   end
 end

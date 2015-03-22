@@ -12,7 +12,7 @@ class Player
   def score
     score = 0
     @hand.each do |card|
-      score += card.value
+      score += card.value(@hand)
     end
     score
   end
