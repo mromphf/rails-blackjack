@@ -19,10 +19,6 @@ class Card
     return @value if @value <= 10
     10
   end
-    
-  def face?
-    @value > 10
-  end
 
   def ace?
     false

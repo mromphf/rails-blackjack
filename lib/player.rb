@@ -33,6 +33,6 @@ class Player
       first_card = @hand[0]
       second_card = @hand[1]
       (first_card.ace? || second_card.ace?) && 
-        (second_card.face? || first_card.face?)
+        (second_card.value == 10 || first_card.value == 10)
     end
 end

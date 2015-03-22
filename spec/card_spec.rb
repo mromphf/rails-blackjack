@@ -45,14 +45,6 @@ describe Card do
     end
   end 
 
-  it "knows when it is a face card" do
-    expect(Card.new(11, :hearts).face?).to eq true
-  end
-
-  it "knows when it is NOT a face card" do
-    expect(Card.new(10, :spades).face?).to eq false
-  end
-
   it "is not an ace" do
     expect(Card.new(2, :diamonds).ace?).to eq false
   end

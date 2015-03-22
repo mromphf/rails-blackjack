@@ -21,10 +21,6 @@ class Ace < Card
     1
   end
 
-  def face?
-    false
-  end
-
   def ace?
     true
   end

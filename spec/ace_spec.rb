@@ -31,10 +31,6 @@ describe Ace do
     end
   end
 
-  it "is not a face card" do
-    expect(ace.face?).to eq false
-  end
-
   it "is an ace" do
     expect(ace.ace?).to eq true
   end
