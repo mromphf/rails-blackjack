@@ -3,6 +3,7 @@ require_relative "card.rb"
 class Ace < Card
   def initialize(suit)
     @suit = suit
+    validate_suit
   end
 
   def ==(target)

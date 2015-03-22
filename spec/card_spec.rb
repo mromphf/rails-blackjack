@@ -11,6 +11,10 @@ describe Card do
     it "will throw an exception if given a value of one" do
       expect { Card.new(1, :diamonds) }.to raise_error
     end
+
+    it "will throw an exception if given an invalid suit" do
+      expect { Card.new(3, :foo) }.to raise_error
+    end
   end
 
   describe "value" do
@@ -39,7 +43,7 @@ describe Card do
 
   describe "comparability" do
     it "is determined by the value of the card first" do
-      cards = [Card.new(3, :hearts), Card.new(11, :club), Card.new(7, :spades)]
+      cards = [Card.new(3, :hearts), Card.new(11, :clubs), Card.new(7, :spades)]
       cards.sort
       expect(cards[2]).to eq Card.new(7, :spades)
     end

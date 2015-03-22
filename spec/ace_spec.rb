@@ -7,6 +7,10 @@ describe Ace do
     expect(ace).to be_a Ace
   end
 
+  it "will throw an exception if given an invalid suit" do
+    expect { Card.new(3, :foo) }.to raise_error
+  end
+
   it "is equal to another ace of the same " do
     expect(ace).to eq Ace.new(:clubs)
   end

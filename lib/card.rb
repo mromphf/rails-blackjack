@@ -1,10 +1,13 @@
 class Card
   include Comparable
 
+  VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
+
   def initialize(value, suit)
     @value = value
     @suit = suit
-    validate_params
+    validate_value
+    validate_suit
   end
 
   def ==(target)
@@ -25,9 +28,16 @@ class Card
   end
 
   private
-    def validate_params
+    def validate_value
       if @value == 1
         raise "ERROR: A card cannot be assigned a value of one."
+      end
+    end
+
+  protected
+    def validate_suit
+      if not VALID_SUITS.include?(@suit)
+        raise "ERROR: Cannot create a card with suit: #{@suit}."
       end
     end
 end
