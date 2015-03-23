@@ -12,6 +12,10 @@ describe Card do
       expect { Card.new(1, :diamonds) }.to raise_error
     end
 
+    it "will throw an exception if given a value greater than thirteen" do
+      expect { Card.new(14, :diamonds) }.to raise_error
+    end
+
     it "will throw an exception if given an invalid suit" do
       expect { Card.new(3, :foo) }.to raise_error
     end
