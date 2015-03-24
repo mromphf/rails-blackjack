@@ -11,8 +11,14 @@ describe Ace do
     expect { Card.new(3, :foo) }.to raise_error
   end
 
-  it "is equal to another ace of the same " do
-    expect(ace).to eq Ace.new(:clubs)
+  describe "equality" do
+    it "is determined when two aces are the same suit" do
+      expect(ace).to eq Ace.new(:hearts)
+    end
+
+    it "is not equal if the suits are different" do
+      expect(ace).not_to eq Ace.new(:clubs)
+    end
   end
 
   describe "value" do

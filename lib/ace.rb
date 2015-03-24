@@ -1,13 +1,16 @@
 require_relative "card.rb"
 
 class Ace < Card
+  
+  attr_reader :suit
+
   def initialize(suit)
     @suit = suit
     validate_suit
   end
 
   def ==(target)
-    target.instance_of? Ace 
+    (@suit == target.suit) && (target.instance_of? Ace)
   end
 
   def value(cards=[])
