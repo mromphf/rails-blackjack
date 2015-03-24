@@ -1,9 +1,6 @@
 require_relative "card.rb"
 
 class Ace < Card
-  
-  attr_reader :suit
-
   def initialize(suit)
     @suit = suit
     validate_suit

@@ -36,12 +36,18 @@ describe Card do
   end
 
   describe "equality" do
-    it "is true when the values of the card are the same" do
-      expect(Card.new(7, :hearts)).to eq Card.new(7, :clubs) 
+    it "is true when the values and the suits of the card are the same" do
+      expect(Card.new(7, :hearts)).to eq Card.new(7, :hearts) 
     end
 
-    it "is not true when the values of the card are NOT the same" do
-      expect(Card.new(8, :hearts)).not_to eq Card.new(7, :clubs) 
+    describe "is not true" do
+      it "when the suits of the card are NOT the same" do
+        expect(Card.new(8, :hearts)).not_to eq Card.new(8, :clubs) 
+      end
+
+      it "when the values of the card are NOT the same" do
+        expect(Card.new(8, :hearts)).not_to eq Card.new(7, :hearts) 
+      end
     end
   end
 

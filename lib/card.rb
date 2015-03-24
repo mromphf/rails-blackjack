@@ -1,6 +1,8 @@
 class Card
   include Comparable
 
+  attr_reader :suit
+
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
 
   def initialize(value, suit)
@@ -11,7 +13,7 @@ class Card
   end
 
   def ==(target)
-    @value == target.value
+    (@value == target.value) && (@suit == target.suit)
   end
 
   def <=>(target)
