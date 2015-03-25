@@ -41,21 +41,39 @@ describe Card do
     end
 
     describe "is not true" do
-      it "when the suits of the card are NOT the same" do
+      it "when values are the same but the suits are different" do
         expect(Card.new(8, :hearts)).not_to eq Card.new(8, :clubs) 
       end
 
-      it "when the values of the card are NOT the same" do
+      it "when the suits are the same but the values are different" do
         expect(Card.new(8, :hearts)).not_to eq Card.new(7, :hearts) 
       end
     end
   end
 
-  describe "comparability" do
-    it "is determined by the value of the card first" do
-      cards = [Card.new(3, :hearts), Card.new(11, :clubs), Card.new(7, :spades)]
-      cards.sort
-      expect(cards[2]).to eq Card.new(7, :spades)
+  describe "sorting" do
+    it "can be done by value" do
+      unsorted_cards = [Card.new(11, :hearts), Card.new(3, :hearts), Card.new(7, :hearts)]
+      sorted_cards = [Card.new(3, :hearts), Card.new(7, :hearts), Card.new(11, :hearts)]
+      expect(unsorted_cards.sort_by { |c| c.value } ).to eq sorted_cards
+    end
+
+    it "can be done with face cards" do
+      unsorted_cards = [Card.new(13, :clubs), Card.new(12, :diamonds), Card.new(11, :clubs)]
+      sorted_cards = [Card.new(11, :clubs), Card.new(13, :clubs), Card.new(12, :diamonds)]
+      expect(unsorted_cards.sort).to eq sorted_cards
+    end
+
+    it "can be be done first by value then by suit" do
+      unsorted_cards = [Card.new(8, :diamonds), Card.new(3, :spades), Card.new(5, :diamonds)]
+      sorted_cards = [Card.new(3, :spades), Card.new(5, :diamonds), Card.new(8, :diamonds)]
+      expect(unsorted_cards.sort_by { |c| [ c.value, c.suit] }).to eq sorted_cards
+    end
+
+    it "will sort by suits according to SHoCkeD sorting method" do
+      unsorted_cards = [Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds), Card.new(3, :spades)]
+      sorted_cards = [Card.new(3, :spades), Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds)]
+      expect(unsorted_cards.sort).to eq sorted_cards
     end
   end 
 

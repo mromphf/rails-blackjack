@@ -4,6 +4,7 @@ class Card
   attr_reader :suit
 
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
+  SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
 
   def initialize(value, suit)
     @value = value
@@ -13,16 +14,16 @@ class Card
   end
 
   def ==(target)
-    (@value == target.value) && (@suit == target.suit)
+    (value == target.value) && (@suit == target.suit)
   end
 
   def <=>(target)
-    @value <=> target.value
+    SUIT_VALUES[@suit] <=> SUIT_VALUES[target.suit] 
   end
 
   def value(cards=[])
-    return @value if @value <= 10
-    10
+    return 10 if @value >= 11
+    @value
   end
 
   def ace?
