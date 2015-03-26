@@ -35,7 +35,7 @@ class Card
       if @value == 1
         raise "ERROR: A card cannot be assigned a value of one."
       end
-      if @value == 14
+      if @value >= 14
         raise "ERROR: Cannot create a card with a value greater than thirteen."
       end
     end
