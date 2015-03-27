@@ -1,5 +1,2 @@
-class GamesController < ActionController::Base
-  def show
-    render 'view'
-  end
+class GamesController < ApplicationController
 end

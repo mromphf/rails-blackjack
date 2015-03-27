@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root 'games#show'
-  get 'game/' => 'games#show'
+  root 'games#index'
+  resources :games
 end
