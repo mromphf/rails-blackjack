@@ -49,10 +49,22 @@ describe Player do
     end
   end
 
-  it "will bust when score exceeds 21" do
-    player = Player.new.add_card(Card.new(10, :hearts))
-    player = player.add_card(Card.new(10, :diamonds))
-    player = player.add_card(Card.new(3, :clubs))
-    expect(player.bust?).to eq true
+  describe "busting" do
+    it "will bust when score exceeds 21" do
+      player.stub(:score) { 22 }
+      (player.bust?).should == true
+    end
+
+    describe "will not bust" do
+      it "when score is less than 21" do
+        player.stub(:score) { 20 }
+        (player.bust?).should == false
+      end
+
+      it "when score is equal to 21" do
+        player.stub(:score) { 21 }
+        (player.bust?).should == false
+      end
+    end
   end
 end
