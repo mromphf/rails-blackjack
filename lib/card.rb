@@ -22,7 +22,7 @@ class Card
   end
 
   def ==(target)
-    (value == target.value) && (@suit == target.suit)
+    (@value == target.state[0]) && (@suit == target.suit)
   end
 
   def <=>(target)
@@ -36,6 +36,10 @@ class Card
 
   def ace?
     false
+  end
+
+  def state
+    [@value, @suit]
   end
 
   private

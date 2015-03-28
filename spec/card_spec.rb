@@ -46,7 +46,11 @@ describe Card do
       end
 
       it "when the suits are the same but the values are different" do
-        expect(Card.new(8, :hearts)).not_to eq Card.new(7, :hearts) 
+        expect(Card.new(11, :hearts)).not_to eq Card.new(13, :hearts) 
+      end
+
+      it "when both the values and the suits are different" do
+        expect(Card.new(8, :spades)).not_to eq Card.new(13, :hearts) 
       end
     end
   end
@@ -56,12 +60,6 @@ describe Card do
       unsorted_cards = [Card.new(11, :hearts), Card.new(3, :hearts), Card.new(7, :hearts)]
       sorted_cards = [Card.new(3, :hearts), Card.new(7, :hearts), Card.new(11, :hearts)]
       expect(unsorted_cards.sort_by { |c| c.value } ).to eq sorted_cards
-    end
-
-    it "can be done with face cards" do
-      unsorted_cards = [Card.new(13, :clubs), Card.new(12, :diamonds), Card.new(11, :clubs)]
-      sorted_cards = [Card.new(11, :clubs), Card.new(13, :clubs), Card.new(12, :diamonds)]
-      expect(unsorted_cards.sort).to eq sorted_cards
     end
 
     it "can be be done first by value then by suit" do

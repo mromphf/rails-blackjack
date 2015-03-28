@@ -22,7 +22,8 @@ describe Deck do
     end
   end
 
-  it "can deal a random card" do
-    deck.random_card.should be_a Card || Ace
+  it "will not deal the card same card twice in a row" do
+    card_one = deck.deal_card!
+    deck.deal_card!.should_not == card_one
   end
 end
