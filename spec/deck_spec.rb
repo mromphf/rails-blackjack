@@ -21,4 +21,8 @@ describe Deck do
       deck.deal_card!.should == Card.new(11, :diamonds)
     end
   end
+
+  it "can deal a random card" do
+    deck.random_card.should be_a Card || Ace
+  end
 end

@@ -2,6 +2,7 @@ var onHit = function() {
     $.ajax({
         url: "/hit",
         type: "get",
+        datatype: "json",
         success: onSuccess,
         failure: onFailure
     });
@@ -11,6 +12,7 @@ var onStand = function() {
     $.ajax({
         url: "/stand",
         type: "get",
+        datatype: "json",
         success: onSuccess,
         failure: onFailure
     });

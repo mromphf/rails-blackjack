@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
   def hit
-    render :json => { text: "You have hit!" }
+    deck = Deck.new
+    card = deck.random_card
+    render :json => { text: card.to_s }
   end
 
   def stand

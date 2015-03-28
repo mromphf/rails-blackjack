@@ -13,6 +13,10 @@ class Deck
     @cards.pop
   end
 
+  def random_card
+    @cards[Random.rand(0..51)]
+  end
+
   private
     def add_suit_to_deck(suit)
       @cards << Ace.new(suit)
