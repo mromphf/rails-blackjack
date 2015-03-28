@@ -5,12 +5,20 @@ class Card
 
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
   SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
+  SUIT_STRINGS = { spades: "Spades", hearts: "Hearts", clubs: "Clubs", diamonds: "Diamonds" }
+  FACE_VALUES = { 11 => "Jack", 12 => "Queen", 13 => "King" }
 
   def initialize(value, suit)
     @value = value
     @suit = suit
     validate_value
     validate_suit
+  end
+
+  def to_s
+    value = @value
+    value = FACE_VALUES[@value] if value > 10
+    "#{value} of #{SUIT_STRINGS[@suit]}"
   end
 
   def ==(target)

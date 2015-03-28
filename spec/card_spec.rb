@@ -80,4 +80,26 @@ describe Card do
   it "is not an ace" do
     expect(Card.new(2, :diamonds).ace?).to eq false
   end
+
+  describe "to-string" do
+    describe "on non-face cards" do
+      it "provides the correct output on spades" do
+        Card.new(3, :hearts).to_s.should == "3 of Hearts"
+      end
+
+      it "provides the correct output on hearts" do
+        Card.new(8, :spades).to_s.should == "8 of Spades"
+      end
+    end
+
+    describe "on face cards" do
+      it "provides the correct output on clubs" do
+        Card.new(11, :clubs).to_s.should == "Jack of Clubs"
+      end
+
+      it "provides the correct output on diamonds" do
+        Card.new(13, :diamonds).to_s.should == "King of Diamonds"
+      end
+    end
+  end
 end
