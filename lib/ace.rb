@@ -6,6 +6,10 @@ class Ace < Card
     validate_suit
   end
 
+  def to_s
+    "Ace of #{SUIT_STRINGS[@suit]}"
+  end
+
   def ==(target)
     (@suit == target.suit) && (target.instance_of? Ace)
   end
