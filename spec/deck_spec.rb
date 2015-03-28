@@ -9,7 +9,20 @@ describe Deck do
     deck.should be_a Deck
   end
 
-  it "will have the king of diamonds as the last card" do
-    deck.deal_card.to_s.should == "King of Diamonds"
+  describe "last three cards" do
+    it "will have the king of diamonds last" do
+      deck.deal_card.should == Card.new(13, :diamonds)
+    end
+
+    it "will have the queen of diamonds second to last" do
+      deck.deal_card
+      deck.deal_card.should == Card.new(12, :diamonds)
+    end
+
+    it "will have the queen of diamonds second to last" do
+      deck.deal_card
+      deck.deal_card
+      deck.deal_card.should == Card.new(11, :diamonds)
+    end
   end
 end

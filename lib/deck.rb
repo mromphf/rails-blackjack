@@ -1,24 +1,23 @@
 class Deck
+  NUMBER_OF_NON_FACE_CARDS = 12
+
   def initialize
-    @cards = [] << Ace.new(:spades)
-    12.times do |i|
-      @cards << Card.new(i + 2, :spades)
-    end
-    @cards << Ace.new(:hearts)
-    12.times do |i|
-      @cards << Card.new(i + 2, :hearts)
-    end
-    @cards << Ace.new(:clubs)
-    12.times do |i|
-      @cards << Card.new(i + 2, :clubs)
-    end
-    @cards << Ace.new(:diamonds)
-    12.times do |i|
-      @cards << Card.new(i + 2, :diamonds)
-    end
+    @cards = [] 
+    add_suit_to_deck(:spades)
+    add_suit_to_deck(:hearts)
+    add_suit_to_deck(:clubs)
+    add_suit_to_deck(:diamonds)
   end
 
   def deal_card
     @cards.pop
   end
+
+  private
+    def add_suit_to_deck(suit)
+      @cards << Ace.new(suit)
+      NUMBER_OF_NON_FACE_CARDS.times do |i|
+        @cards << Card.new(i + 2, suit)
+      end
+    end
 end
