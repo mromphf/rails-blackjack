@@ -19,7 +19,10 @@ var onStand = function() {
 }
 
 function onSuccess(data) {
-    document.getElementById("foo").innerHTML = data.text;
+    //document.getElementById("foo").innerHTML = data.text;
+    var card = document.createElement("li");
+    card.appendChild(document.createTextNode(data.text));
+    document.getElementById("userCards").appendChild(card);
 }
 
 function onFailure() {
