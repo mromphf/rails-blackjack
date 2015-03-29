@@ -1,21 +1,34 @@
-var onHit = function() {
-    ajaxCall("/hit");
-}
+$(document).ready(function () {
+    setTimeout(function () {onHit()}, 500);
+    setTimeout(function () {dealerHit()}, 1000);
+    setTimeout(function () {onHit()}, 1500);
+    setTimeout(function () {dealerHit()}, 2000);
+    setTimeout(function () {enableControls()}, 2500);
+});
 
-var onStand = function() {
-    //ajaxCall("/stand")
-    document.getElementById("foo").innerHTML = "You stand...";
-    disableControls();
-}
-
-function ajaxCall(url) {
+function onHit() {
     $.ajax({
-        url: url,
+        url: "/player_hit",
         type: "get",
         datatype: "json",
         success: onSuccess,
         failure: onFailure
     });
+}
+
+function dealerHit() {
+    $.ajax({
+        url: "/dealer_hit",
+        type: "get",
+        datatype: "json",
+        success: onDealerSuccess,
+        failure: onFailure
+    });
+}
+
+function onStand () {
+    document.getElementById("foo").innerHTML = "You stand...";
+    disableControls();
 }
 
 function onSuccess(data) {
@@ -34,6 +47,14 @@ function onSuccess(data) {
     } 
 }
 
+function onDealerSuccess(data) {
+    document.getElementById("dealerScore").innerHTML = "Score: " + data.score;
+    var node = document.createElement("LI");       
+    var textnode = document.createTextNode(data.text);
+    node.appendChild(textnode);
+    document.getElementById("dealerCards").appendChild(node);
+}
+
 function onFailure() {
     console.log("there was an ajax error trying to hit the games controller.");
 }
@@ -41,6 +62,11 @@ function onFailure() {
 function disableControls() {
     document.getElementById("btnHit").disabled = true;
     document.getElementById("btnStand").disabled = true;
+}
+
+function enableControls() {
+    document.getElementById("btnHit").disabled = false;
+    document.getElementById("btnStand").disabled = false;
 }
 
 function roundIsOver(data) {
