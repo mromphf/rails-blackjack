@@ -105,21 +105,23 @@ describe Card do
     Card.new(13, :hearts).state[:suit].should == "Hearts"
   end
 
-  it "can deserialize values in an array of serialized cards" do
-    data = [{value: "7", suit: "Hearts"}, {value: "11", suit: "Spades"}]
-    deserialized_cards = Card.deserialize(data)
-    deserialized_cards[1].suit.should == :spades
+  it "can serialize an array of cards with an ace" do
+    cards = [Card.new(3, :hearts), Card.new(11, :clubs), Ace.new(:hearts)]
+    Card.serialize(cards).should == ['3 of Hearts', '11 of Clubs', '1 of Hearts']
   end
 
-  it "can deserialize suits in an array of serialized cards" do
-    data = [{value: "7", suit: "Hearts"}, {value: "11", suit: "Spades"}]
-    deserialized_cards = Card.deserialize(data)
-    deserialized_cards[1].state[:value].should == 11
+  it "can serialize an array of cards" do
+    cards = [Card.new(3, :hearts), Card.new(11, :clubs)]
+    Card.serialize(cards).should == ['3 of Hearts', '11 of Clubs']
   end
 
-  it "can serialize an array of card objects" do
-    cards = [Card.new(7, :hearts), Card.new(3, :clubs)]
-    serialized = Card.serialize(cards)
-    serialized.should == [{value: 7, suit: "Hearts"}, {value: 3, suit: "Clubs"}]
+  it "can deserialize an array of card objects" do
+    serialized = ['3 of Hearts', '11 of Clubs']
+    Card.deserialize(serialized).should == [Card.new(3, :hearts), Card.new(11, :clubs)]
+  end
+
+  it "can deserialize an array of cards with an ace" do
+    serialized = ['3 of Hearts', '11 of Clubs', '1 of Spades']
+    Card.deserialize(serialized).should == [Card.new(3, :hearts), Card.new(11, :clubs), Ace.new(:spades)]
   end
 end
