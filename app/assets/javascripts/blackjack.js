@@ -1,3 +1,6 @@
+var dealerScore = 0
+var playerScore = 0
+
 $(document).ready(function () {
     setTimeout(function () {onHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
@@ -16,6 +19,10 @@ function onHit() {
     });
 }
 
+function onRefresh() {
+    location.reload();    
+}
+
 function dealerHit() {
     $.ajax({
         url: "/dealer_hit",
@@ -27,12 +34,30 @@ function dealerHit() {
 }
 
 function onStand () {
-    document.getElementById("foo").innerHTML = "You stand...";
     disableControls();
+    document.getElementById("foo").innerHTML = "You stand...";
+    if ( dealerScore < playerScore ) {
+        dealerHit();
+        setTimeout(function () {evaluateResult()}, 500);
+    }
+}
+
+function evaluateResult() {
+    if ( dealerScore > playerScore ) {
+        document.getElementById("foo").innerHTML = "Dealer wins..."
+    }
+    if ( playerScore > dealerScore ) {
+        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
+    }
+    if ( playerScore == dealerScore ) {
+        document.getElementById("foo").innerHTML = "Draw..."
+    }
+    document.getElementById("btnRefresh").disabled = false;
 }
 
 function onSuccess(data) {
-    document.getElementById("playerScore").innerHTML = "Score: " + data.score;
+    playerScore = data.score
+    document.getElementById("playerScore").innerHTML = "Score: " + playerScore
     var node = document.createElement("LI");       
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
@@ -44,11 +69,14 @@ function onSuccess(data) {
         document.getElementById("playerScore").innerHTML = "Blackjack!!";
     } else if ( data.bust ) {
         document.getElementById("playerScore").innerHTML = "BUST!";
+        document.getElementById("foo").innerHTML = "Dealer wins..."
+        document.getElementById("btnRefresh").disabled = false;
     } 
 }
 
 function onDealerSuccess(data) {
-    document.getElementById("dealerScore").innerHTML = "Score: " + data.score;
+    dealerScore = data.score
+    document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore
     var node = document.createElement("LI");       
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
