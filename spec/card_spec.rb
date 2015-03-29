@@ -103,25 +103,6 @@ describe Card do
 
   it "will provide its state in a hashed form" do
     Card.new(13, :hearts).state[:suit].should == "Hearts"
-  end
-
-  it "can serialize an array of cards with an ace" do
-    cards = [Card.new(3, :hearts), Card.new(11, :clubs), Ace.new(:hearts)]
-    Card.serialize(cards).should == ['3 of Hearts', '11 of Clubs', '1 of Hearts']
-  end
-
-  it "can serialize an array of cards" do
-    cards = [Card.new(3, :hearts), Card.new(11, :clubs)]
-    Card.serialize(cards).should == ['3 of Hearts', '11 of Clubs']
-  end
-
-  it "can deserialize an array of card objects" do
-    serialized = ['3 of Hearts', '11 of Clubs']
-    Card.deserialize(serialized).should == [Card.new(3, :hearts), Card.new(11, :clubs)]
-  end
-
-  it "can deserialize an array of cards with an ace" do
-    serialized = ['3 of Hearts', '11 of Clubs', '1 of Spades']
-    Card.deserialize(serialized).should == [Card.new(3, :hearts), Card.new(11, :clubs), Ace.new(:spades)]
+    Card.new(13, :hearts).state[:value].should == 13
   end
 end
