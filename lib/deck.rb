@@ -3,18 +3,15 @@ class Deck
 
   def initialize
     @cards = []
-    add_suit_to_deck(:spades)
-    add_suit_to_deck(:hearts)
-    add_suit_to_deck(:clubs)
-    add_suit_to_deck(:diamonds)
+    [:spades, :hearts, :clubs, :diamonds].each do |suit|
+      add_suit_to_deck(suit)
+    end
   end
 
-  def deal_card!
-    @cards.pop
-  end
-
-  def random_card
-    @cards[Random.rand(0..51)]
+  def deal_card(drawn_cards=[])
+    drawn_cards.each { |card| @cards.delete(card) }
+    random_index = (Random.rand(1..@cards.size) - 1)
+    @cards[random_index]
   end
 
   private

@@ -5,25 +5,20 @@ require_relative "../lib/ace.rb"
 describe Deck do
   let (:deck) { Deck.new }
 
-  describe "last three cards" do
-    it "will have the king of diamonds last" do
-      deck.deal_card!.should == Card.new(13, :diamonds)
-    end
-
-    it "will have the queen of diamonds second to last" do
-      deck.deal_card!
-      deck.deal_card!.should == Card.new(12, :diamonds)
-    end
-
-    it "will have the queen of diamonds second to last" do
-      deck.deal_card!
-      deck.deal_card!
-      deck.deal_card!.should == Card.new(11, :diamonds)
-    end
+  it "deals cards" do
+    deck.deal_card.should be_a Card
   end
 
-  it "will not deal the card same card twice in a row" do
-    card_one = deck.deal_card!
-    deck.deal_card!.should_not == card_one
+  it "wont't deal a card that's been drawn from the deck" do
+    drawn_card = Card.new(10, :hearts)
+    deck.deal_card([drawn_card]).should_not == drawn_card
+  end
+
+  it "won't deal any aces when all aces have been removed" do
+    drawn_cards = [Ace.new(:spades), Ace.new(:hearts), Ace.new(:clubs), Ace.new(:diamonds)]
+    deck.deal_card(drawn_cards).should_not == Ace.new(:spades)
+    deck.deal_card(drawn_cards).should_not == Ace.new(:hearts)
+    deck.deal_card(drawn_cards).should_not == Ace.new(:clubs)
+    deck.deal_card(drawn_cards).should_not == Ace.new(:diamonds)
   end
 end

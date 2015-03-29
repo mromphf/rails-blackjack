@@ -29,4 +29,8 @@ class Ace < Card
   def ace?
     true
   end
+
+  def state
+    { value: 1, suit: SUIT_STRINGS[@suit] }
+  end
 end

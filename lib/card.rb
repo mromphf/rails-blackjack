@@ -6,6 +6,7 @@ class Card
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
   SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
   SUIT_STRINGS = { spades: "Spades", hearts: "Hearts", clubs: "Clubs", diamonds: "Diamonds" }
+  STRING_SUITS = { "Spades" => :spades, "Hearts" => :hearts, "Clubs" => :clubs, "Diamonds" => :diamonds }
   FACE_VALUES = { 11 => "Jack", 12 => "Queen", 13 => "King" }
 
   def initialize(value, suit)
@@ -22,7 +23,7 @@ class Card
   end
 
   def ==(target)
-    (@value == target.state[0]) && (@suit == target.suit)
+    (@value == target.state[:value]) && (@suit == target.suit)
   end
 
   def <=>(target)
@@ -39,7 +40,23 @@ class Card
   end
 
   def state
-    [@value, @suit]
+    { value: @value, suit: SUIT_STRINGS[@suit] }
+  end
+
+  def self.deserialize(data)
+    cards = []
+    data.each do |item|
+      cards << Card.new(item[:value].to_i, STRING_SUITS[item[:suit]])
+    end
+    cards
+  end
+
+  def self.serialize(cards)
+    values = []
+    cards.each do |card|
+      values << card.state
+    end
+    values
   end
 
   private

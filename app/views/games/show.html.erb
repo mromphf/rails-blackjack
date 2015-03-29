@@ -3,8 +3,10 @@
 
   <p id="foo">Click a button</p>
 
-  <ul id="userCards" style="list-style:none"></ul>
+  <ul id="cards" style="list-style:none"></ul>
 
   <input id="btnHit" type="button" value="Hit" onclick="onHit()"/>
   <input id="btnStand" type="button" value="Stand" onclick="onStand()"/>
+
+  <% session[:drawn_cards].inspect %>
 </center>

@@ -100,4 +100,26 @@ describe Card do
       end
     end
   end
+
+  it "will provide its state in a hashed form" do
+    Card.new(13, :hearts).state[:suit].should == "Hearts"
+  end
+
+  it "can deserialize values in an array of serialized cards" do
+    data = [{value: "7", suit: "Hearts"}, {value: "11", suit: "Spades"}]
+    deserialized_cards = Card.deserialize(data)
+    deserialized_cards[1].suit.should == :spades
+  end
+
+  it "can deserialize suits in an array of serialized cards" do
+    data = [{value: "7", suit: "Hearts"}, {value: "11", suit: "Spades"}]
+    deserialized_cards = Card.deserialize(data)
+    deserialized_cards[1].state[:value].should == 11
+  end
+
+  it "can serialize an array of card objects" do
+    cards = [Card.new(7, :hearts), Card.new(3, :clubs)]
+    serialized = Card.serialize(cards)
+    serialized.should == [{value: 7, suit: "Hearts"}, {value: 3, suit: "Clubs"}]
+  end
 end
