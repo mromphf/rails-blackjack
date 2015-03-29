@@ -19,18 +19,18 @@ function ajaxCall(url) {
 }
 
 function onSuccess(data) {
-    document.getElementById("score").innerHTML = "Score: " + data.score;
+    document.getElementById("playerScore").innerHTML = "Score: " + data.score;
     var node = document.createElement("LI");       
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
-    document.getElementById("cards").appendChild(node);
+    document.getElementById("playerCards").appendChild(node);
     if (roundIsOver(data)) {
         disableControls();
     }
     if ( data.blackjack ) {
-        document.getElementById("score").innerHTML = "Blackjack!!";
+        document.getElementById("playerScore").innerHTML = "Blackjack!!";
     } else if ( data.bust ) {
-        document.getElementById("score").innerHTML = "BUST!";
+        document.getElementById("playerScore").innerHTML = "BUST!";
     } 
 }
 

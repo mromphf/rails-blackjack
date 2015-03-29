@@ -2,10 +2,21 @@
   <h1>Blackjack!</h1>
 
   <p id="foo">Click a button</p>
-  <p id="score"></p>
 
-  <ul id="cards" style="list-style:none"></ul>
+  <div id="playerBox" class="box">
+    <h3>You</h3>
+    <p id="playerScore">Score: </p>
+    <ul id="playerCards" style="list-style:none"></ul>
+  </div>
 
-  <input id="btnHit" type="button" value="Hit" onclick="onHit()"/>
-  <input id="btnStand" type="button" value="Stand" onclick="onStand()"/>
+  <div id="dealerBox" class="box">
+    <h3>Dealer</h3>
+    <p id="dealerScore">Score: </p>
+    <ul id="dealerCards" style="list-style:none"></ul>
+  </div>
+
+  <div id="input">
+    <input id="btnHit" type="button" value="Hit" onclick="onHit()"/>
+    <input id="btnStand" type="button" value="Stand" onclick="onStand()"/>
+  </div>
 </center>
