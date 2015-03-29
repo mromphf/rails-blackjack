@@ -1,0 +1,2 @@
+class CardSerializer
+end
