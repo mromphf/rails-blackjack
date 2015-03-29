@@ -7,11 +7,7 @@ class CardSerializer
       elements = item.split
       value = elements[0].reverse.chomp('"').reverse.to_i
       suit = STRING_SUITS[elements[2].chomp('"')]
-      if value == 1
-        cards << Ace.new(suit)
-      else
-        cards << Card.new(value, suit)
-      end
+      cards << self.build_card(value, suit)
     end
     cards
   end
@@ -23,4 +19,10 @@ class CardSerializer
     end
     values
   end
+
+  private
+    def self.build_card(value, suit)
+      return Ace.new(suit) if value == 1
+      Card.new(value, suit)
+    end
 end
