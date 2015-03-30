@@ -2,25 +2,20 @@ var dealerScore = 0
 var playerScore = 0
 
 $(document).ready(function () {
-    setTimeout(function () {onHit()}, 500);
+    setTimeout(function () {playerHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
-    setTimeout(function () {onHit()}, 1500);
+    setTimeout(function () {playerHit()}, 1500);
     setTimeout(function () {dealerHit()}, 2000);
     setTimeout(function () {enableControls()}, 2500);
 });
 
-function onHit() {
+function playerHit() {
     $.ajax({
         url: "/player_hit",
         type: "get",
         datatype: "json",
-        success: onSuccess,
-        failure: onFailure
+        success: playerCallback 
     });
-}
-
-function onRefresh() {
-    location.reload();    
 }
 
 function dealerHit() {
@@ -28,63 +23,72 @@ function dealerHit() {
         url: "/dealer_hit",
         type: "get",
         datatype: "json",
-        success: onDealerSuccess,
-        failure: onFailure
+        success: dealerCallback
     });
+}
+
+function onRefresh() {
+    location.reload();    
 }
 
 function onStand () {
     disableControls();
     document.getElementById("foo").innerHTML = "You stand...";
-    if ( dealerScore < playerScore ) {
+    dealerTriesToWin();
+}
+
+function dealerTriesToWin() {
+    if (dealerScore <= playerScore && dealerScore > 21) {
         dealerHit();
-        setTimeout(function () {evaluateResult()}, 500);
+        setTimeout(function () {dealerTriesToWin()}, 500);
+    }
+    else {
+       evaluateResult(); 
     }
 }
 
-function evaluateResult() {
-    if ( dealerScore > playerScore ) {
-        document.getElementById("foo").innerHTML = "Dealer wins..."
-    }
-    if ( playerScore > dealerScore ) {
-        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
-    }
-    if ( playerScore == dealerScore ) {
-        document.getElementById("foo").innerHTML = "Draw..."
-    }
-    document.getElementById("btnRefresh").disabled = false;
-}
-
-function onSuccess(data) {
+function playerCallback(data) {
     playerScore = data.score
     document.getElementById("playerScore").innerHTML = "Score: " + playerScore
     var node = document.createElement("LI");       
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
     document.getElementById("playerCards").appendChild(node);
-    if (roundIsOver(data)) {
-        disableControls();
-    }
     if ( data.blackjack ) {
         document.getElementById("playerScore").innerHTML = "Blackjack!!";
     } else if ( data.bust ) {
+        disableControls();
         document.getElementById("playerScore").innerHTML = "BUST!";
         document.getElementById("foo").innerHTML = "Dealer wins..."
         document.getElementById("btnRefresh").disabled = false;
     } 
 }
 
-function onDealerSuccess(data) {
+function dealerCallback(data) {
     dealerScore = data.score
     document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore
     var node = document.createElement("LI");       
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
     document.getElementById("dealerCards").appendChild(node);
+    if (data.bust) {
+        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
+        evaluateResult();
+    }
 }
 
-function onFailure() {
-    console.log("there was an ajax error trying to hit the games controller.");
+function evaluateResult() {
+    disableControls();
+    if ( dealerScore > playerScore && dealerScore <= 21 ) {
+        document.getElementById("foo").innerHTML = "Dealer wins..."
+    }
+    if ( playerScore > dealerScore && playerScore <= 21) {
+        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
+    }
+    if ( playerScore == dealerScore ) {
+        document.getElementById("foo").innerHTML = "Draw..."
+    }
+    document.getElementById("btnRefresh").disabled = false;
 }
 
 function disableControls() {
@@ -95,8 +99,4 @@ function disableControls() {
 function enableControls() {
     document.getElementById("btnHit").disabled = false;
     document.getElementById("btnStand").disabled = false;
-}
-
-function roundIsOver(data) {
-   return (data.blackjack) || (data.bust);
 }
