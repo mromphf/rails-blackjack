@@ -54,9 +54,7 @@ function playerCallback(data) {
     var textnode = document.createTextNode(data.text);
     node.appendChild(textnode);
     document.getElementById("playerCards").appendChild(node);
-    if ( data.blackjack ) {
-        document.getElementById("playerScore").innerHTML = "Blackjack!!";
-    } else if ( data.bust ) {
+    if ( data.bust ) {
         disableControls();
         document.getElementById("playerScore").innerHTML = "BUST!";
         document.getElementById("foo").innerHTML = "Dealer wins..."
@@ -82,10 +80,10 @@ function evaluateResult() {
     if ( dealerScore > playerScore && dealerScore <= 21 ) {
         document.getElementById("foo").innerHTML = "Dealer wins..."
     }
-    if ( playerScore > dealerScore && playerScore <= 21) {
+    else if ( playerScore > dealerScore && playerScore <= 21) {
         document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
     }
-    if ( playerScore == dealerScore ) {
+    else if ( playerScore == dealerScore ) {
         document.getElementById("foo").innerHTML = "Draw..."
     }
     document.getElementById("btnRefresh").disabled = false;

@@ -52,18 +52,23 @@ describe Player do
   describe "busting" do
     it "will bust when score exceeds 21" do
       player.stub(:score) { 22 }
-      (player.bust?).should == true
+      expect(player.bust?).to eq true
     end
 
     describe "will not bust" do
       it "when score is less than 21" do
         player.stub(:score) { 20 }
-        (player.bust?).should == false
+        expect(player.bust?).to eq false
       end
 
       it "when score is equal to 21" do
         player.stub(:score) { 21 }
-        (player.bust?).should == false
+        expect(player.bust?).to eq false
+      end
+
+      it "when given two aces" do
+        player = Player.new([Ace.new(:hearts), Ace.new(:spades)])
+        expect(player.bust?).to eq false
       end
     end
   end
