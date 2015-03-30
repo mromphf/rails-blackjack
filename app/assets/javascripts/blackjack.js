@@ -38,7 +38,7 @@ function onStand () {
 }
 
 function dealerTriesToWin() {
-    if (dealerScore <= playerScore && dealerScore > 21) {
+    if (dealerScore <= playerScore && dealerScore < 21) {
         dealerHit();
         setTimeout(function () {dealerTriesToWin()}, 500);
     }
