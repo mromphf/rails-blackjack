@@ -15,13 +15,14 @@ class Ace < Card
   end
 
   def value(cards=[])
-    unless cards.size < 1
+    unless cards.empty?
       score = 0
       cards.each do |card|
         score += card.value
       end
-      score -= 1
-      return 11 if score <= 10
+      if ((score - 1) <= 10) && (score + 11 >= 21)
+         return 11 
+      end
     end
     1
   end

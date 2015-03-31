@@ -66,7 +66,10 @@ describe Player do
         expect(player.bust?).to eq false
       end
 
-      it "when given two aces"
+      it "when given two aces" do
+        player = Player.new([Ace.new(:spades), Ace.new(:hearts)])
+        expect(player.bust?).to eq false
+      end
     end
   end
 end

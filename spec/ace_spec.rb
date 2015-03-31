@@ -22,14 +22,14 @@ describe Ace do
   end
 
   describe "value" do
-    describe "being low" do
+    describe "is low" do
       it "when combined with mutliple cards" do
         cards = [ Card.new(3, :hearts), Card.new(13, :clubs) ]
         expect(ace.value(cards)).to eq 1
       end
     end
 
-    describe "being high" do
+    describe "is high" do
       it "when combined with one other card" do
         expect(ace.value([Card.new(11, :clubs)])).to eq 11
       end
