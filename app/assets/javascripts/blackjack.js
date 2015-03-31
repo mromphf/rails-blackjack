@@ -5,8 +5,7 @@ $(document).ready(function () {
     setTimeout(function () {playerHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
     setTimeout(function () {playerHit()}, 1500);
-    setTimeout(function () {dealerHit()}, 2000);
-    setTimeout(function () {enableControls()}, 2500);
+    setTimeout(function () {enableControls()}, 2000);
 });
 
 function playerHit() {
