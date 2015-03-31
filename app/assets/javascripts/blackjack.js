@@ -2,6 +2,7 @@ var dealerScore = 0
 var playerScore = 0
 
 $(document).ready(function () {
+    disableControls();
     setTimeout(function () {playerHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
     setTimeout(function () {playerHit()}, 1500);
@@ -36,64 +37,67 @@ function onStand () {
     dealerTriesToWin();
 }
 
+function playerCallback(data) {
+    playerScore = data.score
+    updatePlayerBox("playerCards", data.text, "playerScore", data.score);
+    if ( data.bust ) {
+        disableControls();
+        enableRefresh();
+        document.getElementById("playerScore").innerHTML = "BUST!";
+        document.getElementById("foo").innerHTML = "Dealer wins..."
+    } 
+}
+
+function dealerCallback(data) {
+    dealerScore = data.score
+    updatePlayerBox("dealerCards", data.text, "dealerScore", data.score);
+    if (data.bust) {
+        disableControls();
+        enableRefresh();
+        document.getElementById("dealerScore").innerHTML = "BUST!";
+        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>";
+    }
+}
+
 function dealerTriesToWin() {
     if (dealerScore <= playerScore && dealerScore < 21) {
         dealerHit();
         setTimeout(function () {dealerTriesToWin()}, 500);
     }
     else {
-       evaluateResult(); 
-    }
-}
-
-function playerCallback(data) {
-    playerScore = data.score
-    document.getElementById("playerScore").innerHTML = "Score: " + playerScore
-    var node = document.createElement("LI");       
-    var textnode = document.createTextNode(data.text);
-    node.appendChild(textnode);
-    document.getElementById("playerCards").appendChild(node);
-    if ( data.bust ) {
         disableControls();
-        document.getElementById("playerScore").innerHTML = "BUST!";
-        document.getElementById("foo").innerHTML = "Dealer wins..."
+        if ( dealerScore > playerScore && dealerScore <= 21 ) {
+            document.getElementById("foo").innerHTML = "Dealer wins..."
+        }
+        else if ( playerScore > dealerScore && playerScore <= 21) {
+            document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
+        }
+        else if ( playerScore == dealerScore ) {
+            document.getElementById("foo").innerHTML = "Draw..."
+        }
         document.getElementById("btnRefresh").disabled = false;
-    } 
+    }
 }
 
-function dealerCallback(data) {
-    dealerScore = data.score
-    document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore
+function updatePlayerBox(cardsListId, card_string, scoreId, score) {
     var node = document.createElement("LI");       
-    var textnode = document.createTextNode(data.text);
+    var textnode = document.createTextNode(card_string);
     node.appendChild(textnode);
-    document.getElementById("dealerCards").appendChild(node);
-    if (data.bust) {
-        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
-        evaluateResult();
-    }
-}
-
-function evaluateResult() {
-    disableControls();
-    if ( dealerScore > playerScore && dealerScore <= 21 ) {
-        document.getElementById("foo").innerHTML = "Dealer wins..."
-    }
-    else if ( playerScore > dealerScore && playerScore <= 21) {
-        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
-    }
-    else if ( playerScore == dealerScore ) {
-        document.getElementById("foo").innerHTML = "Draw..."
-    }
-    document.getElementById("btnRefresh").disabled = false;
+    document.getElementById(scoreId).innerHTML = "Score: " + score;
+    document.getElementById(cardsListId).appendChild(node);
 }
 
 function disableControls() {
     document.getElementById("btnHit").disabled = true;
     document.getElementById("btnStand").disabled = true;
+    document.getElementById("btnRefresh").disabled = true;
 }
 
 function enableControls() {
     document.getElementById("btnHit").disabled = false;
     document.getElementById("btnStand").disabled = false;
+}
+
+function enableRefresh() {
+    document.getElementById("btnRefresh").disabled = false;
 }
