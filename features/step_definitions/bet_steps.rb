@@ -1,5 +1,5 @@
 Given(/^I am a user with (\d+) dollars$/) do |arg1|
-    pending # express the regexp above with the code you wish you had
+  @user = User.new(money: 500)
 end
 
 When(/^I bet (\d+) dollars before a game$/) do |arg1|
