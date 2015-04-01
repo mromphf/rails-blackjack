@@ -51,13 +51,13 @@ When(/^the dealer deals me an ace of hearts$/) do
 end
 
 Then(/^I should have a total score of (\d+)$/) do |value|
-  assert(@player.score == value.to_i)
+  expect(@player.score).to eq value.to_i
 end
 
 Then(/^I should have blackjack$/) do
-  assert(@player.blackjack?)
+  expect(@player.blackjack?)
 end
 
 Then(/^I should bust$/) do
-  assert(@player.bust?)
+  expect(@player.bust?)
 end
