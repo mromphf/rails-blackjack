@@ -1,16 +1,16 @@
-Given(/^I am a user with (\d+) dollars$/) do |arg1|
-  @user = User.new(money: 500)
+Given(/^I am a user with (\d+) dollars$/) do |cash|
+  User.create(money: cash.to_i)
 end
 
-When(/^I bet (\d+) dollars before a game$/) do |arg1|
-    pending # express the regexp above with the code you wish you had
+When(/^I bet (\d+) dollars before a game$/) do |bet|
+  @bet = bet.to_i
 end
 
 When(/^I win the game$/) do
-    pending # express the regexp above with the code you wish you had
+  User.find(1).win!(@bet)
 end
 
-Then(/^I should have (\d+) dollars$/) do |arg1|
-    pending # express the regexp above with the code you wish you had
+Then(/^I should have (\d+) dollars$/) do |cash|
+  expect(User.find(1).money).to eq cash.to_i
 end
 
