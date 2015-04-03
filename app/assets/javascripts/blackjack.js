@@ -85,13 +85,13 @@ function dealerTriesToWin() {
     else {
         disableControls();
         if ( dealerScore > playerScore && dealerScore <= 21 ) {
-            document.getElementById("foo").innerHTML = "Dealer wins..."
+            document.getElementById("foo").innerHTML = "Dealer wins...";
         }
         else if ( playerScore > dealerScore && playerScore <= 21) {
-            document.getElementById("foo").innerHTML = "<strong>You win!!</strong>"
+            document.getElementById("foo").innerHTML = "<strong>You win!!</strong>";
         }
         else if ( playerScore == dealerScore ) {
-            document.getElementById("foo").innerHTML = "Draw..."
+            document.getElementById("foo").innerHTML = "Draw...";
         }
         document.getElementById("btnRefresh").disabled = false;
     }
