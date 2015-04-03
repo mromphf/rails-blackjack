@@ -1,8 +1,15 @@
 class GamesController < ApplicationController
   def show
+    @user = User.find(1)
     session[:drawn_cards] = []
     session[:player_cards] = []
     session[:dealer_cards] = []
+  end
+
+  def bet
+    bet = params[:bet].to_i
+    session[:bet] = bet
+    render :json => { bet: bet }
   end
   
   def player_hit
@@ -11,6 +18,14 @@ class GamesController < ApplicationController
 
   def dealer_hit
     draw_new_card(:dealer_cards)
+  end
+
+  def win
+    User.find(1).win!(session[:bet])
+  end
+
+  def lose
+    User.find(1).lose!(session[:loose])
   end
 
   private
