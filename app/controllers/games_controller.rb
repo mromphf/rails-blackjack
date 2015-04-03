@@ -22,10 +22,16 @@ class GamesController < ApplicationController
 
   def win
     User.find(1).win!(session[:bet])
+    render nothing: true
   end
 
   def lose
-    User.find(1).lose!(session[:loose])
+    User.find(1).lose!(session[:bet])
+    render nothing: true
+  end
+
+  def draw
+    render nothing: true
   end
 
   private

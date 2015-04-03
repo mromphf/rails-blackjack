@@ -2,19 +2,25 @@ var dealerScore = 0;
 var playerScore = 0;
 
 function onBet() {
-    document.getElementById("betView").style.display = "none";
-    document.getElementById("gameView").style.display = "inline";
     var bet = document.getElementById("txtBet").value;
-    initializeGame(bet);
+    $.ajax({
+        url: "/bet",
+        type: "post",
+        dataType: 'json',
+        data: { bet: bet },
+        success: initializeGame
+    });
 };
 
-function initializeGame(bet) {
+function initializeGame(data) {
+    document.getElementById("betView").style.display = "none";
+    document.getElementById("gameView").style.display = "inline";
     disableControls();
     setTimeout(function () {playerHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
     setTimeout(function () {playerHit()}, 1500);
     setTimeout(function () {enableControls()}, 2000);
-    document.getElementById("foo").innerHTML = ("Bet: $" + bet + ".00")
+    document.getElementById("foo").innerHTML = ("Bet: $" + data.bet + ".00")
 }
 
 function playerHit() {
@@ -35,8 +41,8 @@ function dealerHit() {
     });
 }
 
-function onRefresh() {
-    location.reload();    
+function reloadPage() {
+  location.reload()
 }
 
 function onStand () {
@@ -108,4 +114,21 @@ function enableControls() {
 
 function enableRefresh() {
     document.getElementById("btnRefresh").disabled = false;
+}
+
+function onRefresh() {
+    if ( (playerScore > dealerScore && playerScore < 21) || dealerScore > 21 ) {
+      var url = "/win"
+    }
+    else if ( (dealerScore > playerScore && dealerScore > 21) || playerScore > 21 ) {
+      var url = "/lose"
+    }
+    else if ( playerScore === dealerScore ) {
+      var url = "/draw"
+    }
+    $.ajax({
+        url: url,
+        type: "get",
+        success: reloadPage
+    });
 }
