@@ -72,4 +72,18 @@ describe Player do
       end
     end
   end
+
+  it "is equal to another player when they both have the same score" do
+    other_player = Player.new
+    player.stub(:score) { 20 }
+    other_player.stub(:score) { 20 }
+    expect(player).to eq other_player
+  end
+
+  it "is unequal to another player when they have different scores" do
+    other_player = Player.new
+    player.stub(:score) { 20 }
+    other_player.stub(:score) { 10 }
+    expect(player).not_to eq other_player
+  end
 end

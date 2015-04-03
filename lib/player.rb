@@ -5,6 +5,10 @@ class Player
     @hand = hand
   end
 
+  def ==(target)
+    score == target.score
+  end
+
   def add_card(card)
     Player.new(@hand << card)
   end
