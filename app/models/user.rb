@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
 
-  def win(cash)
-    self.money += cash
+  def win!(bet)
+    self.money += (bet * 2)
+    save
   end
 end
