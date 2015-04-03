@@ -1,13 +1,21 @@
-var dealerScore = 0
-var playerScore = 0
+var dealerScore = 0;
+var playerScore = 0;
 
-$(document).ready(function () {
+function onBet() {
+    document.getElementById("betView").style.display = "none";
+    document.getElementById("gameView").style.display = "inline";
+    var bet = document.getElementById("txtBet").value;
+    initializeGame(bet);
+};
+
+function initializeGame(bet) {
     disableControls();
     setTimeout(function () {playerHit()}, 500);
     setTimeout(function () {dealerHit()}, 1000);
     setTimeout(function () {playerHit()}, 1500);
     setTimeout(function () {enableControls()}, 2000);
-});
+    document.getElementById("foo").innerHTML = ("Bet: $" + bet + ".00")
+}
 
 function playerHit() {
     $.ajax({

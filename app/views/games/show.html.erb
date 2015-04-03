@@ -1,23 +1,33 @@
 <center>
-  <h1>Blackjack!</h1>
-
-  <p id="foo">Click a button</p>
-
-  <div id="playerBox" class="box">
-    <h3>You</h3>
-    <p id="playerScore">Score: </p>
-    <ul id="playerCards" style="list-style:none"></ul>
+  <div id="betView" style="margin-top:10%">
+    <p>Your cash: $100.00</p>
+    <p>Place a bet...</p>
+    <input id="txtBet"/>
+    </br></br>
+    <input id="btnBet" type="button" value="Bet" onclick="onBet()"/>
   </div>
 
-  <div id="dealerBox" class="box">
-    <h3>Dealer</h3>
-    <p id="dealerScore">Score: </p>
-    <ul id="dealerCards" style="list-style:none"></ul>
-  </div>
+  <div id="gameView" style="display:none">
+    <h1>Blackjack!</h1>
 
-  <div id="input">
-    <input id="btnHit" type="button" disabled="true" value="Hit" onclick="playerHit()"/>
-    <input id="btnStand" type="button" disabled="true" value="Stand" onclick="onStand()"/>
-    <input id="btnRefresh" type="button" disabled="true" value="Refresh" onclick="onRefresh()"/>
+    <p id="foo">Click a button</p>
+
+    <div id="playerBox" class="box">
+      <h3>You</h3>
+      <p id="playerScore">Score: </p>
+      <ul id="playerCards" style="list-style:none"></ul>
+    </div>
+
+    <div id="dealerBox" class="box">
+      <h3>Dealer</h3>
+      <p id="dealerScore">Score: </p>
+      <ul id="dealerCards" style="list-style:none"></ul>
+    </div>
+
+    <div id="input">
+      <input id="btnHit" type="button" disabled="true" value="Hit" onclick="playerHit()"/>
+      <input id="btnStand" type="button" disabled="true" value="Stand" onclick="onStand()"/>
+      <input id="btnRefresh" type="button" disabled="true" value="Refresh" onclick="onRefresh()"/>
+    </div>
   </div>
 </center>
