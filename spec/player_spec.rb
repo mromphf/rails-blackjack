@@ -1,4 +1,6 @@
 require_relative "../lib/player.rb"
+require_relative "../lib/card.rb"
+require_relative "../lib/ace.rb"
 
 describe Player do
   let (:player) { Player.new } 
@@ -85,5 +87,25 @@ describe Player do
     player.stub(:score) { 20 }
     other_player.stub(:score) { 10 }
     expect(player).not_to eq other_player
+  end
+
+  describe "beating another player" do
+    it "wins when it has better cards" do
+      player = Player.new([Card.new(10, :clubs), Card.new(9, :hearts)])
+      target_player = Player.new([Card.new(5, :clubs), Card.new(2, :spades)])
+      expect(player.beats?(target_player)).to eq true
+    end
+
+    it "loses when it has worse cards" do
+      player = Player.new([Card.new(10, :clubs)])
+      target_player = Player.new([Card.new(5, :clubs), Card.new(8, :spades)])
+      expect(player.beats?(target_player)).to eq false
+    end
+
+    it "is a draw when the cards are equal" do
+      player = Player.new([Card.new(10, :clubs)])
+      target_player = Player.new([Card.new(10, :clubs)])
+      expect(player.beats?(target_player)).to eq Player::Draw
+    end
   end
 end
