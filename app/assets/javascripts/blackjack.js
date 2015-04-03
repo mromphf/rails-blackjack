@@ -30,11 +30,25 @@ function dealerHit() {
     });
 }
 
-function onRefresh() {
+function onRoundOver() {
     $.ajax({
-        url: "/game_over",
+        url: "/decide_results",
         type: "get",
-        success: reloadPage
+        success: renderResults
+    });
+}
+
+function onWin() {
+    $.ajax({
+        url: "/win",
+        type: "get"
+    });
+}
+
+function onLose() {
+    $.ajax({
+        url: "/lose",
+        type: "get"
     });
 }
 
@@ -59,10 +73,11 @@ function playerCallback(data) {
     playerScore = data.score
     updatePlayerBox("playerCards", data.text, "playerScore", data.score);
     if ( data.bust ) {
+        onLose();
         disableControls();
         enableRefresh();
         document.getElementById("playerScore").innerHTML = "BUST!";
-        document.getElementById("foo").innerHTML = "Dealer wins..."
+        document.getElementById("foo").innerHTML = "Dealer wins...";
     } 
 }
 
@@ -70,6 +85,7 @@ function dealerCallback(data) {
     dealerScore = data.score
     updatePlayerBox("dealerCards", data.text, "dealerScore", data.score);
     if (data.bust) {
+        onWin();
         disableControls();
         enableRefresh();
         document.getElementById("dealerScore").innerHTML = "BUST!";
@@ -78,23 +94,18 @@ function dealerCallback(data) {
 }
 
 function dealerTriesToWin() {
-    if (dealerScore < playerScore && dealerScore < 21) {
+    if (dealerScore < playerScore && dealerScore < 17) {
         dealerHit();
         setTimeout(function () {dealerTriesToWin()}, 500);
     }
     else {
-        disableControls();
-        if ( dealerScore > playerScore && dealerScore <= 21 ) {
-            document.getElementById("foo").innerHTML = "Dealer wins...";
-        }
-        else if ( playerScore > dealerScore && playerScore <= 21) {
-            document.getElementById("foo").innerHTML = "<strong>You win!!</strong>";
-        }
-        else if ( playerScore == dealerScore ) {
-            document.getElementById("foo").innerHTML = "Draw...";
-        }
-        document.getElementById("btnRefresh").disabled = false;
+        onRoundOver();
     }
+}
+
+function renderResults(data) {
+    document.getElementById("foo").innerHTML = data.text
+    document.getElementById("btnRefresh").disabled = false;
 }
 
 function updatePlayerBox(cardsListId, card_string, scoreId, score) {

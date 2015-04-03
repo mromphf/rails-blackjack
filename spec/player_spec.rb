@@ -101,11 +101,5 @@ describe Player do
       target_player = Player.new([Card.new(5, :clubs), Card.new(8, :spades)])
       expect(player.beats?(target_player)).to eq false
     end
-
-    it "is a draw when the cards are equal" do
-      player = Player.new([Card.new(10, :clubs)])
-      target_player = Player.new([Card.new(10, :clubs)])
-      expect(player.beats?(target_player)).to eq Player::Draw
-    end
   end
 end

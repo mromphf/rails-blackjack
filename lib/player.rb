@@ -1,6 +1,5 @@
 class Player
   BLACKJACK = 21
-  Draw = Class.new
 
   def initialize(hand=[])
     @hand = hand
@@ -23,7 +22,6 @@ class Player
   end
 
   def beats?(target)
-    return Draw if score == target.score
     return score > target.score
   end
 
