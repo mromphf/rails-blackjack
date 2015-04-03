@@ -21,10 +21,6 @@ class Player
     score
   end
 
-  def beats?(target)
-    return score > target.score
-  end
-
   def bust?
     score > BLACKJACK
   end
