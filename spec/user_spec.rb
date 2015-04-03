@@ -13,6 +13,12 @@ describe User do
   it "wins money" do
     user.money = 200
     user.win!(10)
-    User.find(1).money.should == 220
+    User.find_by_username('jimbob').money.should == 210
+  end
+
+  it "loses money" do
+    user.money = 200
+    user.lose!(10)
+    User.find_by_username('jimbob').money.should == 190
   end
 end
