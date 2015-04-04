@@ -38,16 +38,9 @@ function onRoundOver() {
     });
 }
 
-function onWin() {
+function onBust() {
     $.ajax({
-        url: "/win",
-        type: "get"
-    });
-}
-
-function onLose() {
-    $.ajax({
-        url: "/lose",
+        url: "/bust",
         type: "get"
     });
 }
@@ -73,7 +66,7 @@ function playerCallback(data) {
     playerScore = data.score
     updatePlayerBox("playerCards", data.text, "playerScore", data.score);
     if ( data.bust ) {
-        onLose();
+        onBust();
         disableControls();
         enableRefresh();
         document.getElementById("playerScore").innerHTML = "BUST!";
@@ -85,11 +78,7 @@ function dealerCallback(data) {
     dealerScore = data.score
     updatePlayerBox("dealerCards", data.text, "dealerScore", data.score);
     if (data.bust) {
-        onWin();
-        disableControls();
-        enableRefresh();
         document.getElementById("dealerScore").innerHTML = "BUST!";
-        document.getElementById("foo").innerHTML = "<strong>You win!!</strong>";
     }
 }
 

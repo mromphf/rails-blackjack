@@ -20,12 +20,7 @@ class GamesController < ApplicationController
     draw_new_card(:dealer_cards)
   end
 
-  def win
-    User.find(1).win!(session[:bet])
-    render nothing: true
-  end
-
-  def lose
+  def bust
     User.find(1).lose!(session[:bet])
     render nothing: true
   end
@@ -33,7 +28,7 @@ class GamesController < ApplicationController
   def decide_results
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
-    if player.score > dealer.score
+    if player.score > dealer.score || dealer.bust?
       User.find(1).win!(session[:bet])
       text = "<strong>You win!!</strong>"
     elsif player.score == dealer.score
