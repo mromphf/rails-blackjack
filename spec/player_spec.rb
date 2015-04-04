@@ -88,4 +88,24 @@ describe Player do
     other_player.stub(:score) { 10 }
     expect(player).not_to eq other_player
   end
+
+  describe "rendering result" do
+    it "will return 'You win!' after winning" do
+      player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
+      dealer = Player.new([Card.new(5, :clubs), Card.new(5, :spades)])
+      expect(player.render_result(dealer)).to eq "<strong>You win!!</strong>"
+    end
+
+    it "will return 'Draw...' if it is a draw" do
+      player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
+      dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
+      expect(player.render_result(dealer)).to eq "Draw..."
+    end
+
+    it "will return 'Dealer wins...' after losing" do
+      player = Player.new([Card.new(5, :hearts), Card.new(4, :spades)])
+      dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
+      expect(player.render_result(dealer)).to eq "Dealer wins..."
+    end
+  end
 end

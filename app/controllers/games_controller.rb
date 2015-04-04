@@ -30,13 +30,10 @@ class GamesController < ApplicationController
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     if player.score > dealer.score || dealer.bust?
       User.find(1).win!(session[:bet])
-      text = "<strong>You win!!</strong>"
-    elsif player.score == dealer.score
-      text = "Draw..."
-    else 
+    elsif player.score != dealer.score
       User.find(1).lose!(session[:bet])
-      text = "Dealer wins..."
     end
+    text = player.render_result(dealer)
     render :json => { text: text }
   end
 
