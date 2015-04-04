@@ -7,11 +7,11 @@ When(/^I bet (\d+) dollars before a game$/) do |bet|
 end
 
 When(/^I win the game$/) do
-  User.find(1).settle!(@bet, 20, 19)
+  User.find(1).win!(@bet)
 end
 
 When(/^I lose the game$/) do
-  User.find(1).settle!(@bet, 19, 20)
+  User.find(1).lose!(@bet)
 end
 
 Then(/^I should have (\d+) dollars$/) do |cash|

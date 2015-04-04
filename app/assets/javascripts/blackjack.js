@@ -63,9 +63,10 @@ function onStand () {
 }
 
 function playerCallback(data) {
-    playerScore = data.score
+    playerScore = data.score;
+    var playerBusted = data.bust;
     updatePlayerBox("playerCards", data.text, "playerScore", data.score);
-    if ( data.bust ) {
+    if ( playerBusted ) {
         onBust();
         disableControls();
         enableRefresh();
@@ -75,9 +76,10 @@ function playerCallback(data) {
 }
 
 function dealerCallback(data) {
-    dealerScore = data.score
+    dealerScore = data.score;
+    var dealerBusted = data.bust;
     updatePlayerBox("dealerCards", data.text, "dealerScore", data.score);
-    if (data.bust) {
+    if ( dealerBusted ) {
         document.getElementById("dealerScore").innerHTML = "BUST!";
     }
 }
