@@ -36,7 +36,7 @@ class Player
     if (score > dealer.score or dealer.bust?) and not bust?
       return '<strong>You win!!</strong>'
     elsif score == dealer.score
-      return 'Draw...'
+      return 'Push...'
     end
     return 'Dealer wins...'
   end

@@ -102,10 +102,10 @@ describe Player do
       expect(player.render_result(dealer)).to eq "<strong>You win!!</strong>"
     end
 
-    it "will return 'Draw...' if it is a draw" do
+    it "will return 'Push...' if it is a draw" do
       player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
       dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
-      expect(player.render_result(dealer)).to eq "Draw..."
+      expect(player.render_result(dealer)).to eq "Push..."
     end
 
     it "will return 'Dealer wins...' if the dealer has a higher score" do
