@@ -35,7 +35,7 @@ describe Player do
       expect(Player.new(cards).score).to eq 19
     end
 
-    it "is computed correctly with aces" do
+    it "will be 21 if the player has one face card and one ace" do
       cards = [ Card.new(11, :spades), Ace.new(:hearts) ]
       expect(Player.new(cards).score).to eq 21
     end

@@ -1,5 +1,3 @@
-require 'json'
-
 class Card
   include Comparable
 
@@ -46,11 +44,8 @@ class Card
 
   private
     def validate_value
-      if @value == 1
-        raise "ERROR: A card cannot be assigned a value of one."
-      end
-      if @value >= 14
-        raise "ERROR: Cannot create a card with a value greater than thirteen."
+      if @value < 2 or @value >= 14
+        raise "ERROR: A card cannot be assigned a value of #{@value}."
       end
     end
 
