@@ -50,6 +50,10 @@ When(/^the dealer deals me an ace of hearts$/) do
   @player = @player.add_card(Ace.new(:hearts))
 end
 
+When(/^the dealer deals me an ace of spades$/) do 
+  @player = @player.add_card(Ace.new(:spades))
+end
+
 Then(/^I should have a total score of (\d+)$/) do |value|
   expect(@player.score).to eq value.to_i
 end

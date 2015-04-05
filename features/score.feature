@@ -36,8 +36,22 @@ Feature: Scores
         And the dealer deals me a jack of clubs
         Then I should have a total score of 16
 
-    Scenario: Aces high
+    Scenario: Aces high with face card
         Given I am a player
         When the dealer deals me an ace of hearts
         And the dealer deals me a jack of clubs 
         Then I should have a total score of 21
+
+    Scenario: Aces high without face card
+        Given I am a player
+        When the dealer deals me a 5 of clubs 
+        And the dealer deals me a 4 of hearts 
+        And the dealer deals me an ace of hearts
+        Then I should have a total score of 20
+
+    Scenario: Multiple aces low
+        Given I am a player
+        When the dealer deals me a 8 of hearts
+        And the dealer deals me an ace of hearts
+        And the dealer deals me an ace of spades
+        Then I should have a total score of 10
