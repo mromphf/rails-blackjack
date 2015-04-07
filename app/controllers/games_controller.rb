@@ -2,14 +2,14 @@ class GamesController < ApplicationController
   BLACKJACK = 21
 
   def show
-    @user = User.find(1)
+    @user = User.find_by_username('admin')
     session[:drawn_cards] = []
     session[:player_cards] = []
     session[:dealer_cards] = []
   end
 
   def bet
-    @user = User.find(1)
+    @user = User.find_by_username('admin')
     bet = params[:bet].to_i
     render_player_bet(@user, bet)
   end
@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   end
 
   def bust
-    User.find(1).lose!(session[:bet])
+    User.find_by_username('admin').lose!(session[:bet])
     render nothing: true
   end
 
@@ -31,9 +31,9 @@ class GamesController < ApplicationController
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     if player.score > dealer.score or dealer.bust?
-      User.find(1).win!(session[:bet])
+      User.find_by_username('admin').win!(session[:bet])
     elsif player.score != dealer.score
-      User.find(1).lose!(session[:bet])
+      User.find_by_username('admin').lose!(session[:bet])
     end
     text = player.render_result(dealer)
     render :json => { text: text }

@@ -9,6 +9,11 @@ describe User do
   it "should be valid with a password" do
     user.should be_valid 
   end
+  
+  it "should not be valid without a password" do
+    invalid_user = User.new(username: "invalid", password: "", password_confirmation: "")
+    invalid_user.should_not be_valid
+  end
 
   it "wins money" do
     user.money = 200
