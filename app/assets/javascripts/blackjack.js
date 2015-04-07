@@ -1,8 +1,7 @@
 var dealerScore = 0;
 var playerScore = 0;
 
-function onBet() {
-    var bet = document.getElementById("txtBet").value;
+function onBet(bet) {
     $.ajax({
         url: "/bet",
         type: "post",
