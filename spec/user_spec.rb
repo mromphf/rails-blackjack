@@ -16,9 +16,17 @@ describe User do
     User.find_by_username('jimbob').money.should == 210
   end
 
-  it "loses money" do
-    user.money = 200
-    user.lose!(10)
-    User.find_by_username('jimbob').money.should == 190
+  describe "losing money" do
+    it "has money subtracted from its balance" do
+      user.money = 200
+      user.lose!(10)
+      User.find_by_username('jimbob').money.should == 190
+    end
+
+    it "cannot have less than 0 zero dollars" do
+      user.money = 50
+      user.lose!(60)
+      User.find_by_username('jimbob').money.should == 0
+    end
   end
 end

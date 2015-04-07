@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   def lose!(bet)
     self.money -= bet
+    self.money = 0 if self.money < 0
     save
   end
 end
