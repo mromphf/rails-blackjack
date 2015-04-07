@@ -11,12 +11,7 @@ class GamesController < ApplicationController
   def bet
     @user = User.find(1)
     bet = params[:bet].to_i
-    if bet <= @user.money
-      session[:bet] = bet
-      render :json => { bet: bet }
-    else
-      render nothing: true
-    end
+    render_player_bet(@user, bet)
   end
   
   def player_hit
@@ -58,5 +53,14 @@ class GamesController < ApplicationController
                         score: player.score, 
                         blackjack: player.blackjack?,
                         bust: player.bust? }
+    end
+
+    def render_player_bet(user, bet)
+      if bet <= user.money
+        session[:bet] = bet
+        render :json => { bet: bet }
+      else
+        render nothing: true
+      end
     end
 end
