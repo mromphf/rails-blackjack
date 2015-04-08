@@ -38,6 +38,13 @@ class Card
     false
   end
 
+  def render
+    suit = SUIT_STRINGS[@suit].downcase
+    value = @value
+    value = "0#{value}" if value < 10
+    "#{suit}#{value}.png"
+  end
+
   def state
     { value: @value, suit: SUIT_STRINGS[@suit] }
   end

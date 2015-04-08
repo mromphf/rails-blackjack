@@ -82,11 +82,11 @@ describe Card do
   describe "to-string" do
     describe "on non-face cards" do
       it "provides the correct output on spades" do
-        Card.new(3, :hearts).to_s.should == "3 of Hearts"
+        Card.new(8, :spades).to_s.should == "8 of Spades"
       end
 
       it "provides the correct output on hearts" do
-        Card.new(8, :spades).to_s.should == "8 of Spades"
+        Card.new(3, :hearts).to_s.should == "3 of Hearts"
       end
     end
 
@@ -98,6 +98,24 @@ describe Card do
       it "provides the correct output on diamonds" do
         Card.new(13, :diamonds).to_s.should == "King of Diamonds"
       end
+    end
+  end
+
+  describe "render" do
+    it "will provide the corresponding image name for spades" do
+      expect(Card.new(6, :spades).render).to eq "spades06.png"
+    end
+
+    it "will provide the corresponding image name for hearts" do
+      expect(Card.new(9, :hearts).render).to eq "hearts09.png"
+    end
+
+    it "will provide the corresponding image name for clubs" do
+      expect(Card.new(11, :clubs).render).to eq "clubs11.png"
+    end
+
+    it "will provide the corresponding image name for diamonds" do
+      expect(Card.new(13, :diamonds).render).to eq "diamonds13.png"
     end
   end
 

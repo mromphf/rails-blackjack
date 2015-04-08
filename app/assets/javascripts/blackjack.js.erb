@@ -101,7 +101,7 @@ function renderResults(data) {
 function updatePlayerBox(cardsListId, card_string, scoreId, score) {
     var node = document.createElement("LI");       
     var img = document.createElement("img");
-    img.setAttribute('src', "<%= asset_path('spades01.png') %>");
+    img.setAttribute('src', '/assets/' + card_string);
     node.appendChild(img);
     document.getElementById(scoreId).innerHTML = "Score: " + score;
     document.getElementById(cardsListId).appendChild(img);
