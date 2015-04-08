@@ -1,6 +1,7 @@
 *.rbc
 capybara-*.html
 .rspec
+/app/assets/images/*.png
 /log
 /tmp
 /db/*.sqlite3
