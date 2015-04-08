@@ -100,10 +100,11 @@ function renderResults(data) {
 
 function updatePlayerBox(cardsListId, card_string, scoreId, score) {
     var node = document.createElement("LI");       
-    var textnode = document.createTextNode(card_string);
-    node.appendChild(textnode);
+    var img = document.createElement("img");
+    img.setAttribute('src', "<%= asset_path('spades01.png') %>");
+    node.appendChild(img);
     document.getElementById(scoreId).innerHTML = "Score: " + score;
-    document.getElementById(cardsListId).appendChild(node);
+    document.getElementById(cardsListId).appendChild(img);
 }
 
 function disableControls() {
