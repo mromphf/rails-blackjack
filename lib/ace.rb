@@ -36,4 +36,9 @@ class Ace < Card
   def state
     { value: 1, suit: SUIT_STRINGS[@suit] }
   end
+
+  def render
+    suit = SUIT_STRINGS[@suit].downcase
+    "#{suit}01.png"
+  end
 end

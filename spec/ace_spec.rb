@@ -68,4 +68,22 @@ describe Ace do
       Ace.new(:diamonds).to_s.should == "Ace of Diamonds"
     end
   end
+
+  describe 'render' do
+    it 'provides an img name for spades' do
+      Ace.new(:spades).render.should == 'spades01.png'
+    end
+
+    it 'provides an img name for hearts' do
+      Ace.new(:hearts).render.should == 'hearts01.png'
+    end
+
+    it 'provides an img name for clubs' do
+      Ace.new(:clubs).render.should == 'clubs01.png'
+    end
+
+    it 'provides an img name for diamonds' do
+      Ace.new(:diamonds).render.should == 'diamonds01.png'
+    end
+  end
 end
