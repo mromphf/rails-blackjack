@@ -64,7 +64,7 @@ function onStand () {
 function playerCallback(data) {
     playerScore = data.score;
     var playerBusted = data.bust;
-    updatePlayerBox("playerCards", data.text, "playerScore", data.score);
+    updatePlayerBox("playerCards", data.text, "playerScore", "You: " + data.score);
     if ( playerBusted ) {
         onBust();
         disableControls();
@@ -77,7 +77,7 @@ function playerCallback(data) {
 function dealerCallback(data) {
     dealerScore = data.score;
     var dealerBusted = data.bust;
-    updatePlayerBox("dealerCards", data.text, "dealerScore", data.score);
+    updatePlayerBox("dealerCards", data.text, "dealerScore", "Dealer: " + data.score);
     if ( dealerBusted ) {
         document.getElementById("dealerScore").innerHTML = "BUST!";
     }
@@ -94,8 +94,8 @@ function dealerTriesToWin() {
 }
 
 function renderResults(data) {
-    document.getElementById("foo").innerHTML = data.text
-    document.getElementById("btnRefresh").disabled = false;
+    document.getElementById("foo").innerHTML = data.text;
+    enableRefresh();
 }
 
 function updatePlayerBox(cardsListId, card_string, scoreId, score) {
@@ -103,7 +103,7 @@ function updatePlayerBox(cardsListId, card_string, scoreId, score) {
     var img = document.createElement("img");
     img.setAttribute('src', '/assets/' + card_string);
     node.appendChild(img);
-    document.getElementById(scoreId).innerHTML = "Score: " + score;
+    document.getElementById(scoreId).innerHTML = score;
     document.getElementById(cardsListId).appendChild(img);
 }
 
@@ -119,6 +119,9 @@ function enableControls() {
 }
 
 function enableRefresh() {
+    document.getElementById("btnHit").style.display = "none";
+    document.getElementById("btnStand").style.display = "none";
+    document.getElementById("btnRefresh").style.display = "block";
     document.getElementById("btnRefresh").disabled = false;
 }
 

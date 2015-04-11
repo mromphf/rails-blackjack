@@ -1,40 +1,37 @@
-<div id="container">
-  <div id="cash">
-    <p><center>Your cash:<center></p>
-    <p id="moneyValue">$<%= @user.money %>.00</p>
+<div id="cash">
+  <p><center>Your cash:
+    <span id="moneyValue">$<%= @user.money %>.00</div>
+    <center></p>
+</div>
+
+<div id="betView" style="margin-top:10%">
+  <p><center>Place a bet...</center></p>
+  <center>
+    <input class="btnBet" type="button" value="5" onclick="onBet(5)"/>
+    <input class="btnBet" type="button" value="10" onclick="onBet(10)"/>
+    <input class="btnBet" type="button" value="25" onclick="onBet(25)"/>
+    <input class="btnBet" type="button" value="50" onclick="onBet(50)"/>
+  </center>
+</div>
+
+<div id="gameView" style="display:none">
+  <div id="dealerBox" class="box">
+    <center><p id="dealerScore">Dealer: </p></center>
+    <ul id="dealerCards" style="list-style:none"></ul>
   </div>
 
-  <div id="betView" style="margin-top:10%">
-    <p><center>Place a bet...</center></p>
+  <div id="playerBox" class="box">
+    <center><p id="playerScore">You: </p></center>
+    <ul id="playerCards" style="list-style:none"></ul>
+  </div>
+
+  <div id="input">
     <center>
-      <input class="btnBet" type="button" value="5" onclick="onBet(5)"/>
-      <input class="btnBet" type="button" value="10" onclick="onBet(10)"/>
-      <input class="btnBet" type="button" value="25" onclick="onBet(25)"/>
-      <input class="btnBet" type="button" value="50" onclick="onBet(50)"/>
+    <input id="btnHit" type="button" disabled="true" value="Hit" onclick="playerHit()"/>
+    <input id="btnStand" type="button" disabled="true" value="Stand" onclick="onStand()"/>
+    <input id="btnRefresh" type="button" disabled="true" value="Play Again" onclick="reloadPage()"/>
     </center>
   </div>
-
-  <div id="gameView" style="display:none">
-    <div id="dealerBox" class="box">
-      <center><h3>Dealer</h3></center>
-      <center><p id="dealerScore">Score: </p></center>
-      <ul id="dealerCards" style="list-style:none"></ul>
-    </div>
-
-    <div id="playerBox" class="box">
-      <center><h3>You</h3></center>
-      <center><p id="playerScore">Score: </p></center>
-      <ul id="playerCards" style="list-style:none"></ul>
-    </div>
-
-    <div id="input">
-      <center>
-      <input id="btnHit" type="button" disabled="true" value="Hit" onclick="playerHit()"/>
-      <input id="btnStand" type="button" disabled="true" value="Stand" onclick="onStand()"/>
-      <input id="btnRefresh" type="button" disabled="true" value="Refresh" onclick="reloadPage()"/>
-      </center>
-    </div>
-    <br/>
-    <p id="foo">Click a button</p>
-  </div>
+  <br/>
+  <p id="foo">Click a button</p>
 </div>
