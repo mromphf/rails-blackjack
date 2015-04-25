@@ -47,19 +47,19 @@ class Card
     { value: @value, suit: SUIT_STRINGS[@suit] }
   end
 
-  private
-    def validate_value
-      if @value < 2 or @value >= 14
-        raise "ERROR: A card cannot be assigned a value of #{@value}."
-      end
-    end
-
   protected
     attr_reader :suit
 
     def validate_suit
       if not VALID_SUITS.include?(@suit)
         raise "ERROR: Cannot create a card with suit: #{@suit}."
+      end
+    end
+
+  private
+    def validate_value
+      if @value < 2 or @value >= 14
+        raise "ERROR: A card cannot be assigned a value of #{@value}."
       end
     end
 end

@@ -1,11 +1,10 @@
 class Deck
   NUMBER_OF_NON_ACE_CARDS = 12
+  SUITS = [:spades, :hearts, :clubs, :diamonds]
 
   def initialize
     @cards = []
-    [:spades, :hearts, :clubs, :diamonds].each do |suit|
-      add_suit_to_deck(suit)
-    end
+    SUITS.each { |suit| add_suit_to_deck(suit) }
   end
 
   def deal_card(drawn_cards=[])
