@@ -62,12 +62,6 @@ describe Card do
       expect(unsorted_cards.sort_by { |c| c.value } ).to eq sorted_cards
     end
 
-    it "can be be done first by value then by suit" do
-      unsorted_cards = [Card.new(8, :diamonds), Card.new(3, :spades), Card.new(5, :diamonds)]
-      sorted_cards = [Card.new(3, :spades), Card.new(5, :diamonds), Card.new(8, :diamonds)]
-      expect(unsorted_cards.sort_by { |c| [ c.value, c.suit] }).to eq sorted_cards
-    end
-
     it "will sort by suits according to SHoCkeD sorting method" do
       unsorted_cards = [Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds), Card.new(3, :spades)]
       sorted_cards = [Card.new(3, :spades), Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds)]

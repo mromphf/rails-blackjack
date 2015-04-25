@@ -1,8 +1,6 @@
 class Card
   include Comparable
 
-  attr_reader :suit
-
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
   SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
   SUIT_STRINGS = { spades: "Spades", hearts: "Hearts", clubs: "Clubs", diamonds: "Diamonds" }
@@ -57,6 +55,8 @@ class Card
     end
 
   protected
+    attr_reader :suit
+
     def validate_suit
       if not VALID_SUITS.include?(@suit)
         raise "ERROR: Cannot create a card with suit: #{@suit}."
