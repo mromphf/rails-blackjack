@@ -17,17 +17,7 @@ class Player
     score = 0
     sorted_hand = @hand.sort_by {|c| c.value}
     sorted_hand.reverse.each do |card|
-      if card.face?
-        score += 10
-      elsif card.ace?
-        if (score + 11) <= BLACKJACK
-          score += 11
-        else
-          score += 1
-        end
-      else
-        score += card.value
-      end
+      score += add_card_value(card, score)
     end
     return 21 if self.blackjack?
     score
@@ -59,5 +49,17 @@ class Player
       second_card = @hand[1]
       (first_card.ace? || second_card.ace?) && 
         (second_card.value <= 10 || first_card.value <= 10)
+    end
+
+    def add_card_value(card, score_so_far)
+      if card.face?
+        return 10
+      elsif card.ace?
+        if (score_so_far + 11) <= BLACKJACK
+          return 11
+        end
+        return 1
+      end 
+      return card.value
     end
 end
