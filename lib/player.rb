@@ -19,7 +19,7 @@ class Player
     sorted_hand.reverse.each do |card|
       score += add_card_value(card, score)
     end
-    return 21 if self.blackjack?
+    return BLACKJACK if self.blackjack?
     score
   end
 
@@ -58,7 +58,6 @@ class Player
         if (score_so_far + 11) <= BLACKJACK
           return 11
         end
-        return 1
       end 
       return card.value
     end
