@@ -49,6 +49,11 @@ describe Player do
       card = Card.new(13, :diamonds)
       expect(Player.new([card]).score).to eq 10
     end
+
+    it "will not bust with two face cards" do
+      cards = [Card.new(12, :clubs), Card.new(13, :hearts)]
+      expect(Player.new(cards).bust?).to eq false
+    end
   end
 
   describe "busting" do

@@ -21,20 +21,6 @@ describe Card do
     end
   end
 
-  describe "value" do
-    it "will always be 10 for jacks" do
-      expect(Card.new(11, :clubs).value).to eq 10
-    end
-
-    it "will always be 10 for queens" do
-      expect(Card.new(12, :clubs).value).to eq 10
-    end
-
-    it "will always be 10 for kings" do
-      expect(Card.new(13, :clubs).value).to eq 10
-    end
-  end
-
   describe "equality" do
     it "is true when the values and the suits of the card are the same" do
       expect(Card.new(7, :hearts)).to eq Card.new(7, :hearts) 
@@ -116,5 +102,9 @@ describe Card do
   it "will provide its state in a hashed form" do
     Card.new(13, :hearts).state[:suit].should == "Hearts"
     Card.new(13, :hearts).state[:value].should == 13
+  end
+
+  it "is a face card if its face is greater than 10" do
+    expect(Card.new(12, :clubs).face?).to eq true
   end
 end

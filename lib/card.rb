@@ -1,6 +1,8 @@
 class Card
   include Comparable
 
+  attr_reader :value
+
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
   SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
   SUIT_STRINGS = { spades: "Spades", hearts: "Hearts", clubs: "Clubs", diamonds: "Diamonds" }
@@ -27,15 +29,14 @@ class Card
     SUIT_VALUES[@suit] <=> SUIT_VALUES[target.suit]
   end
 
-  def value(cards=[])
-    return 10 if @value >= 11
-    @value
-  end
-
   def ace?
     false
   end
 
+  def face?
+    @value > 10
+  end
+  
   def render
     suit = SUIT_STRINGS[@suit].downcase
     value = @value

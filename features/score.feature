@@ -49,9 +49,9 @@ Feature: Scores
         And the dealer deals me an ace of hearts
         Then I should have a total score of 20
 
-    Scenario: Multiple aces low
+    Scenario: One low ace one high ace
         Given I am a player
         When the dealer deals me a 8 of hearts
         And the dealer deals me an ace of hearts
         And the dealer deals me an ace of spades
-        Then I should have a total score of 10
+        Then I should have a total score of 20
