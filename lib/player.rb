@@ -47,8 +47,8 @@ class Player
     def has_blackjack?
       first_card = @hand[0]
       second_card = @hand[1]
-      (first_card.ace? || second_card.ace?) && 
-        (second_card.value <= 10 || first_card.value <= 10)
+      (first_card.ace? && second_card.value >= 10) ||
+        (first_card.value >= 10 && second_card.ace?)
     end
 
     def add_card_value(card, score_so_far)
