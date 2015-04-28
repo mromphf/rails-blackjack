@@ -1,10 +1,12 @@
 <div id="cash">
-  <p><center>Your cash:
+  <br/>
+  <br/>
+  <center>Your cash:
     <span id="moneyValue">$<%= @user.money %>.00</div>
-    <center></p>
+  <center>
 </div>
 
-<div id="betView" style="margin-top:10%">
+<div id="betView">
   <p><center>Place a bet...</center></p>
   <center>
     <input class="btnBet" type="button" value="5" onclick="onBet(5)"/>
@@ -15,14 +17,17 @@
 </div>
 
 <div id="gameView" style="display:none">
-  <div id="dealerBox" class="box">
-    <center><p id="dealerScore">Dealer: </p></center>
-    <ul id="dealerCards" style="list-style:none"></ul>
-  </div>
+  <div id="cards">
+    <br/>
+    <div id="dealerBox" class="box">
+      <center><p id="dealerScore">Dealer: </p></center>
+      <ul id="dealerCards" style="list-style:none"></ul>
+    </div>
 
-  <div id="playerBox" class="box">
-    <center><p id="playerScore">You: </p></center>
-    <ul id="playerCards" style="list-style:none"></ul>
+    <div id="playerBox" class="box">
+      <center><p id="playerScore">You: </p></center>
+      <ul id="playerCards" style="list-style:none"></ul>
+    </div>
   </div>
 
   <div id="input">
