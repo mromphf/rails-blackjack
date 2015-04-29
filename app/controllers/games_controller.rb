@@ -30,13 +30,9 @@ class GamesController < ApplicationController
   def decide_results
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
-    if player.score > dealer.score or dealer.bust?
-      User.find_by_username('admin').win!(session[:bet])
-    elsif player.score != dealer.score
-      User.find_by_username('admin').lose!(session[:bet])
-    end
-    text = player.render_result(dealer)
-    render :json => { text: text }
+    result = Player.determine_result(player, dealer)
+    result.execute(User.find_by_username('admin'), session[:bet])
+    render :json => { text: player.render_result(dealer) } 
   end
 
   private

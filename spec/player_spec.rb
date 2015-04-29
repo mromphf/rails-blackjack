@@ -125,4 +125,30 @@ describe Player do
       expect(player.render_result(dealer)).to eq "Dealer wins..."
     end
   end
+
+  describe "determing game result" do
+    it "will return a win if the player beats the dealer" do
+      player = double("Player", score: 20, bust?: false)
+      dealer = double("Player", score: 19, bust?: false)
+      expect(Player.determine_result(player, dealer)).to be_a PlayerWins
+    end
+
+    it "will return a loss if the player loses by busting" do 
+      player = double("Player", score: 23, bust?: true)
+      dealer = double("Player", score: 20, bust?: false)
+      expect(Player.determine_result(player, dealer)).to be_a PlayerLoses
+    end
+
+    it "will return a loss if the player loses to the dealer" do
+      player = double("Player", score: 17, bust?: false)
+      dealer = double("Player", score: 20, bust?: false)
+      expect(Player.determine_result(player, dealer)).to be_a PlayerLoses
+    end
+
+    it "will return a push if the player loses to the dealer" do
+      player = double("Player", score: 20, bust?: false)
+      dealer = double("Player", score: 20, bust?: false)
+      expect(Player.determine_result(player, dealer)).to be_a PlayerPush
+    end
+  end
 end
