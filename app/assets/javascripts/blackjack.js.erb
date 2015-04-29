@@ -52,12 +52,12 @@ function initializeGame(data) {
     setTimeout(function () {dealerHit()}, 1000);
     setTimeout(function () {playerHit()}, 1500);
     setTimeout(function () {enableControls()}, 2000);
-    document.getElementById("foo").innerHTML = ("Bet: $" + data.bet + ".00");
+    document.getElementById("prompt").innerHTML = ("Bet: $" + data.bet + ".00");
 }
 
 function onStand () {
     disableControls();
-    document.getElementById("foo").innerHTML = "You stand...";
+    document.getElementById("prompt").innerHTML = "You stand...";
     dealerTriesToWin();
 }
 
@@ -70,7 +70,7 @@ function playerCallback(data) {
         disableControls();
         enableRefresh();
         document.getElementById("playerScore").innerHTML = "BUST!";
-        document.getElementById("foo").innerHTML = "Dealer wins...";
+        document.getElementById("prompt").innerHTML = "Dealer wins...";
     } 
 }
 
@@ -94,7 +94,7 @@ function dealerTriesToWin() {
 }
 
 function renderResults(data) {
-    document.getElementById("foo").innerHTML = data.text;
+    document.getElementById("prompt").innerHTML = data.text;
     enableRefresh();
 }
 
@@ -102,6 +102,9 @@ function updatePlayerBox(cardsListId, card_string, scoreId, score) {
     var node = document.createElement("LI");       
     var img = document.createElement("img");
     img.setAttribute('src', '/assets/' + card_string);
+    img.setAttribute('width', '108px');
+    img.setAttribute('height', '144px');
+    img.setAttribute('class', 'card');
     node.appendChild(img);
     document.getElementById(scoreId).innerHTML = score;
     document.getElementById(cardsListId).appendChild(img);
