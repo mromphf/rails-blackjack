@@ -1,13 +1,14 @@
 <div id='loginBox'>
   <center>
-  <%= form_for(:session, url:sessions_path) do |form| %>
-    <%= form.label(:username) %><br/>
-    <%= form.text_field(:username) %><br/>
+    <%= form_for(:session, url:sessions_path) do |form| %>
+      <%= form.label(:username) %><br/>
+      <%= form.text_field(:username) %><br/>
 
-    <%= form.label(:password) %><br/>
-    <%= form.password_field(:password) %><br/>
+      <%= form.label(:password) %><br/>
+      <%= form.password_field(:password) %><br/>
 
-    <%= form.submit("Sign In")%>
-  <% end %>
+      <%= form.submit("Sign In")%>
+    <% end %>
   </center>
+  <%= link_to "New User?", "/users/new" %>
 </div>

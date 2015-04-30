@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'sessions#new'
 
+  resources(:users, only:[:new, :create])
   resources(:sessions, only:[:create, :new, :destroy])
 
   match('/', to: 'sessions#new', via: 'get')
