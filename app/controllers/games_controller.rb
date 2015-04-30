@@ -1,15 +1,17 @@
 class GamesController < ApplicationController
   BLACKJACK = 21
 
+  before_filter :authenticate
+
   def show
-    @user = User.find_by_username('admin')
+    @user = current_user
     session[:drawn_cards] = []
     session[:player_cards] = []
     session[:dealer_cards] = []
   end
 
   def bet
-    @user = User.find_by_username('admin')
+    @user = current_user
     bet = params[:bet].to_i
     render_player_bet(@user, bet)
   end
@@ -23,7 +25,7 @@ class GamesController < ApplicationController
   end
 
   def bust
-    User.find_by_username('admin').lose!(session[:bet])
+    current_user.lose!(session[:bet])
     render nothing: true
   end
 
@@ -31,7 +33,7 @@ class GamesController < ApplicationController
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     result = Player.determine_result(player, dealer)
-    result.execute(User.find_by_username('admin'), session[:bet])
+    result.execute(current_user, session[:bet])
     render :json => { text: player.render_result(dealer) } 
   end
 
@@ -45,10 +47,7 @@ class GamesController < ApplicationController
       player = Player.new(player_cards)
       session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
-      render :json => { text: card.render, 
-                        score: player.score, 
-                        blackjack: player.blackjack?,
-                        bust: player.bust? }
+      render :json => { text: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
     end
 
     def render_player_bet(user, bet)
@@ -58,5 +57,9 @@ class GamesController < ApplicationController
       else
         render nothing: true
       end
+    end
+
+    def authenticate
+      redirect_to root_path if not logged_in?
     end
 end
