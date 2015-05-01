@@ -1,16 +1,16 @@
 class PlayerWins
-  def execute(user, bet)
+  def save(user, bet)
     user.win!(bet)
   end
 end
 
 class PlayerLoses
-  def execute(user, bet)
+  def save(user, bet)
     user.lose!(bet)
   end
 end
 
 class PlayerPush
-  def execute(user, bet)
+  def save(user, bet)
   end
 end

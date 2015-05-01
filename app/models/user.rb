@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_secure_password
   validates(:username, presence: true, on: :create)
   validates(:password, length: { minimum: 4 }, on: :create)
-  validates(:money, presence: true)
 
   def win!(bet)
     self.money += bet

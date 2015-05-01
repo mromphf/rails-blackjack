@@ -46,7 +46,7 @@ class Player
   end
 
   def self.determine_result(player, dealer)
-    if (player.score > dealer.score and player.score <= 21) or dealer.bust?
+    if (player.score > dealer.score and not player.bust?) or dealer.bust?
       return PlayerWins.new
     elsif player.score != dealer.score or player.bust?
       return PlayerLoses.new

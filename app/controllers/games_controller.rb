@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
   BLACKJACK = 21
-
   before_filter :authenticate
 
   def show
@@ -33,7 +32,7 @@ class GamesController < ApplicationController
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     result = Player.determine_result(player, dealer)
-    result.execute(current_user, session[:bet])
+    result.save(current_user, session[:bet])
     render :json => { text: player.render_result(dealer) } 
   end
 

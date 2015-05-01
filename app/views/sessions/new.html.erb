@@ -1,7 +1,7 @@
 <div id='loginBox'>
   <center>
     <%= form_for(:session, url:sessions_path) do |form| %>
-      <%= form.label(:username) %><br/>
+      <%= form.label("Email") %><br/>
       <%= form.text_field(:username) %><br/>
 
       <%= form.label(:password) %><br/>

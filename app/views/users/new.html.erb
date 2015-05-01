@@ -1,14 +1,14 @@
 <div id='loginBox'>
   <center>
     <%= form_for @user do |form| %>
-      <%= form.label(:username) %><br/>
+      <%= form.label("Email address") %><br/>
       <%= form.text_field(:username) %><br/>
 
       <%= form.label(:password) %><br/>
-      <%= form.text_field(:password) %><br/>
+      <%= form.password_field(:password) %><br/>
 
       <%= form.label(:password_confirmation) %><br/>
-      <%= form.text_field(:password_confirmation) %><br/>
+      <%= form.password_field(:password_confirmation) %><br/>
 
       <%= form.submit("Sign up!")%>
     <% end %>
