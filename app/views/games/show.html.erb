@@ -1,9 +1,9 @@
 <div id="cash">
   <br/>
-  <center>Your cash:
-    <span id="moneyValue">$<%= @user.money %>.00</div>
-  <center>
-    <%= link_to "Log Out", "/signout", method: 'delete' %>
+  <center>Your Cash:
+    <span id="moneyValue">$<%= @user.money %></span>
+  </center>
+  <%= link_to "Log Out", "/signout", id: "btnSignout", method: 'delete' %>
 </div>
 
 <div id="betView">
@@ -18,16 +18,18 @@
 
 <div id="gameView" style="display:none">
   <div id="cards">
-    <br/>
-    <div id="dealerBox" class="box">
-      <p id="dealerScore">Dealer: </p>
-      <ul id="dealerCards" style="list-style:none"></ul>
-    </div>
+    <center>
+      <br/>
+      <div id="dealerBox" class="box">
+        <p id="dealerScore">Dealer: </p>
+        <ul id="dealerCards" style="list-style:none"></ul>
+      </div>
 
-    <div id="playerBox" class="box">
-      <p id="playerScore">You: </p>
-      <ul id="playerCards" style="list-style:none"></ul>
-    </div>
+      <div id="playerBox" class="box">
+        <p id="playerScore">You: </p>
+        <ul id="playerCards" style="list-style:none"></ul>
+      </div>
+    <center>
   </div>
 
   <div id="input">
