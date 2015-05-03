@@ -19,9 +19,6 @@ ul, li {
     margin-top: 10px;
 }
 
-label {
-}
-
 input[type=text], input[type=password] {
     height: 35px;
     width: 100%;
@@ -86,6 +83,18 @@ a, a:visited {
     border-bottom: 1px solid #d93;
 }
 
+#yourCash {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+}
+
+#signout {
+    display: block;
+    float: right:
+    margin-right: 5%;
+}
+
 #moneyValue {
     font-size: 1.5em;
     color: #ffdd22;
@@ -142,29 +151,40 @@ a, a:visited {
 }
 
 .card {
-    margin-left: 1%;
+    width: 54px;
+    height: 72px;
+}
+
+@media screen and (min-width: 1200px) {
+    .card {
+        width: 108px;
+        height: 144px;
+        margin-left: 1%;
+    }
 }
 
 .box {
-    height: 200px;
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 1%;
+    height: 150px;
+}
+
+@media screen and (min-width: 1200px) {
+  .box {
+      height: 200px;
+      margin: 0 auto;
+      margin-bottom: 1%;
+  }
 }
 
 #input {
     position: absolute;
     bottom: 0;
-    margin-top: 2%;
     width: 100%;
     height: 20%;
-    background-color: #114412;
-    border-top: 1px solid #d93;
 }
 
 #input input[type=button] {
-    height: 75px;
-    width: 200px;
+    height: 50px;
+    width: 175px;
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 1%;
@@ -172,6 +192,14 @@ a, a:visited {
     border: none;
     background-color: #121212;
     box-shadow: 0px 5px 5px #111111;
+}
+
+@media screen and (min-width: 1200px) {
+  #input input[type=button] {
+      height: 75px;
+      height: 75px;
+      width: 200px;
+  }
 }
 
 #input input[type=button]:hover {
