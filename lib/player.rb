@@ -45,10 +45,10 @@ class Player
     'Dealer wins...'
   end
 
-  def self.determine_result(player, dealer)
-    if (player.score > dealer.score and not player.bust?) or dealer.bust?
+  def determine_result(dealer)
+    if (self.score > dealer.score and not self.bust?) or dealer.bust?
       return PlayerWins.new
-    elsif player.score != dealer.score or player.bust?
+    elsif self.score != dealer.score or self.bust?
       return PlayerLoses.new
     end
     PlayerPush.new

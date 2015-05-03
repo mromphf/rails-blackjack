@@ -31,7 +31,7 @@ class GamesController < ApplicationController
   def decide_results
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
-    result = Player.determine_result(player, dealer)
+    result = player.determine_result(dealer)
     result.save(current_user, session[:bet])
     render :json => { text: player.render_result(dealer) } 
   end

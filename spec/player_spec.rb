@@ -128,27 +128,27 @@ describe Player do
 
   describe "determing game result" do
     it "will return a win if the player beats the dealer" do
-      player = double("Player", score: 20, bust?: false)
+      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs)])
       dealer = double("Player", score: 19, bust?: false)
-      expect(Player.determine_result(player, dealer)).to be_a PlayerWins
+      expect(player.determine_result(dealer)).to be_a PlayerWins
     end
 
     it "will return a loss if the player loses by busting" do 
-      player = double("Player", score: 23, bust?: true)
+      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs), Card.new(5, :clubs)])
       dealer = double("Player", score: 20, bust?: false)
-      expect(Player.determine_result(player, dealer)).to be_a PlayerLoses
+      expect(player.determine_result(dealer)).to be_a PlayerLoses
     end
 
     it "will return a loss if the player loses to the dealer" do
-      player = double("Player", score: 17, bust?: false)
+      player = Player.new([Card.new(10, :hearts), Card.new(8, :clubs)])
       dealer = double("Player", score: 20, bust?: false)
-      expect(Player.determine_result(player, dealer)).to be_a PlayerLoses
+      expect(player.determine_result(dealer)).to be_a PlayerLoses
     end
 
-    it "will return a push if the player loses to the dealer" do
-      player = double("Player", score: 20, bust?: false)
+    it "will return a push if the player ties with the dealer" do
+      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs)])
       dealer = double("Player", score: 20, bust?: false)
-      expect(Player.determine_result(player, dealer)).to be_a PlayerPush
+      expect(player.determine_result(dealer)).to be_a PlayerPush
     end
   end
 end
