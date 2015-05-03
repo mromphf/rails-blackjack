@@ -8,8 +8,7 @@ body, html {
     margin: 0;
     padding: 0;
     color: #dd9933;
-    background-color: #010101;
-    background-image: url(/assets/casino.jpg);
+    background-color: #114412;
     background-size: 1920px 1080px;
     font-family: 'roboto-thin';
 }
@@ -20,16 +19,68 @@ ul, li {
     margin-top: 10px;
 }
 
-#btnSignout, #btnSignout:visited {
+label {
+}
+
+input[type=text], input[type=password] {
+    height: 35px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    font-size: 1.1em;
+    padding: 3px;
+    box-shadow: 0px 2px 5px #111111;
+}
+
+input[type=button], input[type=submit] {
+    height: 50px;
+    width: 48%;
+    display: box;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+    text-decoration: none;
+    color: #ffdd22;
+    border: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    background-color: #121212;
+    box-shadow: 0px 5px 5px #111111;
+}
+
+input[type=button]:hover, input[type=submit]:hover {
+    color: #ddd;
+    background-color: #232323;
+}
+
+a, a:visited {
   color: #ffdd22;
   float: right;
   margin-right: 5%;
   text-decoration: none;
 }
 
-#cash {
+#loginBox {
+    width: 90%;
     margin: 0 auto;
-    height: 80px;
+    margin-top: 30%;
+    padding: 10px;
+}
+
+@media screen and (min-width: 1200px) {
+    #loginBox {
+        width: 15%;
+        margin: 0 auto;
+        margin-top: 10%;
+        padding: 10px;
+    }
+}
+
+.navbar {
+    height: 60px;
     width: 100%;
     background-color: #121212;
     border-bottom: 1px solid #d93;
@@ -42,23 +93,26 @@ ul, li {
 
 #betView {
     position: absolute;
-    border-top: 1px solid #d93;
-    background-color: #114412;
+    bottom: 0;
     width: 100%;
     height: 20%;
-    margin-top: 20%;
     padding-bottom: 30px; 
-    bottom: 0;
 }
 
 .btnBet {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
+    border: none;
     border-radius: 50%;
     background-color: #ffffff;
-    border: none;
     margin: 1%;
-    box-shadow: 0px 5px 5px #111111;
+}
+
+@media screen and (min-width: 1200px) {
+    .btnBet {
+        width: 75px;
+        height: 75px;
+    }
 }
 
 .btnBet:hover {
@@ -80,7 +134,6 @@ ul, li {
     font-size: 1.3em;
     text-shadow: 2px 2px black;
     height: 690px;
-    background-color: rgba(60, 60, 60, 0.6);
 }
 
 #cards p {
