@@ -1,8 +1,6 @@
 *.rbc
 capybara-*.html
 .rspec
-/app/assets/images/*.png
-/app/assets/images/*.jpg
 /log
 /tmp
 /db/*.sqlite3
