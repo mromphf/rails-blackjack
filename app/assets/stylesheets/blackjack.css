@@ -84,20 +84,22 @@ a, a:visited {
 }
 
 #yourCash {
-    display: block;
+    display: inline-block;
     width: 150px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#moneyValue {
+    display: inline-block;
+    font-size: 1.5em;
+    color: #ffdd22;
 }
 
 #signout {
     display: block;
     float: right:
     margin-right: 5%;
-}
-
-#moneyValue {
-    font-size: 1.5em;
-    color: #ffdd22;
 }
 
 #betView {
@@ -115,6 +117,7 @@ a, a:visited {
     border-radius: 50%;
     background-color: #ffffff;
     margin: 1%;
+    box-shadow: 0px 5px 5px #111111;
 }
 
 @media screen and (min-width: 1200px) {
@@ -125,7 +128,7 @@ a, a:visited {
 }
 
 .btnBet:hover {
-    background-color: #dddddd; 
+    background-color: #cdcdcd; 
 }
 
 #btnRefresh {
@@ -184,10 +187,11 @@ a, a:visited {
 
 #input input[type=button] {
     height: 50px;
-    width: 175px;
+    width: 150px;
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 1%;
+    float: none;
     color: #ffdd22;
     border: none;
     background-color: #121212;

@@ -1,6 +1,10 @@
 var dealerScore = 0;
 var playerScore = 0;
 
+function onCancel() {
+    window.history.back();
+}
+
 function onBet(bet) {
     $.ajax({
         url: "/bet",
@@ -44,6 +48,12 @@ function onBust() {
     });
 }
 
+function onStand () {
+    disableControls();
+    document.getElementById("prompt").innerHTML = "You stand...";
+    dealerTriesToWin();
+}
+
 function initializeGame(data) {
     document.getElementById("betView").style.display = "none";
     document.getElementById("gameView").style.display = "inline";
@@ -53,12 +63,6 @@ function initializeGame(data) {
     setTimeout(function () {playerHit()}, 1500);
     setTimeout(function () {enableControls()}, 2000);
     document.getElementById("prompt").innerHTML = ("Bet: $" + data.bet + ".00");
-}
-
-function onStand () {
-    disableControls();
-    document.getElementById("prompt").innerHTML = "You stand...";
-    dealerTriesToWin();
 }
 
 function playerCallback(data) {
