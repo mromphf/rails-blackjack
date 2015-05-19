@@ -2,9 +2,10 @@ class SessionsController < ApplicationController
   before_filter :check_session, except: :destroy
 
   def create
-    session_username = params[:session][:username]
-    user = User.find_by(username: session_username.downcase)
-    if user && user.authenticate(params[:session][:password])
+    submitted_username = params[:session][:username]
+    submitted_password = params[:session][:password]
+    user = User.find_by(username: submitted_username.downcase)
+    if user && user.authenticate(submitted_password)
       log_in user
       redirect_to '/play'
     else
