@@ -15,6 +15,12 @@
 
       <%= form.submit("Sign up!")%>
     <% end %>
-    <input type="button" value="Cancel" onclick="onCancel()"/>
+    <%= button_to 'Cancel', root_path, method: 'get' %>
+
+    <div class="errors">
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div>
   </center>
 </div>
