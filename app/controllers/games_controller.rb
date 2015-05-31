@@ -1,12 +1,23 @@
 class GamesController < ApplicationController
   BLACKJACK = 21
   before_filter :authenticate
+  before_filter :check_funds, only: :reset_funds
 
   def show
     @user = current_user
+    if @user.money <= 0 
+      redirect_to '/reset_funds'      
+    end
     session[:drawn_cards] = []
     session[:player_cards] = []
     session[:dealer_cards] = []
+  end
+
+  def reset_funds
+    render 'reset'
+    @user = current_user
+    @user.money = 200
+    @user.save!
   end
 
   def bet
@@ -56,6 +67,11 @@ class GamesController < ApplicationController
       else
         render nothing: true
       end
+    end
+
+    def check_funds
+      @user = current_user
+      redirect_to '/play' if @user.money > 0
     end
 
     def authenticate
