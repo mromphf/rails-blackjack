@@ -79,6 +79,7 @@ a, a:visited {
 #btnGuest {
     margin-top: 50px;
     width: 100%;
+    display: none;
 }
 
 .navbar {
