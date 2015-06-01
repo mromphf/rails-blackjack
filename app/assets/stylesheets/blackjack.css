@@ -238,3 +238,24 @@ a, a:visited {
     border: none;
     background-color: #aaa;
 }
+
+#resetContent {
+  margin-top: 20%;
+}
+
+#btnReset {
+  display: block;
+  width: 15%;
+  float: none;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+  #resetContent {
+      margin-top: 5%;
+  }
+
+  #btnReset {
+      width: 50%;
+  }
+}

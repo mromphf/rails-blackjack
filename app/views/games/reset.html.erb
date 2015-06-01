@@ -1,2 +1,9 @@
-<p>You will be given additional funds.</p>
-<%= button_to "Ok!", '/play', method: 'get' %>
+<div id="resetContent">
+  <center>
+    <p>Whoops! It looks like you're out of cash. Bad luck, friend, but
+    there's no need to stop playing!<br/>
+    We'll give you 200 more dollars so you can have a chance to win back 
+    your rent money. Good luck!</p>
+  </center>
+  <%= button_to "Ok!", '/play', id: 'btnReset', method: 'get' %>
+</div>
