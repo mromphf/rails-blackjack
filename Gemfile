@@ -22,6 +22,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 
+# Omniauth gems
+gem "omniauth-google-oauth2", "~> 0.2.1"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

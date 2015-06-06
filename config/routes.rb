@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources(:users, only:[:new, :create])
   resources(:sessions, only:[:create, :new, :destroy])
 
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   match('/', to: 'sessions#new', via: 'get')
   match('/signout', to: 'sessions#destroy', via: 'delete')
   match('/play', to: "games#show", via: 'get')
