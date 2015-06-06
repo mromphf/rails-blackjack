@@ -41,4 +41,10 @@ describe User do
       User.find_by_username('jimbob@email.com').money.should == 0
     end
   end
+
+  it "has its money reset" do
+    user.money = 0
+    user.reset_money!
+    user.money.should == 200
+  end
 end

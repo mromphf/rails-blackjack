@@ -17,4 +17,9 @@ class User < ActiveRecord::Base
     self.money = 0 if self.money < 0
     save!
   end
+
+  def reset_money!
+    self.money = 200
+    save!
+  end
 end

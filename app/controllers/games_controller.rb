@@ -15,9 +15,7 @@ class GamesController < ApplicationController
 
   def reset_funds
     render 'reset'
-    @user = current_user
-    @user.money = 200
-    @user.save!
+    current_user.reset_money!
   end
 
   def bet
