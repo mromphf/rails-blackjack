@@ -2,15 +2,9 @@ class SessionsController < ApplicationController
   before_filter :check_session, except: :destroy
 
   def create
-    submitted_username = params[:session][:username]
-    submitted_password = params[:session][:password]
-    user = User.find_by(username: submitted_username.downcase)
-    if user && user.authenticate(submitted_password)
-      log_in user
-      redirect_to '/play'
-    else
-      render 'new'
-    end
+    user = User.from_omniauth(env["omniauth.auth"])
+    log_in(user)
+    redirect_to '/play'
   end
 
   def destroy
