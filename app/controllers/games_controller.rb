@@ -49,7 +49,7 @@ class GamesController < ApplicationController
     def draw_new_card(session_var)
       drawn_cards = CardSerializer.deserialize(session[:drawn_cards])
       player_cards = CardSerializer.deserialize(session[session_var])
-      card = Deck.new.deal_card(drawn_cards)
+      card = Deck.new(drawn_cards).deal_card
       player_cards << card
       drawn_cards << card
       player = Player.new(player_cards)
