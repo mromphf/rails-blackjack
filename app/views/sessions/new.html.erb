@@ -1,17 +1,12 @@
 <div class="navbar">
 </div>
 
+<br/>
+<center>
+  <h1>Blackjack on Rails!</h1>
+</center>
+
 <div id='loginBox'>
-  <%= form_for(:session, url:sessions_path) do |form| %>
-    <%= form.label "Email" %><br/>
-    <%= form.text_field :username %><br/>
-
-    <%= form.label :password %><br/>
-    <%= form.password_field :password %><br/>
-
-    <%= form.submit("Sign In") %>
-  <% end %>
-  <%= button_to "New User?", "/users/new", method: "get" %>
-
+  <%= button_to "Sign in with Google!", "/auth/google_oauth2/", id: "sign_in" %>
   <%= button_to "Play As a Guest!", root_path, id: 'btnGuest', method: "get" %>
 </div>

@@ -76,6 +76,10 @@ a, a:visited {
     }
 }
 
+#sign_in {
+    width: 100%;
+}
+
 #btnGuest {
     margin-top: 50px;
     width: 100%;
