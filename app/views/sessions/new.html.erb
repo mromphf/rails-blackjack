@@ -7,7 +7,10 @@
 </center>
 
 <div id='loginBox'>
-  <%= button_to "Sign in with Google!", "/auth/google_oauth2/", id: "sign_in" %>
-  <%= button_to "Sign in with Facebook!", "/auth/facebook/", id: "sign_in" %>
+  <center>
+    <h3>Sign in with...</h1>
+  </center>
+  <%= button_to "Google+", "/auth/google_oauth2/", id: "btnGoogle" %>
+  <%= button_to "Facebook", "/auth/facebook/", id: "btnFacebook" %>
   <%= button_to "Play As a Guest!", root_path, id: 'btnGuest', method: "get" %>
 </div>
