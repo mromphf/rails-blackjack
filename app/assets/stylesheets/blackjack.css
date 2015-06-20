@@ -136,6 +136,10 @@ a, a:visited {
     margin-right: 5%;
 }
 
+#signout:hover {
+    color: #eeaa44;
+}
+
 .errors {
     margin-top: 75px;
     padding: 2px;
