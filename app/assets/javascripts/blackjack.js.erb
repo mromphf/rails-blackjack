@@ -68,7 +68,7 @@ function initializeGame(data) {
 function playerCallback(data) {
     playerScore = data.score;
     var playerBusted = data.bust;
-    updatePlayerBox("playerCards", data.text, "playerScore", "You: " + data.score);
+    updatePlayerBox("playerCards", data.image, "playerScore", "You: " + data.score);
     if ( playerBusted ) {
         onBust();
         disableControls();
@@ -81,7 +81,7 @@ function playerCallback(data) {
 function dealerCallback(data) {
     dealerScore = data.score;
     var dealerBusted = data.bust;
-    updatePlayerBox("dealerCards", data.text, "dealerScore", "Dealer: " + data.score);
+    updatePlayerBox("dealerCards", data.image, "dealerScore", "Dealer: " + data.score);
     if ( dealerBusted ) {
         document.getElementById("dealerScore").innerHTML = "BUST!";
     }

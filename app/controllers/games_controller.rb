@@ -55,7 +55,7 @@ class GamesController < ApplicationController
       player = Player.new(player_cards)
       session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
-      render :json => { text: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
+      render :json => { image: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
     end
 
     def render_player_bet(user, bet)
