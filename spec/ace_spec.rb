@@ -8,7 +8,7 @@ describe Ace do
   end
 
   it "will throw an exception if given an invalid suit" do
-    expect { Card.new(3, :foo) }.to raise_error
+    expect { Card.new(3, :foo) }.to raise_error("ERROR: Cannot create a card with suit: foo.")
   end
 
   describe "equality" do
@@ -37,37 +37,37 @@ describe Ace do
 
   describe "to string" do
     it "provides the expected string for spades" do
-      Ace.new(:spades).to_s.should == "Ace of Spades"
+      expect(Ace.new(:spades).to_s).to eq "Ace of Spades"
     end
 
     it "provides the expected string for hearts" do
-      Ace.new(:hearts).to_s.should == "Ace of Hearts"
+      expect(Ace.new(:hearts).to_s).to eq "Ace of Hearts"
     end
 
     it "provides the expected string for clubs" do
-      Ace.new(:clubs).to_s.should == "Ace of Clubs"
+      expect(Ace.new(:clubs).to_s).to eq "Ace of Clubs"
     end
 
     it "provides the expected string for diamonds" do
-      Ace.new(:diamonds).to_s.should == "Ace of Diamonds"
+      expect(Ace.new(:diamonds).to_s).to eq "Ace of Diamonds"
     end
   end
 
   describe 'render' do
     it 'provides an img name for spades' do
-      Ace.new(:spades).render.should == 'spades01.png'
+      expect(Ace.new(:spades).render).to eq 'spades01.png'
     end
 
     it 'provides an img name for hearts' do
-      Ace.new(:hearts).render.should == 'hearts01.png'
+      expect(Ace.new(:hearts).render).to eq 'hearts01.png'
     end
 
     it 'provides an img name for clubs' do
-      Ace.new(:clubs).render.should == 'clubs01.png'
+      expect(Ace.new(:clubs).render).to eq 'clubs01.png'
     end
 
     it 'provides an img name for diamonds' do
-      Ace.new(:diamonds).render.should == 'diamonds01.png'
+      expect(Ace.new(:diamonds).render).to eq 'diamonds01.png'
     end
   end
 

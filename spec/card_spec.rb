@@ -9,15 +9,15 @@ describe Card do
     end
 
     it "will throw an exception if given a value of one" do
-      expect { Card.new(1, :diamonds) }.to raise_error
+      expect { Card.new(1, :diamonds) }.to raise_error "ERROR: A card cannot be assigned a value of 1."
     end
 
     it "will throw an exception if given a value greater than thirteen" do
-      expect { Card.new(14, :diamonds) }.to raise_error
+      expect { Card.new(14, :diamonds) }.to raise_error "ERROR: A card cannot be assigned a value of 14."
     end
 
     it "will throw an exception if given an invalid suit" do
-      expect { Card.new(3, :foo) }.to raise_error
+      expect { Card.new(3, :foo) }.to raise_error "ERROR: Cannot create a card with suit: foo."
     end
   end
 
@@ -62,21 +62,21 @@ describe Card do
   describe "to-string" do
     describe "on non-face cards" do
       it "provides the correct output on spades" do
-        Card.new(8, :spades).to_s.should == "8 of Spades"
+        expect(Card.new(8, :spades).to_s).to eq "8 of Spades"
       end
 
       it "provides the correct output on hearts" do
-        Card.new(3, :hearts).to_s.should == "3 of Hearts"
+        expect(Card.new(3, :hearts).to_s).to eq "3 of Hearts"
       end
     end
 
     describe "on face cards" do
       it "provides the correct output on clubs" do
-        Card.new(11, :clubs).to_s.should == "Jack of Clubs"
+        expect(Card.new(11, :clubs).to_s).to eq "Jack of Clubs"
       end
 
       it "provides the correct output on diamonds" do
-        Card.new(13, :diamonds).to_s.should == "King of Diamonds"
+        expect(Card.new(13, :diamonds).to_s).to eq "King of Diamonds"
       end
     end
   end
@@ -100,8 +100,8 @@ describe Card do
   end
 
   it "will provide its state in a hashed form" do
-    Card.new(13, :hearts).state[:suit].should == "Hearts"
-    Card.new(13, :hearts).state[:value].should == 13
+    expect(Card.new(13, :hearts).state[:suit]).to eq "Hearts"
+    expect(Card.new(13, :hearts).state[:value]).to eq 13
   end
 
   it "is a face card if its face is greater than 10" do

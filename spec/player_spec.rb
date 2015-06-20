@@ -58,22 +58,22 @@ describe Player do
 
   describe "busting" do
     it "will bust when score exceeds 21" do
-      player.stub(:score) { 22 }
+      player = Player.new([Card.new(13, :diamonds), Card.new(13, :spades), Card.new(13, :hearts)])
       expect(player.bust?).to eq true
     end
 
     describe "will not bust" do
       it "when score is less than 21" do
-        player.stub(:score) { 20 }
+      player = Player.new([Card.new(10, :diamonds), Card.new(10, :hearts)])
         expect(player.bust?).to eq false
       end
 
       it "when score is equal to 21" do
-        player.stub(:score) { 21 }
+        player = Player.new([Card.new(10, :diamonds), Card.new(10, :hearts), Ace.new(:hearts)])
         expect(player.bust?).to eq false
       end
 
-      it "when given two aces" do
+      it "when given two aces" do 
         player = Player.new([Ace.new(:spades), Ace.new(:hearts)])
         expect(player.bust?).to eq false
       end
@@ -81,16 +81,14 @@ describe Player do
   end
 
   it "is equal to another player when they both have the same score" do
-    other_player = Player.new
-    player.stub(:score) { 20 }
-    other_player.stub(:score) { 20 }
+    player = Player.new([Card.new(10, :diamonds)])
+    other_player = Player.new([Card.new(10, :hearts)])
     expect(player).to eq other_player
   end
 
   it "is unequal to another player when they have different scores" do
-    other_player = Player.new
-    player.stub(:score) { 20 }
-    other_player.stub(:score) { 10 }
+    player = Player.new([Card.new(10, :diamonds)])
+    other_player = Player.new([Card.new(9, :hearts)])
     expect(player).not_to eq other_player
   end
 
