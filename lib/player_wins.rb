@@ -3,14 +3,3 @@ class PlayerWins
     user.win!(bet)
   end
 end
-
-class PlayerLoses
-  def save(user, bet)
-    user.lose!(bet)
-  end
-end
-
-class PlayerPush
-  def save(user, bet)
-  end
-end

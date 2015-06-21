@@ -1,4 +1,6 @@
 require_relative "player_wins"
+require_relative "player_push"
+require_relative "player_loses"
 
 class Player
   BLACKJACK = 21
