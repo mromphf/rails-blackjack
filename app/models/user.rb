@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  BLACKJACK = 21
-
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
