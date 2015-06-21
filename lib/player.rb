@@ -41,12 +41,12 @@ class Player
   end
 
   def render_result(dealer)
-    if (score > dealer.score or dealer.bust?) and not self.bust?
+    if (self.score > dealer.score and not self.bust?) or dealer.bust?
       return '<strong>You win!!</strong>'
-    elsif score == dealer.score
-      return 'Push...'
+    elsif self.score != dealer.score or self.bust?
+      return 'Dealer wins...'
     end
-    'Dealer wins...'
+    'Push...'
   end
 
   def determine_result(dealer)
