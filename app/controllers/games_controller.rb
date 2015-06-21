@@ -16,9 +16,8 @@ class GamesController < ApplicationController
   end
 
   def bet
-    @user = current_user
     bet = params[:bet].to_i
-    render_player_bet(@user, bet)
+    render_player_bet(bet)
   end
   
   def player_hit
@@ -55,8 +54,8 @@ class GamesController < ApplicationController
       render :json => { image: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
     end
 
-    def render_player_bet(user, bet)
-      if bet <= user.money
+    def render_player_bet(bet)
+      if bet <= current_user.money
         session[:bet] = bet
         render :json => { bet: bet }
       else
@@ -65,13 +64,11 @@ class GamesController < ApplicationController
     end
 
     def check_funds
-      user = current_user
-      redirect_to '/play' unless user.is_broke?
+      redirect_to '/play' unless current_user.is_broke?
     end
 
     def check_broke
-      user = current_user
-      redirect_to '/reset_funds' if user.is_broke?
+      redirect_to '/reset_funds' if current_user.is_broke?
     end
 
     def authenticate
