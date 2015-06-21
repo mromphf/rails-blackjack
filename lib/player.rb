@@ -2,6 +2,8 @@ require_relative "player_wins"
 
 class Player
   BLACKJACK = 21
+  FACE_CARD_VALUE = 10
+  ACES_HIGH_VALUE = 11
 
   def initialize(hand=[])
     @hand = hand
@@ -64,10 +66,10 @@ class Player
 
     def add_card_value(card, score_so_far)
       if card.face?
-        return 10
+        return FACE_CARD_VALUE
       elsif card.ace?
-        if (score_so_far + 11) <= BLACKJACK
-          return 11
+        if (score_so_far + ACES_HIGH_VALUE) <= BLACKJACK
+          return ACES_HIGH_VALUE
         end
       end 
       return card.value

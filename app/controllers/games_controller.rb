@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-  BLACKJACK = 21
   before_filter :authenticate
   before_filter :check_funds, only: :reset_funds
   before_filter :check_broke, only: :show
