@@ -9,6 +9,10 @@ describe User do
     User.find(1).money.should == 210
   end
 
+  it "is not broke by default" do
+    expect(User.new.is_broke?).not_to eq true
+  end
+
   describe "losing money" do
     it "has money subtracted from its balance" do
       user.money = 200
@@ -27,5 +31,10 @@ describe User do
     user.money = 0
     user.reset_money!
     user.money.should == 200
+  end
+
+  it "can be broke" do
+    user.money = 0
+    expect(user.is_broke?).to eq true
   end
 end

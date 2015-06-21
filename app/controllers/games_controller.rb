@@ -67,12 +67,12 @@ class GamesController < ApplicationController
 
     def check_funds
       user = current_user
-      redirect_to '/play' if user.money > 0
+      redirect_to '/play' unless user.is_broke?
     end
 
     def check_broke
       user = current_user
-      redirect_to '/reset_funds' if user.money <= 0 
+      redirect_to '/reset_funds' if user.is_broke?
     end
 
     def authenticate

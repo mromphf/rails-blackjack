@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
     self.money = 200
     save!
   end
+
+  def is_broke?
+    self.money <= 0 
+  end
 end
