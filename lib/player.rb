@@ -40,15 +40,6 @@ class Player
     false
   end
 
-  def render_result(dealer)
-    if (self.score > dealer.score and not self.bust?) or dealer.bust?
-      return '<strong>You win!!</strong>'
-    elsif self.score != dealer.score or self.bust?
-      return 'Dealer wins...'
-    end
-    'Push...'
-  end
-
   def determine_result(dealer)
     if (self.score > dealer.score and not self.bust?) or dealer.bust?
       return PlayerWins.new

@@ -92,38 +92,6 @@ describe Player do
     expect(player).not_to eq other_player
   end
 
-  describe "rendering result" do
-    it "will return 'You win!' if player has a higher score than dealer" do
-      player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
-      dealer = Player.new([Card.new(5, :clubs), Card.new(5, :spades)])
-      expect(player.render_result(dealer)).to eq "<strong>You win!!</strong>"
-    end
-
-    it "will return 'You win!' if dealer busts" do
-      player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
-      dealer = Player.new([Card.new(10, :clubs), Card.new(10, :spades), Card.new(5, :diamonds)])
-      expect(player.render_result(dealer)).to eq "<strong>You win!!</strong>"
-    end
-
-    it "will return 'Push...' if it is a draw" do
-      player = Player.new([Card.new(10, :hearts), Card.new(9, :spades)])
-      dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
-      expect(player.render_result(dealer)).to eq "Push..."
-    end
-
-    it "will return 'Dealer wins...' if the dealer has a higher score" do
-      player = Player.new([Card.new(5, :hearts), Card.new(4, :spades)])
-      dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
-      expect(player.render_result(dealer)).to eq "Dealer wins..."
-    end
-
-    it "will return 'Dealer wins...' if player busts" do
-      player = Player.new([Card.new(13, :hearts), Card.new(12, :spades), Card.new(10, :diamonds)])
-      dealer = Player.new([Card.new(11, :clubs), Card.new(9, :hearts)])
-      expect(player.render_result(dealer)).to eq "Dealer wins..."
-    end
-  end
-
   describe "determing game result" do
     it "will return a win if the player beats the dealer" do
       player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs)])

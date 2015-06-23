@@ -38,7 +38,7 @@ class GamesController < ApplicationController
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     result = player.determine_result(dealer)
     result.save(current_user, session[:bet])
-    render :json => { text: player.render_result(dealer) } 
+    render :json => { text: result.render }
   end
 
   private
