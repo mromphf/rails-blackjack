@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def first_name
+    self.name.split(' ')[0]
+  end
+
   def win!(bet)
     self.money += bet
     save!

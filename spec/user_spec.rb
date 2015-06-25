@@ -37,4 +37,9 @@ describe User do
     user.money = 0
     expect(user.is_broke?).to eq true
   end
+
+  it "can determine its first name" do
+    user.name = "Jim Bob"
+    expect(user.first_name).to eq "Jim"
+  end
 end
