@@ -16,17 +16,20 @@ class User < ActiveRecord::Base
 
   def place_bet!(bet)
     self.bet = bet
+    self.in_game = true
     save!
   end
 
   def win!
     self.money += self.bet
+    self.in_game = false
     save!
   end
 
   def lose!
     self.money -= self.bet
     self.money = 0 if self.money < 0
+    self.in_game = false
     save!
   end
 

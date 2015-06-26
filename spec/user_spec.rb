@@ -27,6 +27,25 @@ describe User do
     end
   end
 
+  it "is game after it has placed a bet" do
+    user.place_bet! 30
+    expect(user.in_game?).to eq true
+  end
+
+  describe "is not in a game" do
+    it "after winning" do
+      user.place_bet! 30
+      user.win!
+      expect(user.in_game?).to eq false
+    end
+
+    it "after losing" do
+      user.place_bet! 30
+      user.lose!
+      expect(user.in_game?).to eq false
+    end
+  end
+
   it "has its money reset" do
     user.money = 0
     user.reset_money!
