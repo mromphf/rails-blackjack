@@ -14,13 +14,18 @@ class User < ActiveRecord::Base
     self.name.split(' ')[0]
   end
 
-  def win!(bet)
-    self.money += bet
+  def place_bet!(bet)
+    self.bet = bet
     save!
   end
 
-  def lose!(bet)
-    self.money -= bet
+  def win!
+    self.money += self.bet
+    save!
+  end
+
+  def lose!
+    self.money -= self.bet
     self.money = 0 if self.money < 0
     save!
   end

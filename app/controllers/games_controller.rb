@@ -29,7 +29,7 @@ class GamesController < ApplicationController
   end
 
   def bust
-    current_user.lose!(session[:bet])
+    current_user.lose!
     render nothing: true
   end
 
@@ -37,7 +37,7 @@ class GamesController < ApplicationController
     player = Player.new(CardSerializer.deserialize(session[:player_cards]))
     dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
     result = player.determine_result(dealer)
-    result.save(current_user, session[:bet])
+    result.save current_user
     render :json => { text: result.render }
   end
 
@@ -56,7 +56,7 @@ class GamesController < ApplicationController
 
     def render_player_bet(bet)
       if bet <= current_user.money
-        session[:bet] = bet
+        current_user.place_bet! bet
         render :json => { bet: bet }
       else
         render nothing: true

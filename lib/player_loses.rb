@@ -1,6 +1,6 @@
 class PlayerLoses
-  def save(user, bet)
-    user.lose!(bet)
+  def save(user)
+    user.lose!
   end
 
   def render

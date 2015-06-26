@@ -1,5 +1,5 @@
 class PlayerPush
-  def save(user, bet)
+  def save(user)
   end
 
   def render

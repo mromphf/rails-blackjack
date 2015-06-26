@@ -4,9 +4,9 @@ describe User do
   let(:user) { User.new(money: 200) }
 
   it "wins money" do
-    user.money = 200
-    user.win!(10)
-    User.find(1).money.should == 210
+    user = User.new(money: 200, bet: 10)
+    user.win!
+    user.money.should == 210
   end
 
   it "is not broke by default" do
@@ -15,15 +15,15 @@ describe User do
 
   describe "losing money" do
     it "has money subtracted from its balance" do
-      user.money = 200
-      user.lose!(10)
-      User.find(1).money.should == 190
+      user = User.new(money: 200, bet: 10)
+      user.lose!
+      user.money.should == 190
     end
 
     it "cannot have less than 0 zero dollars" do
-      user.money = 50
-      user.lose!(60)
-      User.find(1).money.should == 0
+      user = User.new(money: 20, bet: 50)
+      user.lose!
+      user.money.should == 0
     end
   end
 
