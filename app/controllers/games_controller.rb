@@ -16,8 +16,14 @@ class GamesController < ApplicationController
   end
 
   def bet
+    @user = current_user
     bet = params[:bet].to_i
-    render_player_bet(bet)
+    if bet <= current_user.money
+      current_user.place_bet! bet
+      render json: { foo: "" }
+    else
+      render nothing: true
+    end
   end
   
   def player_hit
@@ -52,15 +58,6 @@ class GamesController < ApplicationController
       session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
       render :json => { image: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
-    end
-
-    def render_player_bet(bet)
-      if bet <= current_user.money
-        current_user.place_bet! bet
-        render :json => { bet: bet }
-      else
-        render nothing: true
-      end
     end
 
     def check_funds
