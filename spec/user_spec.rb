@@ -4,7 +4,7 @@ describe User do
   let(:user) { User.new(money: 200) }
 
   it "wins money" do
-    user = User.new(money: 200, bet: 10)
+    user = User.new(money: 190, bet: 10)
     user.win!
     user.money.should == 210
   end
@@ -15,19 +15,27 @@ describe User do
 
   describe "losing money" do
     it "has money subtracted from its balance" do
-      user = User.new(money: 200, bet: 10)
+      user = User.new(money: 200)
+      user.place_bet! 10
       user.lose!
       user.money.should == 190
     end
 
     it "cannot have less than 0 zero dollars" do
-      user = User.new(money: 20, bet: 50)
+      user = User.new(money: 20)
+      user.place_bet! 50
       user.lose!
       user.money.should == 0
     end
   end
 
-  it "is game after it has placed a bet" do
+  it "will have money removed after placing a bet" do
+    user.money = 230
+    user.place_bet! 30
+    expect(user.money).to eq 200
+  end
+
+  it "is in game after it has placed a bet" do
     user.place_bet! 30
     expect(user.in_game?).to eq true
   end
