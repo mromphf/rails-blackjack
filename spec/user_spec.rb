@@ -35,6 +35,13 @@ describe User do
     expect(user.money).to eq 200
   end
 
+  it "will have it's money restored after a push" do
+    user.money = 200
+    user.place_bet! 10
+    user.push!
+    expect(user.money).to eq 200
+  end
+
   it "is in game after it has placed a bet" do
     user.place_bet! 30
     expect(user.in_game?).to eq true

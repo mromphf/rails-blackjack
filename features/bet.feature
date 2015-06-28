@@ -14,3 +14,9 @@ Feature: Betting
         When I bet 10 dollars before a game
         And I lose the game
         Then I should have 190 dollars
+        
+    Scenario: Push
+        Given I am a user with 200 dollars
+        When I bet 10 dollars before a game
+        And The game is a draw
+        Then I should have 200 dollars

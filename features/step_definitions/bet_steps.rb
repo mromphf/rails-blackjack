@@ -14,6 +14,10 @@ When(/^I lose the game$/) do
   @user.lose!
 end
 
+When(/^The game is a draw$/) do
+  @user.push!
+end
+
 Then(/^I should have (\d+) dollars$/) do |cash|
   expect(@user.money).to eq cash.to_i
 end

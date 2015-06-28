@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def push!
+    self.money += self.bet
+    self.in_game = false
+    save!
+  end
+
   def lose!
     self.in_game = false
     save!
