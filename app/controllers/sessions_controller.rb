@@ -7,6 +7,11 @@ class SessionsController < ApplicationController
     redirect_to '/play'
   end
 
+  def create_guest
+    log_in_guest
+    redirect_to '/play'
+  end
+
   def destroy
     log_out
     redirect_to root_path
