@@ -13,6 +13,7 @@ module SessionsHelper
 
   def log_out
     session[:logged_in] = false
+    session[:guest_mode] = false
     session[:current_user_id] = nil
   end
 
@@ -21,7 +22,7 @@ module SessionsHelper
   end
 
   def current_user
-    if session[:guest_mode] = true
+    if session[:guest_mode] == true
       Guest.new(session)
     else
       User.find(session[:current_user_id].to_i)
