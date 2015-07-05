@@ -73,6 +73,6 @@ class GamesController < ApplicationController
     end
 
     def card_asset_path(card)
-      "#{ActionController::Base.helpers.asset_path(card.render)}"
+      "#{ActionController::Base.helpers.image_path(card.render)}"
     end
 end
