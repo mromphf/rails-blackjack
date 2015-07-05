@@ -57,7 +57,7 @@ class GamesController < ApplicationController
       player = Player.new(player_cards)
       session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
-      render :json => { image: card.render, score: player.score, blackjack: player.blackjack?, bust: player.bust? }
+      render :json => { image: card_asset_path(card), score: player.score, blackjack: player.blackjack?, bust: player.bust? }
     end
 
     def check_funds
@@ -70,5 +70,9 @@ class GamesController < ApplicationController
 
     def authenticate
       redirect_to root_path if not logged_in?
+    end
+
+    def card_asset_path(card)
+      "#{ActionController::Base.helpers.asset_path(card.render)}"
     end
 end
