@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "roboto-thin";
-    src: url('Roboto-Regular.ttf') format('truetype');
+    font-family: "roboto";
+    src: font_url("Roboto-Regular.ttf") format('truetype');
     font-weight: normal;
 }
 
@@ -10,7 +10,7 @@ body, html {
     color: #dd9933;
     background-color: #114412;
     background-size: 1920px 1080px;
-    font-family: 'roboto-thin';
+    font-family: 'roboto';
 }
 
 ul, li {
