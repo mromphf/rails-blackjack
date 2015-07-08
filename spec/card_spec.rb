@@ -47,12 +47,6 @@ describe Card do
       sorted_cards = [Card.new(3, :hearts), Card.new(7, :hearts), Card.new(11, :hearts)]
       expect(unsorted_cards.sort_by { |c| c.value } ).to eq sorted_cards
     end
-
-    it "will sort by suits according to SHoCkeD sorting method" do
-      unsorted_cards = [Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds), Card.new(3, :spades)]
-      sorted_cards = [Card.new(3, :spades), Card.new(3, :hearts), Card.new(3, :clubs), Card.new(3, :diamonds)]
-      expect(unsorted_cards.sort).to eq sorted_cards
-    end
   end 
 
   it "is not an ace" do

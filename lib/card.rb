@@ -4,7 +4,6 @@ class Card
   attr_reader :value
 
   VALID_SUITS = [ :hearts, :clubs, :diamonds, :spades ]
-  SUIT_VALUES = { spades: 1, hearts: 2, clubs: 3, diamonds: 4 }
   SUIT_STRINGS = { spades: "Spades", hearts: "Hearts", clubs: "Clubs", diamonds: "Diamonds" }
   FACE_VALUES = { 11 => "Jack", 12 => "Queen", 13 => "King" }
 
@@ -23,10 +22,6 @@ class Card
 
   def ==(target)
     (@value == target.state[:value]) && (@suit == target.suit)
-  end
-
-  def <=>(target)
-    SUIT_VALUES[@suit] <=> SUIT_VALUES[target.suit]
   end
 
   def ace?

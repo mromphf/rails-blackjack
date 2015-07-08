@@ -28,12 +28,6 @@ describe Ace do
   it "is an ace" do
     expect(ace.ace?).to eq true
   end
-  
-  it "is sorted by suit using the SHoCkeD method" do
-    unsorted_cards = [Ace.new(:clubs), Ace.new(:spades), Ace.new(:diamonds), Ace.new(:hearts)]
-    sorted_cards = [Ace.new(:spades), Ace.new(:hearts), Ace.new(:clubs), Ace.new(:diamonds)]
-    expect(unsorted_cards.sort).to eq sorted_cards
-  end
 
   describe "to string" do
     it "provides the expected string for spades" do
