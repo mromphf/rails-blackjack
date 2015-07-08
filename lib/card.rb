@@ -21,7 +21,7 @@ class Card
   end
 
   def ==(target)
-    (@value == target.state[:value]) && (@suit == target.suit)
+    (@value == target.value) && (@suit == target.suit)
   end
 
   def ace?
@@ -39,8 +39,8 @@ class Card
     "#{suit}#{value}.png"
   end
 
-  def state
-    { value: @value, suit: SUIT_STRINGS[@suit] }
+  def serialize
+    "#{@value} of #{SUIT_STRINGS[@suit]}"
   end
 
   protected

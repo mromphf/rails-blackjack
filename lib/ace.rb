@@ -1,8 +1,6 @@
 require_relative "card.rb"
 
 class Ace < Card
-  attr_reader :value
-
   def initialize(suit)
     @value = 1
     @suit = suit
@@ -25,8 +23,8 @@ class Ace < Card
     false
   end
 
-  def state
-    { value: 1, suit: SUIT_STRINGS[@suit] }
+  def serialize
+    "1 of #{SUIT_STRINGS[@suit]}"
   end
 
   def render

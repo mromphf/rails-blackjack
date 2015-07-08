@@ -15,7 +15,7 @@ class CardSerializer
   def self.serialize(cards)
     values = []
     cards.each do |card|
-      values << "#{card.state[:value]} of #{card.state[:suit]}"
+      values << card.serialize
     end
     values
   end

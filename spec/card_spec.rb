@@ -93,11 +93,6 @@ describe Card do
     end
   end
 
-  it "will provide its state in a hashed form" do
-    expect(Card.new(13, :hearts).state[:suit]).to eq "Hearts"
-    expect(Card.new(13, :hearts).state[:value]).to eq 13
-  end
-
   it "is a face card if its face is greater than 10" do
     expect(Card.new(12, :clubs).face?).to eq true
   end
