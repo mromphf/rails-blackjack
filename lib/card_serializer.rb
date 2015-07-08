@@ -13,11 +13,7 @@ class CardSerializer
   end
 
   def self.serialize(cards)
-    values = []
-    cards.each do |card|
-      values << card.serialize
-    end
-    values
+    cards.map(&:serialize)
   end
 
   private
