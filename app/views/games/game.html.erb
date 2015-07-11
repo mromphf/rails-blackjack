@@ -1,0 +1,10 @@
+<div class="navbar">
+  <br/>
+  <div id="yourCash">Your Cash:
+    <span id="moneyValue">$<%= @user.money %></span>
+  </div>
+  <%= link_to "Log Out", "/signout", method: 'delete', id: "signout" %>
+</div>
+
+<%= render 'bet' %>
+<%= render 'play' %>

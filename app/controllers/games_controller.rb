@@ -8,6 +8,7 @@ class GamesController < ApplicationController
     session[:drawn_cards] = []
     session[:player_cards] = []
     session[:dealer_cards] = []
+    render 'game'
   end
 
   def reset_funds

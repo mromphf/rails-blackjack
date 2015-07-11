@@ -1,21 +1,3 @@
-<div class="navbar">
-  <br/>
-  <div id="yourCash">Your Cash:
-    <span id="moneyValue">$<%= @user.money %></span>
-  </div>
-  <%= link_to "Log Out", "/signout", method: 'delete', id: "signout" %>
-</div>
-
-<div id="betView">
-  <p><center>Place a bet...</center></p>
-  <center>
-    <button class="btnBet" onclick="onBet(5)"/>5</button>
-    <button class="btnBet" onclick="onBet(10)"/>10</button>
-    <button class="btnBet" onclick="onBet(25)"/>25</button>
-    <button class="btnBet" onclick="onBet(50)"/>50</button>
-  </center>
-</div>
-
 <div id="gameView" style="display:none">
   <div id="cards">
     <center>
