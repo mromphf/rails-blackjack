@@ -16,14 +16,31 @@ describe Guest do
   end
 
   describe "betting" do
-    it "will subtract money from the guest" do
-      guest.place_bet! 10
-      expect(guest.money).to eq 190
+    context "when user can afford the bet" do
+      it "will subtract money from the guest" do
+        guest.place_bet! 10
+        expect(guest.money).to eq 190
+      end
+
+      it "will set the players bet according to the amount bet" do
+        guest.place_bet! 10
+        expect(guest.bet).to eq 10 
+      end
+
+      it "will return some blank json" do
+        expect(guest.place_bet! 10).to eq json: {}
+      end
     end
 
-    it "will set the players bet according to the amount bet" do
-      guest.place_bet! 10
-      expect(guest.bet).to eq 10 
+    context "when the user cannot afford the bet" do
+      it "will return nothing" do
+        expect(guest.place_bet! 1000).to eq nothing: true
+      end
+
+      it "will not change the users money" do
+        guest.place_bet! 1000
+        expect(guest.money).to eq 200
+      end
     end
   end
 

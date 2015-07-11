@@ -18,12 +18,7 @@ class GamesController < ApplicationController
   def bet
     @user = current_user
     bet = params[:bet].to_i
-    if bet <= current_user.money
-      current_user.place_bet! bet
-      render json: { foo: "" }
-    else
-      render nothing: true
-    end
+    render current_user.place_bet!(bet)
   end
   
   def player_hit

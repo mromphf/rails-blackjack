@@ -16,8 +16,13 @@ class Guest
   end
 
   def place_bet!(bet)
-    @session[:guest_money] -= bet
-    @session[:guest_bet] = bet
+    if can_afford? bet
+      @session[:guest_money] -= bet
+      @session[:guest_bet] = bet
+      return {json: {}}
+    else
+      return {nothing: true}
+    end
   end
 
   def win!
@@ -38,4 +43,9 @@ class Guest
   def is_broke?
     @session[:guest_money] <= 0
   end
+
+  private
+    def can_afford?(bet)
+      self.money >= bet
+    end
 end

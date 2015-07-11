@@ -15,11 +15,16 @@ class User < ActiveRecord::Base
   end
 
   def place_bet!(bet)
-    self.bet = bet
-    self.money -= bet
-    self.money = 0 if self.money < 0
-    self.in_game = true
-    save!
+    if can_afford? bet
+      self.bet = bet
+      self.money -= bet
+      self.money = 0 if self.money < 0
+      self.in_game = true
+      save!
+      return { json: {} }
+    else
+      return { nothing: true }
+    end
   end
 
   def win!
@@ -47,4 +52,9 @@ class User < ActiveRecord::Base
   def is_broke?
     self.money <= 0 
   end
+
+  private
+    def can_afford?(bet)
+      self.money >= bet
+    end
 end

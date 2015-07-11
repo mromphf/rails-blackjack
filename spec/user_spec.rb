@@ -20,13 +20,6 @@ describe User do
       user.lose!
       user.money.should == 190
     end
-
-    it "cannot have less than 0 zero dollars" do
-      user = User.new(money: 20)
-      user.place_bet! 50
-      user.lose!
-      user.money.should == 0
-    end
   end
 
   it "will have money removed after placing a bet" do
@@ -75,5 +68,15 @@ describe User do
   it "can determine its first name" do
     user.name = "Jim Bob"
     expect(user.first_name).to eq "Jim"
+  end
+
+  describe "betting" do
+    it "will return blank json if it can afford the bet" do
+      expect(user.place_bet! 10).to eq json: {}
+    end
+
+    it "will return nothing when the user cannot afford the bet" do
+      expect(user.place_bet! 1000).to eq nothing: true
+    end
   end
 end
