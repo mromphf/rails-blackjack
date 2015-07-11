@@ -18,7 +18,7 @@ function onBet(bet) {
 function playerHit() {
     $.ajax({
         url: "/player_hit",
-        type: "get",
+        type: "post",
         datatype: "json",
         success: playerCallback 
     });
@@ -27,7 +27,7 @@ function playerHit() {
 function dealerHit() {
     $.ajax({
         url: "/dealer_hit",
-        type: "get",
+        type: "post",
         datatype: "json",
         success: dealerCallback
     });
@@ -36,7 +36,7 @@ function dealerHit() {
 function onRoundOver() {
     $.ajax({
         url: "/decide_results",
-        type: "get",
+        type: "post",
         success: renderResults
     });
 }
@@ -44,7 +44,7 @@ function onRoundOver() {
 function onBust() {
     $.ajax({
         url: "/bust",
-        type: "get"
+        type: "post"
     });
 }
 
