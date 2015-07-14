@@ -16,9 +16,9 @@
 
   <div id="input">
     <center>
-      <input id="btnHit" type="button" disabled="true" value="Hit" onclick="playerHit()"/>
-      <input id="btnStand" type="button" disabled="true" value="Stand" onclick="onStand()"/>
-      <input id="btnRefresh" type="button" disabled="true" value="Play Again" onclick="reloadPage()"/>
+      <input id="btnHit" type="button" disabled="true" value="Hit" onclick="blackjack.playerHit()"/>
+      <input id="btnStand" type="button" disabled="true" value="Stand" onclick="blackjack.onStand()"/>
+      <input id="btnRefresh" type="button" disabled="true" value="Play Again" onclick="blackjack.reloadPage()"/>
     </center>
   <br/>
   <p id="prompt">Bet: $<%= @user.bet %> </p>
