@@ -21,6 +21,23 @@ class GamesController < ApplicationController
     bet = params[:bet].to_i
     render current_user.place_bet!(bet)
   end
+
+  def initialize_game
+    deck = Deck.new
+    player_card_one = deck.deal_card
+    dealer_card = deck.deal_card
+    player_card_two = deck.deal_card
+    player = Player.new([player_card_one, player_card_two])
+    dealer = Player.new([dealer_card])
+    session[:player_cards] = CardSerializer.serialize([player_card_one, player_card_two])
+    session[:dealer_cards] = CardSerializer.serialize([dealer_card])
+    session[:drawn_cards] = CardSerializer.serialize([player_card_one, player_card_two, dealer_card])
+    render :json => { player_card_one: card_asset_path(player_card_one), 
+                      dealer_card: card_asset_path(dealer_card),
+                      player_card_two: card_asset_path(player_card_two),
+                      player_score: player.score,
+                      dealer_score: dealer.score }
+  end
   
   def player_hit
     draw_new_card(:player_cards)
@@ -53,7 +70,10 @@ class GamesController < ApplicationController
       player = Player.new(player_cards)
       session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
-      render :json => { image: card_asset_path(card), score: player.score, blackjack: player.blackjack?, bust: player.bust? }
+      render :json => { image: card_asset_path(card), 
+                        score: player.score, 
+                        blackjack: player.blackjack?, 
+                        bust: player.bust? }
     end
 
     def check_funds

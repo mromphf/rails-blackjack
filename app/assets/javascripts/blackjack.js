@@ -12,9 +12,18 @@ var blackjack = (function() {
           type: "post",
           dataType: 'json',
           data: { bet: bet },
-          success: initializeGame
+          success: startGame 
       });
   };
+
+  function startGame() {
+      $.ajax({
+          url: "/initialize_game",
+          type: "post",
+          dataType: 'json',
+          success: initializeGame 
+      });
+  }
 
   function playerHit() {
       $.ajax({
@@ -59,9 +68,19 @@ var blackjack = (function() {
       document.getElementById("betView").style.display = "none";
       document.getElementById("gameView").style.display = "inline";
       disableControls();
-      setTimeout(function () {playerHit()}, 500);
-      setTimeout(function () {dealerHit()}, 1000);
-      setTimeout(function () {playerHit()}, 1500);
+
+      setTimeout(function () {
+          updatePlayerBox("playerCards", data.player_card_one, "playerScore", "Dealing...");
+      }, 500);
+      setTimeout(function () {
+          updatePlayerBox("dealerCards", data.dealer_card, "dealerScore", "Dealer: " + data.dealer_score);
+      }, 1000);
+      setTimeout(function () {
+          updatePlayerBox("playerCards", data.player_card_two, "playerScore", "You: " + data.player_score);
+      }, 1500);
+
+      dealerScore = data.dealer_score
+      playerScore = data.player_score
       setTimeout(function () {enableControls()}, 2000);
   }
 
