@@ -24,9 +24,9 @@ class GamesController < ApplicationController
 
   def initialize_game
     deck = Deck.new
-    player_card_one = deck.deal_card
-    dealer_card = deck.deal_card
-    player_card_two = deck.deal_card
+    player_card_one = deck.deal_card!
+    dealer_card = deck.deal_card!
+    player_card_two = deck.deal_card!
     player = Player.new([player_card_one, player_card_two])
     dealer = Player.new([dealer_card])
     session[:player_cards] = CardSerializer.serialize([player_card_one, player_card_two])
@@ -64,7 +64,7 @@ class GamesController < ApplicationController
     def draw_new_card(session_var)
       drawn_cards = CardSerializer.deserialize(session[:drawn_cards])
       player_cards = CardSerializer.deserialize(session[session_var])
-      card = Deck.new(drawn_cards).deal_card
+      card = Deck.new(drawn_cards).deal_card!
       player_cards << card
       drawn_cards << card
       player = Player.new(player_cards)

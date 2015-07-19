@@ -8,9 +8,11 @@ class Deck
     SUITS.each { |suit| add_suit_to_deck(suit) }
   end
 
-  def deal_card
+  def deal_card!
     random_index = (Random.rand(1..@cards.size) - 1)
-    @cards[random_index]
+    card = @cards[random_index]
+    @cards.delete(card)
+    card
   end
 
   private
