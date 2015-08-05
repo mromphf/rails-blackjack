@@ -36,7 +36,8 @@ class GamesController < ApplicationController
                       dealer_card: card_asset_path(dealer_card),
                       player_card_two: card_asset_path(player_card_two),
                       player_score: player.score,
-                      dealer_score: dealer.score }
+                      dealer_score: dealer.score,
+                      bet: current_user.bet }
   end
   
   def player_hit

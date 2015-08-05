@@ -81,6 +81,7 @@ var blackjack = (function() {
 
       dealerScore = data.dealer_score
       playerScore = data.player_score
+      document.getElementById("prompt").innerHTML = "Bet: $" + data.bet;
       setTimeout(function () {enableControls()}, 2000);
   }
 
