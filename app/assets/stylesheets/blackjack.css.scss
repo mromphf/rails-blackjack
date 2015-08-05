@@ -173,7 +173,8 @@ a, a:visited {
 .btnBet {
     width: 50px;
     height: 50px;
-    border: none;
+    border: 5px solid #000;
+    color: #0000ff;
     border-radius: 50%;
     background-color: #fff;
     margin: 1%;
@@ -183,13 +184,35 @@ a, a:visited {
 
 @media screen and (min-width: 1200px) {
     .btnBet {
+        border: 10px solid #000;
         width: 75px;
         height: 75px;
     }
 }
 
+#bet5 {
+    color: #ee1111;
+    border-color: #ee1111;
+}
+
+#bet10 {
+    color: #ff8000;
+    border-color: #ff8000;
+}
+
+#bet25 {
+    color: #aa33aa;
+    border-color: #aa33aa;
+}
+
+#bet50 {
+    color: #1111ee;
+    border-color: #1111ee;
+}
+
 .btnBet:hover {
-    background-color: #cdcdcd; 
+    background-color: #dedede; 
+    box-shadow: 0px 7px 7px #111111;
 }
 
 #btnRefresh {
