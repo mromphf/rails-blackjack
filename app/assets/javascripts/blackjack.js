@@ -69,7 +69,6 @@ var blackjack = (function() {
               document.getElementById("dealerScore").innerHTML = "BUST!";
           }
       }, delay);
-      setTimeout(function() {onRoundOver()}, delay);
       setTimeout(function() {renderResults(data.result)}, delay);
   }
 
