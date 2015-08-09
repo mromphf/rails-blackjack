@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   match '/reset_funds', to: "games#reset_funds", via: 'get'
   match '/bet', to: 'games#bet', via: 'post'
   match '/initialize_game', to: 'games#initialize_game', via: 'post'
+  match '/dealer_tries_to_win', to: 'games#dealer_tries_to_win', via: 'post'
   match '/bust', to: 'games#bust', via: 'post'
   match '/decide_results', to: 'games#decide_results', via: 'post'
   match '/player_hit', to: 'games#player_hit', via: 'post'

@@ -45,11 +45,48 @@ class GamesController < ApplicationController
   end
   
   def player_hit
-    draw_new_card(:player_cards)
+    drawn_cards = all_drawn_cards
+    player_cards = CardSerializer.deserialize(session[:player_cards])
+    deck = Deck.new.remove_cards(drawn_cards)
+    card = deck.deal_card
+
+    player_cards << card
+    drawn_cards << card
+
+    player = Player.new(player_cards)
+    save_player_cards(player_cards)
+    render :json => { image: card_asset_path(card), 
+                      score: player.score, 
+                      blackjack: player.blackjack?, 
+                      bust: player.bust? }
   end
 
-  def dealer_hit
-    draw_new_card(:dealer_cards)
+  def dealer_tries_to_win
+    keep_trying = true
+    num_cards = 0
+    card_images = []
+    player_cards = CardSerializer.deserialize(session[:player_cards])
+    dealer_cards = CardSerializer.deserialize(session[:dealer_cards])
+
+    while keep_trying and num_cards < 10
+      drawn_cards = player_cards + dealer_cards
+      deck = Deck.new.remove_cards(drawn_cards)
+      card = deck.deal_card
+      card_images << card_asset_path(card)
+      dealer_cards << card
+      drawn_cards << card
+
+      player = Player.new(player_cards)
+      dealer = Player.new(dealer_cards)
+
+      num_cards += 1
+      keep_trying = (dealer.score < player.score) && (dealer.score < 17)
+    end
+    save_dealer_cards(dealer_cards)
+    render :json => { number_of_cards: num_cards,
+                      images: card_images,
+                      score: dealer.score,
+                      bust: dealer.bust? }
   end
 
   def bust
@@ -66,23 +103,6 @@ class GamesController < ApplicationController
   end
 
   private
-    def draw_new_card(session_var)
-      drawn_cards = all_drawn_cards
-      player_cards = CardSerializer.deserialize(session[session_var])
-      deck = Deck.new.remove_cards(drawn_cards)
-      card = deck.deal_card
-
-      player_cards << card
-      drawn_cards << card
-
-      player = Player.new(player_cards)
-      session[session_var] = CardSerializer.serialize(player_cards)
-      render :json => { image: card_asset_path(card), 
-                        score: player.score, 
-                        blackjack: player.blackjack?, 
-                        bust: player.bust? }
-    end
-
     def check_funds
       redirect_to '/play' unless current_user.is_broke?
     end

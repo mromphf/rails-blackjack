@@ -34,12 +34,12 @@ var blackjack = (function() {
       });
   }
 
-  function dealerHit() {
-      $.ajax({
-          url: "/dealer_hit",
-          type: "post",
-          datatype: "json",
-          success: dealerCallback
+  function dealerTriesToWin() {
+      $.ajax ({
+        url: "/dealer_tries_to_win",
+        type: "post",
+        datatype: "json",
+        success: dealerResults
       });
   }
 
@@ -62,6 +62,28 @@ var blackjack = (function() {
       disableControls();
       document.getElementById("prompt").innerHTML = "You stand...";
       dealerTriesToWin();
+  }
+
+  function dealerResults(data) {
+      var dealerBusted = data.bust;
+      var delay = 0;
+      for ( var i = 0, n = data.number_of_cards; i < n; i++ ) {
+          renderDealerCard(data.images[i], delay);
+          delay += 500;
+      }
+      setTimeout(function() {
+          document.getElementById("dealerScore").innerHTML = "Dealer: " + data.score;
+          if ( dealerBusted ) {
+              document.getElementById("dealerScore").innerHTML = "BUST!";
+          }
+      }, delay);
+      setTimeout(function() {onRoundOver()}, delay);
+  }
+
+  function renderDealerCard(image, delay) {
+      setTimeout(function() {
+          updatePlayerBox("dealerCards", image, "dealerScore", "Drawing...");
+      }, delay);
   }
 
   function initializeGame(data) {
@@ -95,25 +117,6 @@ var blackjack = (function() {
           enableRefresh();
           document.getElementById("playerScore").innerHTML = "BUST!";
           document.getElementById("prompt").innerHTML = "Dealer wins...";
-      }
-  }
-
-  function dealerCallback(data) {
-      dealerScore = data.score;
-      var dealerBusted = data.bust;
-      updatePlayerBox("dealerCards", data.image, "dealerScore", "Dealer: " + data.score);
-      if ( dealerBusted ) {
-          document.getElementById("dealerScore").innerHTML = "BUST!";
-      }
-  }
-
-  function dealerTriesToWin() {
-      if (dealerScore < playerScore && dealerScore < 17) {
-          dealerHit();
-          setTimeout(function () {dealerTriesToWin()}, 500);
-      }
-      else {
-          onRoundOver();
       }
   }
 
