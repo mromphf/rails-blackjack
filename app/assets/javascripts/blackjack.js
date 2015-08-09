@@ -71,7 +71,7 @@ var blackjack = (function() {
 
   function renderDealerCard(image, delay) {
       setTimeout(function() {
-          updatePlayerBox("dealerCards", image, "dealerScore", "Drawing...");
+          updateDealerCards(image, "Drawing...");
       }, delay);
   }
 
@@ -81,13 +81,13 @@ var blackjack = (function() {
       disableControls();
 
       setTimeout(function () {
-          updatePlayerBox("playerCards", data.player_card_one, "playerScore", "Dealing...");
+          updatePlayerCards(data.player_card_one, "Dealing...");
       }, 500);
       setTimeout(function () {
-          updatePlayerBox("dealerCards", data.dealer_card, "dealerScore", "Dealer: " + data.dealer_score);
+          updateDealerCards(data.dealer_card, "Dealer: " + data.dealer_score);
       }, 1000);
       setTimeout(function () {
-          updatePlayerBox("playerCards", data.player_card_two, "playerScore", "You: " + data.player_score);
+          updatePlayerCards(data.player_card_two, "You: " + data.player_score);
       }, 1500);
 
       document.getElementById("prompt").innerHTML = "Bet: $" + data.bet;
@@ -96,7 +96,7 @@ var blackjack = (function() {
 
   function playerCallback(data) {
       var playerBusted = data.bust;
-      updatePlayerBox("playerCards", data.image, "playerScore", "You: " + data.score);
+      updatePlayerCards(data.image, "You: " + data.score);
       if ( playerBusted ) {
           onBust();
           disableControls();
@@ -111,14 +111,24 @@ var blackjack = (function() {
       enableRefresh();
   }
 
-  function updatePlayerBox(cardsListId, card_string, scoreId, score) {
+  function updatePlayerCards(card_string, score) {
       var node = document.createElement("LI");
       var img = document.createElement("img");
       img.setAttribute('src', card_string);
       img.setAttribute('class', 'card');
       node.appendChild(img);
-      document.getElementById(scoreId).innerHTML = score;
-      document.getElementById(cardsListId).appendChild(img);
+      document.getElementById("playerScore").innerHTML = score;
+      document.getElementById("playerCards").appendChild(img);
+  }
+
+  function updateDealerCards(card_string, score) {
+      var node = document.createElement("LI");
+      var img = document.createElement("img");
+      img.setAttribute('src', card_string);
+      img.setAttribute('class', 'card');
+      node.appendChild(img);
+      document.getElementById("dealerScore").innerHTML = score;
+      document.getElementById("dealerCards").appendChild(img);
   }
 
   function disableControls() {
