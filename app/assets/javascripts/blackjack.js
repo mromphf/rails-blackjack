@@ -1,7 +1,4 @@
 var blackjack = (function() {
-  var dealerScore = 0;
-  var playerScore = 0;
-
   function onCancel() {
       window.history.back();
   }
@@ -93,14 +90,11 @@ var blackjack = (function() {
           updatePlayerBox("playerCards", data.player_card_two, "playerScore", "You: " + data.player_score);
       }, 1500);
 
-      dealerScore = data.dealer_score
-      playerScore = data.player_score
       document.getElementById("prompt").innerHTML = "Bet: $" + data.bet;
       setTimeout(function () {enableControls()}, 2000);
   }
 
   function playerCallback(data) {
-      playerScore = data.score;
       var playerBusted = data.bust;
       updatePlayerBox("playerCards", data.image, "playerScore", "You: " + data.score);
       if ( playerBusted ) {
