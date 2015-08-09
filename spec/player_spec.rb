@@ -99,6 +99,12 @@ describe Player do
       expect(player.determine_result(dealer)).to be_a PlayerWins
     end
 
+    it "will return a win if the palyer has blackjack" do
+      player = Player.new([Card.new(10, :hearts), Ace.new(:hearts)])
+      dealer = double("Player", score: 21, bust?: false)
+      expect(player.determine_result(dealer)).to be_a PlayerWins
+    end
+
     it "will return a loss if the player loses by busting" do 
       player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs), Card.new(5, :clubs)])
       dealer = double("Player", score: 20, bust?: false)

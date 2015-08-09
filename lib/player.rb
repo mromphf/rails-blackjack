@@ -41,6 +41,7 @@ class Player
   end
 
   def determine_result(dealer)
+    return PlayerWins.new if self.blackjack?
     if (self.score > dealer.score and not self.bust?) or dealer.bust?
       return PlayerWins.new
     elsif self.score != dealer.score or self.bust?
