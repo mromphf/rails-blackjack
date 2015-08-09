@@ -15,6 +15,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'omniauth-google-oauth2', '~> 0.2.1'
 gem 'omniauth-facebook', '~> 1.4.1'
+gem 'thin', '~> 1.6.3'
 
 group(:test) do
   gem 'rspec-rails'
