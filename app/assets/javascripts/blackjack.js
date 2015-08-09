@@ -43,14 +43,6 @@ var blackjack = (function() {
       });
   }
 
-  function onRoundOver() {
-      $.ajax({
-          url: "/decide_results",
-          type: "post",
-          success: renderResults
-      });
-  }
-
   function onBust() {
       $.ajax({
           url: "/bust",
@@ -78,6 +70,7 @@ var blackjack = (function() {
           }
       }, delay);
       setTimeout(function() {onRoundOver()}, delay);
+      setTimeout(function() {renderResults(data.result)}, delay);
   }
 
   function renderDealerCard(image, delay) {
@@ -120,8 +113,8 @@ var blackjack = (function() {
       }
   }
 
-  function renderResults(data) {
-      document.getElementById("prompt").innerHTML = data.text;
+  function renderResults(result) {
+      document.getElementById("prompt").innerHTML = result;
       enableRefresh();
   }
 

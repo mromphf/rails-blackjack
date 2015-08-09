@@ -82,24 +82,18 @@ class GamesController < ApplicationController
       num_cards += 1
       keep_trying = (dealer.score < player.score) && (dealer.score < 17)
     end
-    save_dealer_cards(dealer_cards)
+    result = player.determine_result(dealer)
+    result.save current_user
     render :json => { number_of_cards: num_cards,
                       images: card_images,
                       score: dealer.score,
+                      result: result.render,
                       bust: dealer.bust? }
   end
 
   def bust
     current_user.lose!
     render nothing: true
-  end
-
-  def decide_results
-    player = Player.new(CardSerializer.deserialize(session[:player_cards]))
-    dealer = Player.new(CardSerializer.deserialize(session[:dealer_cards]))
-    result = player.determine_result(dealer)
-    result.save current_user
-    render :json => { text: result.render }
   end
 
   private
