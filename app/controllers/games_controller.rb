@@ -5,9 +5,8 @@ class GamesController < ApplicationController
 
   def show
     @user = current_user
-    session[:drawn_cards] = []
-    session[:player_cards] = []
-    session[:dealer_cards] = []
+    save_player_cards([])
+    save_dealer_cards([])
     render 'game'
   end
 
@@ -24,14 +23,19 @@ class GamesController < ApplicationController
 
   def initialize_game
     deck = Deck.new
-    player_card_one = deck.deal_card!
-    dealer_card = deck.deal_card!
-    player_card_two = deck.deal_card!
+
+    player_card_one = deck.deal_card
+    deck = deck.remove_card(player_card_one)
+    dealer_card = deck.deal_card
+    deck = deck.remove_card(dealer_card)
+    player_card_two = deck.deal_card
+
     player = Player.new([player_card_one, player_card_two])
     dealer = Player.new([dealer_card])
-    session[:player_cards] = CardSerializer.serialize([player_card_one, player_card_two])
-    session[:dealer_cards] = CardSerializer.serialize([dealer_card])
-    session[:drawn_cards] = CardSerializer.serialize([player_card_one, player_card_two, dealer_card])
+
+    save_player_cards([player_card_one, player_card_two])
+    save_dealer_cards([dealer_card])
+
     render :json => { player_card_one: card_asset_path(player_card_one), 
                       dealer_card: card_asset_path(dealer_card),
                       player_card_two: card_asset_path(player_card_two),
@@ -63,13 +67,15 @@ class GamesController < ApplicationController
 
   private
     def draw_new_card(session_var)
-      drawn_cards = CardSerializer.deserialize(session[:drawn_cards])
+      drawn_cards = all_drawn_cards
       player_cards = CardSerializer.deserialize(session[session_var])
-      card = Deck.new(drawn_cards).deal_card!
+      deck = Deck.new.remove_cards(drawn_cards)
+      card = deck.deal_card
+
       player_cards << card
       drawn_cards << card
+
       player = Player.new(player_cards)
-      session[:drawn_cards] = CardSerializer.serialize(drawn_cards)
       session[session_var] = CardSerializer.serialize(player_cards)
       render :json => { image: card_asset_path(card), 
                         score: player.score, 
@@ -91,5 +97,17 @@ class GamesController < ApplicationController
 
     def card_asset_path(card)
       "#{ActionController::Base.helpers.image_path(card.render)}"
+    end
+
+    def save_player_cards(cards)
+      session[:player_cards] = CardSerializer.serialize(cards)
+    end
+
+    def save_dealer_cards(cards)
+      session[:dealer_cards] = CardSerializer.serialize(cards)
+    end
+
+    def all_drawn_cards
+      CardSerializer.deserialize(session[:player_cards]) + CardSerializer.deserialize(session[:dealer_cards])
     end
 end
