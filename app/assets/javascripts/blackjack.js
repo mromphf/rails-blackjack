@@ -56,10 +56,10 @@ var blackjack = (function() {
   function dealerResults(data) {
       var dealerBusted = data.bust;
       var delay = 0;
-      for ( var i = 0, n = data.number_of_cards; i < n; i++ ) {
-          renderDealerCard(data.images[i], delay);
+      data.images.forEach(function(image) {
+          renderDealerCard(image, delay); 
           delay += 500;
-      }
+      });
       setTimeout(function() {
           document.getElementById("dealerScore").innerHTML = "Dealer: " + data.score;
           if ( dealerBusted ) {
