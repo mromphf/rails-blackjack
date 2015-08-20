@@ -31,6 +31,15 @@ var blackjack = (function() {
       });
   }
 
+  function doubleDown() {
+      disableControls();
+      $.ajax({
+          url: "/double_down",
+          type: "post",
+          success: doubleDownCallback
+      });
+  }
+
   function dealerTriesToWin() {
       $.ajax ({
         url: "/dealer_tries_to_win",
@@ -95,6 +104,7 @@ var blackjack = (function() {
   }
 
   function playerCallback(data) {
+      document.getElementById("btnDouble").disabled = true;
       var playerBusted = data.bust;
       updatePlayerCards(data.image, "You: " + data.score);
       if ( playerBusted ) {
@@ -103,6 +113,13 @@ var blackjack = (function() {
           enableRefresh();
           document.getElementById("playerScore").innerHTML = "BUST!";
           document.getElementById("prompt").innerHTML = "Dealer wins...";
+      }
+  }
+
+  function doubleDownCallback(data) {
+      playerCallback(data);
+      if ( !data.bust ) {
+          setTimeout(onStand, 500);
       }
   }
 
@@ -134,29 +151,33 @@ var blackjack = (function() {
   function disableControls() {
       document.getElementById("btnHit").disabled = true;
       document.getElementById("btnStand").disabled = true;
+      document.getElementById("btnDouble").disabled = true;
       document.getElementById("btnRefresh").disabled = true;
   }
 
   function enableControls() {
       document.getElementById("btnHit").disabled = false;
       document.getElementById("btnStand").disabled = false;
+      document.getElementById("btnDouble").disabled = false;
   }
 
   function enableRefresh() {
       document.getElementById("btnHit").style.display = "none";
       document.getElementById("btnStand").style.display = "none";
+      document.getElementById("btnDouble").style.display = "none";
       document.getElementById("btnRefresh").style.display = "block";
       document.getElementById("btnRefresh").disabled = false;
   }
 
   function reloadPage() {
-    location.reload()
+      location.reload()
   }
 
   return {
     onBet: onBet,
     playerHit: playerHit,
     onStand: onStand,
-    reloadPage: reloadPage
+    reloadPage: reloadPage,
+    doubleDown: doubleDown
   };
 }());
