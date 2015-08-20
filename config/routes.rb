@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   match '/dealer_tries_to_win', to: 'games#dealer_tries_to_win', via: 'post'
   match '/bust', to: 'games#bust', via: 'post'
   match '/player_hit', to: 'games#player_hit', via: 'post'
-  match '/dealer_hit', to: 'games#dealer_hit', via: 'post'
+  match '/double_down', to: 'games#double_down', via: 'post'
 end

@@ -61,6 +61,11 @@ class GamesController < ApplicationController
                       bust: player.bust? }
   end
 
+  def double_down
+    current_user.double_down!
+    player_hit
+  end
+
   def dealer_tries_to_win
     keep_trying = true
     card_images = []
