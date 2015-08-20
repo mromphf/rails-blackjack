@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def double_down!
+    self.money -= bet
+    self.bet += bet
+    save!
+  end
+
   def win!
     self.money += (self.bet * 2)
     self.in_game = false

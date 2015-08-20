@@ -79,4 +79,27 @@ describe User do
       expect(user.place_bet! 1000).to eq nothing: true
     end
   end
+
+  describe "doubling down" do
+    it "will earn twice the bet after winning" do
+      user = User.new(money: 190, bet: 10)
+      user.double_down!
+      user.win!
+      expect(user.money).to eq 220
+    end
+
+    it "will lose twice the bet after losing" do
+      user = User.new(money: 190, bet: 10)
+      user.double_down!
+      user.lose!
+      expect(user.money).to eq 180
+    end
+
+    it "will have it's original money restored after a push" do
+      user = User.new(money: 190, bet: 10)
+      user.double_down!
+      user.push!
+      expect(user.money).to eq 200
+    end
+  end
 end

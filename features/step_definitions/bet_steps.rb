@@ -6,6 +6,10 @@ When(/^I bet (\d+) dollars before a game$/) do |bet|
   @user.place_bet! bet.to_i
 end
 
+When(/^I double down$/) do
+  @user.double_down!
+end
+
 When(/^I win the game$/) do
   @user.win!
 end
