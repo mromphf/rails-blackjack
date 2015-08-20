@@ -79,4 +79,27 @@ describe Guest do
       expect(guest.is_broke?).to be true
     end
   end
+
+  describe "doubling down" do
+    it "will earn twice the bet after winning" do
+      guest.place_bet! 10
+      guest.double_down!
+      guest.win!
+      expect(guest.money).to eq 220
+    end
+
+    it "will lose twice the bet after losing" do
+      guest.place_bet! 10
+      guest.double_down!
+      guest.lose!
+      expect(guest.money).to eq 180
+    end
+
+    it "will have it's original money restored after a push" do
+      guest.place_bet! 10
+      guest.double_down!
+      guest.push!
+      expect(guest.money).to eq 200
+    end
+  end
 end

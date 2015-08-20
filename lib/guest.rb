@@ -25,6 +25,11 @@ class Guest
     end
   end
 
+  def double_down!
+    @session[:guest_money] -= @session[:guest_bet]
+    @session[:guest_bet] += @session[:guest_bet]
+  end
+
   def win!
     @session[:guest_money] += (@session[:guest_bet] * 2)
   end
