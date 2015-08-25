@@ -18,10 +18,13 @@
     <center>
       <input id="btnHit" type="button" disabled="true" value="Hit" onclick="blackjack.playerHit()"/>
       <input id="btnStand" type="button" disabled="true" value="Stand" onclick="blackjack.onStand()"/>
-      <input id="btnDouble" type="button" disabled="true" value="Double Down" onclick="blackjack.doubleDown()"/>
       <input id="btnRefresh" type="button" disabled="true" value="Play Again" onclick="blackjack.reloadPage()"/>
+      <br/>
+      <input id="btnDouble" type="button" disabled="true" value="Double&#x00A;Down" onclick="blackjack.doubleDown()"/>
     </center>
-  <br/>
-  <p id="prompt">Bet: $0 </p>
+    <br/>
+    <p id="prompt">
+      <span id="betVal">Bet: $0</span>
+    </p>
   </div>
 </div>

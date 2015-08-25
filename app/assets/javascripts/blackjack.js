@@ -58,7 +58,7 @@ var blackjack = (function() {
 
   function onStand () {
       disableControls();
-      document.getElementById("prompt").innerHTML = "You stand...";
+      document.getElementById("betVal").innerHTML = "You stand...";
       dealerTriesToWin();
   }
 
@@ -99,7 +99,7 @@ var blackjack = (function() {
           updatePlayerCards(data.player_card_two, "You: " + data.player_score);
       }, 1500);
 
-      document.getElementById("prompt").innerHTML = "Bet: $" + data.bet;
+      document.getElementById("betVal").innerHTML = "Bet: $" + data.bet;
       setTimeout(function () {enableControls()}, 2000);
   }
 
@@ -112,7 +112,7 @@ var blackjack = (function() {
           disableControls();
           enableRefresh();
           document.getElementById("playerScore").innerHTML = "BUST!";
-          document.getElementById("prompt").innerHTML = "Dealer wins...";
+          document.getElementById("betVal").innerHTML = "Dealer wins...";
       }
   }
 
@@ -124,7 +124,7 @@ var blackjack = (function() {
   }
 
   function renderResults(result) {
-      document.getElementById("prompt").innerHTML = result;
+      document.getElementById("betVal").innerHTML = result;
       enableRefresh();
   }
 
