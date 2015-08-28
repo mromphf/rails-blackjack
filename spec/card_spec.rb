@@ -8,10 +8,6 @@ describe Card do
       expect(card).to be_a Card
     end
 
-    it "will throw an exception if given a value of one" do
-      expect { Card.new(1, :diamonds) }.to raise_error "ERROR: A card cannot be assigned a value of 1."
-    end
-
     it "will throw an exception if given a value greater than thirteen" do
       expect { Card.new(14, :diamonds) }.to raise_error "ERROR: A card cannot be assigned a value of 14."
     end
@@ -49,8 +45,14 @@ describe Card do
     end
   end 
 
-  it "is not an ace" do
-    expect(Card.new(2, :diamonds).ace?).to eq false
+  describe "aces" do
+    it "is an ace if it has a value of one" do
+      expect(Card.new(1, :hearts).ace?).to be_truthy
+    end
+
+    it "is not an ace if has a value greater than one" do
+      expect(Card.new(2, :spades).ace?).to be_falsy
+    end
   end
 
   describe "to-string" do
@@ -73,6 +75,16 @@ describe Card do
         expect(Card.new(13, :diamonds).to_s).to eq "King of Diamonds"
       end
     end
+
+    describe "on aces" do
+      it "provides the expected string for clubs" do
+        expect(Card.new(1, :clubs).to_s).to eq "Ace of Clubs"
+      end
+
+      it "provides the expected string for diamonds" do
+        expect(Card.new(1, :diamonds).to_s).to eq "Ace of Diamonds"
+      end
+    end
   end
 
   describe "render" do
@@ -91,9 +103,21 @@ describe Card do
     it "will provide the corresponding image name for diamonds" do
       expect(Card.new(13, :diamonds).render).to eq "diamonds13.png"
     end
+
+    it "will provide the corresponding image name for ace of spades" do
+      expect(Card.new(1, :spades).render).to eq 'spades01.png'
+    end
+
+    it "will provide the corresponding image name for ace of diamonds" do
+      expect(Card.new(1, :diamonds).render).to eq 'diamonds01.png'
+    end
   end
 
   it "is a face card if its face is greater than 10" do
-    expect(Card.new(12, :clubs).face?).to eq true
+    expect(Card.new(12, :clubs).face?).to be_truthy
+  end
+
+  it "is not a face card if it is an ace" do
+    expect(Card.new(1, :diamonds).face?).to be_falsy
   end
 end

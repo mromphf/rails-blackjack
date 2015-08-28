@@ -15,9 +15,13 @@ class Card
   end
 
   def to_s
-    value = @value
-    value = FACE_VALUES[@value] if value > 10
-    "#{value} of #{SUIT_STRINGS[@suit]}"
+    if ace?
+      "Ace of #{SUIT_STRINGS[@suit]}"
+    else
+      value = @value
+      value = FACE_VALUES[@value] if value > 10
+      "#{value} of #{SUIT_STRINGS[@suit]}"
+    end
   end
 
   def ==(target)
@@ -25,7 +29,7 @@ class Card
   end
 
   def ace?
-    false
+    @value == 1
   end
 
   def face?
@@ -54,7 +58,7 @@ class Card
 
   private
     def validate_value
-      if @value < 2 or @value >= 14
+      if @value >= 14
         raise "ERROR: A card cannot be assigned a value of #{@value}."
       end
     end

@@ -1,6 +1,5 @@
 require_relative "../lib/player.rb"
 require_relative "../lib/card.rb"
-require_relative "../lib/ace.rb"
 
 describe Player do
   let (:player) { Player.new } 
@@ -36,12 +35,12 @@ describe Player do
     end
 
     it "will be 21 if the player has one face card and one ace" do
-      cards = [ Card.new(11, :spades), Ace.new(:hearts) ]
+      cards = [ Card.new(11, :spades), Card.new(1, :hearts) ]
       expect(Player.new(cards).score).to eq 21
     end
 
     it "is blackjack when the player has a face card and an ace" do
-      cards = [ Card.new(13, :spades), Ace.new(:diamonds) ]
+      cards = [ Card.new(13, :spades), Card.new(1, :diamonds) ]
       expect(Player.new(cards).blackjack?).to eq true
     end
 
@@ -69,12 +68,12 @@ describe Player do
       end
 
       it "when score is equal to 21" do
-        player = Player.new([Card.new(10, :diamonds), Card.new(10, :hearts), Ace.new(:hearts)])
+        player = Player.new([Card.new(10, :diamonds), Card.new(10, :hearts), Card.new(1, :hearts)])
         expect(player.bust?).to eq false
       end
 
       it "when given two aces" do 
-        player = Player.new([Ace.new(:spades), Ace.new(:hearts)])
+        player = Player.new([Card.new(1, :spades), Card.new(1, :hearts)])
         expect(player.bust?).to eq false
       end
     end
@@ -100,7 +99,7 @@ describe Player do
     end
 
     it "will return a win if the palyer has blackjack" do
-      player = Player.new([Card.new(10, :hearts), Ace.new(:hearts)])
+      player = Player.new([Card.new(10, :hearts), Card.new(1, :hearts)])
       dealer = double("Player", score: 21, bust?: false)
       expect(player.determine_result(dealer)).to be_a PlayerWins
     end

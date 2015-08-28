@@ -1,5 +1,5 @@
 class Deck
-  NUMBER_OF_NON_ACE_CARDS = 12
+  NUMBER_OF_CARDS = 13
   SUITS = [:spades, :hearts, :clubs, :diamonds]
 
   def initialize(cards=Deck.full_deck)
@@ -25,9 +25,8 @@ class Deck
     def self.full_deck
       cards = []
       SUITS.each do |suit|
-        cards << Ace.new(suit)
-        NUMBER_OF_NON_ACE_CARDS.times do |i|
-          cards << Card.new(i + 2, suit)
+        NUMBER_OF_CARDS.times do |i|
+          cards << Card.new(i + 1, suit)
         end
       end
       cards

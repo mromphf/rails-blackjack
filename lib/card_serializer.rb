@@ -18,7 +18,6 @@ class CardSerializer
 
   private
     def self.build_card(value, suit)
-      return Ace.new(suit) if value == 1
       Card.new(value, suit)
     end
 end

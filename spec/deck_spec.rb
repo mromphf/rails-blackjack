@@ -27,10 +27,10 @@ describe Deck do
     end
 
     it "has one of each ace" do
-      expect(Deck.full_deck.count(Ace.new(:hearts))).to eq 1
-      expect(Deck.full_deck.count(Ace.new(:clubs))).to eq 1
-      expect(Deck.full_deck.count(Ace.new(:diamonds))).to eq 1
-      expect(Deck.full_deck.count(Ace.new(:spades))).to eq 1
+      expect(Deck.full_deck.count(Card.new(1, :hearts))).to eq 1
+      expect(Deck.full_deck.count(Card.new(1, :clubs))).to eq 1
+      expect(Deck.full_deck.count(Card.new(1, :diamonds))).to eq 1
+      expect(Deck.full_deck.count(Card.new(1, :spades))).to eq 1
     end
   end
 end
