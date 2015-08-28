@@ -40,16 +40,6 @@ class Player
     false
   end
 
-  def determine_result(dealer)
-    return PlayerWins.new if self.blackjack?
-    if (self.score > dealer.score and not self.bust?) or dealer.bust?
-      return PlayerWins.new
-    elsif self.score != dealer.score or self.bust?
-      return PlayerLoses.new
-    end
-    PlayerPush.new
-  end
-
   private
     def has_blackjack?
       first_card = @hand[0]

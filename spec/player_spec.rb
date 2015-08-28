@@ -90,36 +90,4 @@ describe Player do
     other_player = Player.new([Card.new(9, :hearts)])
     expect(player).not_to eq other_player
   end
-
-  describe "determing game result" do
-    it "will return a win if the player beats the dealer" do
-      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs)])
-      dealer = double("Player", score: 19, bust?: false)
-      expect(player.determine_result(dealer)).to be_a PlayerWins
-    end
-
-    it "will return a win if the palyer has blackjack" do
-      player = Player.new([Card.new(10, :hearts), Card.new(1, :hearts)])
-      dealer = double("Player", score: 21, bust?: false)
-      expect(player.determine_result(dealer)).to be_a PlayerWins
-    end
-
-    it "will return a loss if the player loses by busting" do 
-      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs), Card.new(5, :clubs)])
-      dealer = double("Player", score: 20, bust?: false)
-      expect(player.determine_result(dealer)).to be_a PlayerLoses
-    end
-
-    it "will return a loss if the player loses to the dealer" do
-      player = Player.new([Card.new(10, :hearts), Card.new(8, :clubs)])
-      dealer = double("Player", score: 20, bust?: false)
-      expect(player.determine_result(dealer)).to be_a PlayerLoses
-    end
-
-    it "will return a push if the player ties with the dealer" do
-      player = Player.new([Card.new(10, :hearts), Card.new(10, :clubs)])
-      dealer = double("Player", score: 20, bust?: false)
-      expect(player.determine_result(dealer)).to be_a PlayerPush
-    end
-  end
 end
