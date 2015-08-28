@@ -85,7 +85,7 @@ class GamesController < ApplicationController
 
       keep_trying = (dealer.score < player.score) && (dealer.score < 17)
     end
-    result = Round.determine_winner(player, dealer)
+    result = Round.determine_result(player, dealer)
     result.save current_user
     render :json => { images: card_images,
                       score: dealer.score,
