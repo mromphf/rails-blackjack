@@ -1,6 +1,5 @@
 require_relative "../lib/deck.rb"
 require_relative "../lib/card.rb"
-require_relative "../lib/ace.rb"
 
 describe Deck do
   it "deals cards" do
