@@ -1,7 +1,7 @@
 # Blackjack
 A Rails Blackjack implementation.  
 
-Find the "official" hosted version: blackjack.dustychickens.com  
+Find the "official" instance: blackjack.markromphfblog.com  
 
 ruby 2.1.1  
 Rails 4.1.4
